@@ -1,0 +1,1060 @@
+<title>Placa, Costra y Borde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#F5F2F1;
+  --surface:#FFFDFC;
+  --surface-2:#EFEAE9;
+  --ink:#23191C;
+  --ink-2:#6B5B60;
+  --ink-3:#8F8085;
+  --rule:#E1D7D6;
+  --rule-strong:#CFC1C0;
+  --accent:#A61E32;
+  --accent-tint:#F5E4E5;
+
+  --c-pso:#4F6377;      --t-pso:#E5EAEF;
+  --c-imp:#96660D;      --t-imp:#F6EBD6;
+  --c-eri:#A81F33;      --t-eri:#F7E0E2;
+  --c-cel:#6E3F63;      --t-cel:#F0E3EE;
+  --c-fas:#2E2A2C;      --t-fas:#E4DEDF;
+
+  --ok:#2F6B4F;         --ok-t:#E1EEE7;
+  --warn:#8A5A0B;
+  --crit:#A81F33;
+
+  --f-display:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+
+  --shadow:0 1px 2px rgba(35,25,28,.05), 0 8px 24px -16px rgba(35,25,28,.22);
+  --r:3px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#171215;
+    --surface:#1F181B;
+    --surface-2:#271F22;
+    --ink:#F0E7E6;
+    --ink-2:#B7A6A9;
+    --ink-3:#8E7E82;
+    --rule:#362B2F;
+    --rule-strong:#4B3D41;
+    --accent:#E8798C;
+    --accent-tint:#3A2126;
+
+    --c-pso:#A3B7CC;    --t-pso:#26303A;
+    --c-imp:#DCA94B;    --t-imp:#382C14;
+    --c-eri:#EA7A8B;    --t-eri:#3C1F25;
+    --c-cel:#C58FB8;    --t-cel:#331F2E;
+    --c-fas:#CFC3C6;    --t-fas:#2B2427;
+
+    --ok:#7FC3A0;       --ok-t:#1E3129;
+    --warn:#E0A94E;
+    --crit:#EA7A8B;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 28px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171215;
+  --surface:#1F181B;
+  --surface-2:#271F22;
+  --ink:#F0E7E6;
+  --ink-2:#B7A6A9;
+  --ink-3:#8E7E82;
+  --rule:#362B2F;
+  --rule-strong:#4B3D41;
+  --accent:#E8798C;
+  --accent-tint:#3A2126;
+
+  --c-pso:#A3B7CC;    --t-pso:#26303A;
+  --c-imp:#DCA94B;    --t-imp:#382C14;
+  --c-eri:#EA7A8B;    --t-eri:#3C1F25;
+  --c-cel:#C58FB8;    --t-cel:#331F2E;
+  --c-fas:#CFC3C6;    --t-fas:#2B2427;
+
+  --ok:#7FC3A0;       --ok-t:#1E3129;
+  --warn:#E0A94E;
+  --crit:#EA7A8B;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 28px -18px rgba(0,0,0,.8);
+}
+
+/* ============ BASE ============ */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:600;text-wrap:balance;margin:0;line-height:1.18}
+p{margin:0}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+strong{font-weight:700}
+em{font-style:italic}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+::selection{background:var(--accent-tint);color:var(--ink)}
+
+.mono{font-family:var(--f-mono);font-size:.72em;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+
+/* ============ SHELL ============ */
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px 96px}
+.grid{display:grid;grid-template-columns:1fr;gap:36px}
+@media (min-width:1040px){
+  .grid{grid-template-columns:250px minmax(0,1fr);gap:52px;align-items:start}
+}
+.col{min-width:0;display:flex;flex-direction:column;gap:44px}
+
+/* ============ HEADER ============ */
+.masthead{
+  border-bottom:1px solid var(--rule);
+  background:var(--surface);
+}
+.masthead .inner{max-width:1240px;margin:0 auto;padding:38px 20px 30px}
+.eyebrow{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;
+}
+.eyebrow b{color:var(--accent);font-weight:600}
+h1{
+  font-size:clamp(2.5rem,6.5vw,4.1rem);
+  letter-spacing:-.022em;margin:.28em 0 .18em;font-weight:500;
+}
+h1 i{font-style:italic;color:var(--accent)}
+.dek{max-width:62ch;color:var(--ink-2);font-size:1.06rem}
+.dek b{color:var(--ink)}
+
+.stripe{display:flex;height:5px;margin-top:26px;border-radius:99px;overflow:hidden}
+.stripe span{flex:1}
+
+/* ============ RAIL ============ */
+.rail{position:relative}
+@media (min-width:1040px){
+  .rail{position:sticky;top:22px;max-height:calc(100vh - 44px);overflow-y:auto;padding-right:4px}
+}
+.rail-title{
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:6px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+}
+.rail-title span{color:var(--accent)}
+.plan{list-style:none;margin:0;padding:0}
+.plan li{border-bottom:1px solid var(--rule)}
+.plan a{
+  display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;
+  padding:9px 4px;color:var(--ink-2);text-decoration:none;font-size:14.5px;line-height:1.3;
+  transition:color .15s ease,background .15s ease;
+}
+.plan a:hover{color:var(--ink);background:var(--surface-2)}
+.plan .t{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.02em}
+.plan .m{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3)}
+.plan a[aria-current="true"]{color:var(--ink);font-weight:600}
+.plan a[aria-current="true"] .t{color:var(--accent)}
+.rail-note{
+  margin-top:16px;padding:12px 13px;border:1px solid var(--rule);border-radius:var(--r);
+  background:var(--surface);font-size:13.4px;color:var(--ink-2);line-height:1.5;
+}
+.rail-note b{color:var(--ink)}
+
+/* ============ SECTIONS ============ */
+section{scroll-margin-top:20px}
+.sec-head{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.sec-tag{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--h,var(--accent));font-weight:600;
+}
+.sec-tag::before{content:"";width:26px;height:3px;background:var(--h,var(--accent));border-radius:2px}
+.sec-head h2{font-size:clamp(1.75rem,3.4vw,2.4rem);letter-spacing:-.015em}
+.sec-head .sub{color:var(--ink-2);font-size:.98rem;max-width:64ch}
+
+.body-col{display:flex;flex-direction:column;gap:26px;max-width:74ch}
+
+h3{
+  font-size:1.16rem;letter-spacing:-.005em;margin-bottom:.35em;
+  display:flex;align-items:baseline;gap:9px;
+}
+h3::before{
+  content:"";flex:none;width:6px;height:6px;border-radius:50%;
+  background:var(--h,var(--accent));transform:translateY(-2px);
+}
+h4{font-size:.95rem;font-family:var(--f-body);font-weight:700;letter-spacing:.01em;margin-bottom:.2em}
+
+.block{display:flex;flex-direction:column;gap:10px}
+ul.list{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:6px}
+ul.list li{padding-left:2px}
+ul.list li::marker{color:var(--h,var(--accent))}
+ul.tight{gap:3px;font-size:.96rem}
+
+/* ============ CARDS / CALLOUTS ============ */
+.card{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);
+  padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;
+}
+.card.tinted{background:var(--ht,var(--surface-2));border-color:transparent}
+.card-label{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--h,var(--accent));font-weight:600;
+}
+.alarm{
+  border-left:3px solid var(--crit);background:var(--surface);border-radius:0 var(--r) var(--r) 0;
+  padding:16px 18px;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--rule);
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+.alarm .card-label{color:var(--crit)}
+
+.keys{
+  display:grid;gap:0;border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;
+  background:var(--surface);
+}
+.keys div{padding:11px 15px;border-bottom:1px solid var(--rule);font-size:.95rem;display:flex;gap:11px;align-items:flex-start}
+.keys div:last-child{border-bottom:0}
+.keys b{
+  flex:none;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--h,var(--accent));width:74px;padding-top:5px;font-weight:600;
+}
+
+/* ============ TABLES ============ */
+.tscroll{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.6px}
+caption{
+  text-align:left;padding:13px 16px 11px;border-bottom:1px solid var(--rule);
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);
+}
+th,td{padding:9px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule);line-height:1.42}
+thead th{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-2);font-weight:600;background:var(--surface-2);white-space:nowrap;
+}
+tbody th{font-weight:600;font-size:13.6px;color:var(--ink-2);white-space:nowrap;background:var(--surface-2)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+.c-pso{color:var(--c-pso)} .c-imp{color:var(--c-imp)} .c-eri{color:var(--c-eri)}
+.c-cel{color:var(--c-cel)} .c-fas{color:var(--c-fas)}
+thead .h-pso{color:var(--c-pso)} thead .h-imp{color:var(--c-imp)}
+thead .h-eri{color:var(--c-eri)} thead .h-cel{color:var(--c-cel)} thead .h-fas{color:var(--c-fas)}
+
+/* ============ DIAGRAM ============ */
+figure{margin:0;display:flex;flex-direction:column;gap:10px}
+.figbox{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:16px 12px;overflow-x:auto}
+.figbox svg{display:block;width:100%;min-width:600px;height:auto}
+figcaption{font-size:13.4px;color:var(--ink-3);line-height:1.45}
+.sv-band{stroke:var(--rule-strong);stroke-width:1}
+.sv-lab{font-family:"Source Sans 3",sans-serif;font-size:12.5px;fill:var(--ink-2)}
+.sv-lab-b{font-family:"Source Sans 3",sans-serif;font-size:12.5px;font-weight:700;fill:var(--ink)}
+.sv-mono{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;fill:var(--ink-3)}
+.sv-name{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.09em;font-weight:600}
+.sv-desc{font-family:"Source Sans 3",sans-serif;font-size:11.5px;fill:var(--ink-2)}
+
+/* ============ DRUGS / DOSE ============ */
+.dose{
+  font-family:var(--f-mono);font-size:.78em;background:var(--surface-2);
+  padding:1px 5px;border-radius:2px;color:var(--ink);white-space:nowrap;
+}
+.pick{
+  display:inline-block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;background:var(--ok-t);color:var(--ok);padding:2px 6px;border-radius:2px;
+  font-weight:600;vertical-align:1px;
+}
+
+/* ============ QUIZ ============ */
+.quiz{display:flex;flex-direction:column;gap:10px}
+details.q{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);
+  padding:0;overflow:hidden;
+}
+details.q>summary{
+  cursor:pointer;padding:14px 18px;list-style:none;display:flex;gap:12px;align-items:flex-start;
+  font-size:.98rem;line-height:1.45;
+}
+details.q>summary::-webkit-details-marker{display:none}
+details.q>summary::after{
+  content:"ver";margin-left:auto;flex:none;font-family:var(--f-mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding-top:5px;
+}
+details.q[open]>summary::after{content:"ocultar"}
+details.q>summary:hover{background:var(--surface-2)}
+.qn{
+  flex:none;font-family:var(--f-mono);font-size:11px;color:var(--accent);
+  font-weight:600;padding-top:3px;width:22px;
+}
+.ans{padding:0 18px 16px 52px;font-size:.95rem;color:var(--ink-2);border-top:1px solid var(--rule);padding-top:13px;margin-top:-1px}
+.ans b{color:var(--ink)}
+.ans .why{display:block;margin-top:6px;color:var(--ink-3);font-size:.92em}
+
+/* ============ CASE ============ */
+.case{
+  background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--accent);
+  border-radius:0 var(--r) var(--r) 0;padding:16px 18px;display:flex;flex-direction:column;gap:9px;
+}
+.case .stem{font-family:var(--f-display);font-size:1.02rem;line-height:1.5}
+
+/* ============ MNEMO ============ */
+.mnemo{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.mnemo div{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:14px 15px;
+  display:flex;flex-direction:column;gap:5px;
+}
+.mnemo strong{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.mnemo span{font-size:.93rem;color:var(--ink-2);line-height:1.45}
+
+/* ============ FOOT ============ */
+.foot{
+  border-top:1px solid var(--rule);margin-top:20px;padding-top:22px;
+  font-size:13.6px;color:var(--ink-3);display:flex;flex-direction:column;gap:8px;max-width:70ch;
+}
+
+/* ============ PRINT ============ */
+@media print{
+  .rail,.rail-note{display:none}
+  .grid{grid-template-columns:1fr}
+  body{background:#fff;font-size:11pt}
+  details.q{break-inside:avoid}
+  details.q>summary::after{display:none}
+  .card,.tscroll,.figbox{box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+html{scroll-behavior:smooth}
+</style>
+
+<header class="masthead">
+  <div class="inner">
+    <div class="eyebrow">
+      <span>Dermatología · FCM UNCUYO</span>
+      <span>·</span>
+      <span>Repaso cronometrado</span>
+      <span>·</span>
+      <b>60 minutos</b>
+    </div>
+    <h1>Placa, costra <i>y</i> borde</h1>
+    <p class="dek">Psoriasis, impétigo, erisipela y celulitis en una sola pasada. Ordenado por <b>profundidad de la lesión</b>, que es lo que decide germen, clínica, gravedad y tratamiento. Cada bloque termina en la clave que te permite reconocerlo en una foto.</p>
+    <div class="stripe" aria-hidden="true">
+      <span style="background:var(--c-pso)"></span>
+      <span style="background:var(--c-imp)"></span>
+      <span style="background:var(--c-eri)"></span>
+      <span style="background:var(--c-cel)"></span>
+      <span style="background:var(--c-fas)"></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <!-- ================= RAIL ================= -->
+    <nav class="rail" aria-label="Plan de estudio">
+      <div class="rail-title"><span>Plan</span><span id="clock">60 min</span></div>
+      <ul class="plan">
+        <li><a href="#mapa"><span class="t">00'</span><span>Mapa: las capas</span><span class="m">4</span></a></li>
+        <li><a href="#psoriasis"><span class="t">04'</span><span>Psoriasis</span><span class="m">16</span></a></li>
+        <li><a href="#impetigo"><span class="t">20'</span><span>Impétigo</span><span class="m">8</span></a></li>
+        <li><a href="#erisipela"><span class="t">28'</span><span>Erisipela</span><span class="m">10</span></a></li>
+        <li><a href="#celulitis"><span class="t">38'</span><span>Celulitis</span><span class="m">9</span></a></li>
+        <li><a href="#alarma"><span class="t">47'</span><span>Alarma: fascitis</span><span class="m">3</span></a></li>
+        <li><a href="#perlas"><span class="t">50'</span><span>Perlas y mnemos</span><span class="m">3</span></a></li>
+        <li><a href="#test"><span class="t">53'</span><span>Autoevaluación</span><span class="m">7</span></a></li>
+      </ul>
+      <div class="rail-note">
+        <b>Cómo usarlo.</b> Leé de corrido hasta el minuto 50 sin frenar a memorizar. La memoria la fija el test final: si fallás una, volvés solo a ese bloque.
+      </div>
+    </nav>
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="col">
+
+      <!-- ============ MAPA ============ -->
+      <section id="mapa">
+        <div class="sec-head">
+          <span class="sec-tag">00' · Mapa mental</span>
+          <h2>Todo se ordena por profundidad</h2>
+          <p class="sub">Si sabés en qué capa asienta cada cuadro, deducís el resto: cuanto más profundo, más sistémico, más grave y más rápido hay que actuar.</p>
+        </div>
+
+        <div class="body-col">
+          <figure>
+            <div class="figbox">
+              <svg viewBox="0 0 740 350" role="img" aria-labelledby="svgt">
+                <title id="svgt">Corte de piel mostrando la capa donde asienta cada patología</title>
+
+                <text x="150" y="24" class="sv-mono" text-anchor="end">CAPA</text>
+                <text x="474" y="24" class="sv-mono">DÓNDE ASIENTA</text>
+
+                <!-- EPIDERMIS -->
+                <rect x="162" y="40" width="280" height="42" fill="var(--t-imp)" class="sv-band"/>
+                <text x="150" y="59" class="sv-lab-b" text-anchor="end">Epidermis</text>
+                <text x="150" y="74" class="sv-lab" text-anchor="end" font-size="11">córnea → basal</text>
+                <text x="172" y="66" class="sv-desc" font-size="11" fill="var(--c-pso)" font-weight="700">psoriasis: hiperproliferación + paraqueratosis</text>
+
+                <!-- DERMIS PAPILAR -->
+                <rect x="162" y="82" width="280" height="52" fill="var(--t-eri)" class="sv-band"/>
+                <text x="150" y="103" class="sv-lab-b" text-anchor="end">Dermis superficial</text>
+                <text x="150" y="118" class="sv-lab" text-anchor="end" font-size="11">papilar + linfáticos</text>
+
+                <!-- DERMIS RETICULAR -->
+                <rect x="162" y="134" width="280" height="62" fill="var(--t-cel)" class="sv-band"/>
+                <text x="150" y="160" class="sv-lab-b" text-anchor="end">Dermis profunda</text>
+                <text x="150" y="175" class="sv-lab" text-anchor="end" font-size="11">reticular</text>
+
+                <!-- HIPODERMIS -->
+                <rect x="162" y="196" width="280" height="64" fill="var(--t-cel)" class="sv-band" opacity=".62"/>
+                <text x="150" y="222" class="sv-lab-b" text-anchor="end">Hipodermis</text>
+                <text x="150" y="237" class="sv-lab" text-anchor="end" font-size="11">tejido celular subcutáneo</text>
+
+                <!-- FASCIA -->
+                <rect x="162" y="260" width="280" height="16" fill="var(--t-fas)" class="sv-band"/>
+                <text x="150" y="273" class="sv-lab-b" text-anchor="end">Fascia</text>
+
+                <!-- MUSCULO -->
+                <rect x="162" y="276" width="280" height="34" fill="var(--surface-2)" class="sv-band"/>
+                <text x="150" y="297" class="sv-lab-b" text-anchor="end">Músculo</text>
+
+                <!-- BRACKETS -->
+                <g stroke="var(--c-imp)" stroke-width="2" fill="none">
+                  <path d="M462 42 L456 42 L456 80 L462 80"/>
+                </g>
+                <text x="474" y="58" class="sv-name" fill="var(--c-imp)">IMPÉTIGO</text>
+                <text x="474" y="73" class="sv-desc">ampolla subcórnea · sin cicatriz</text>
+
+                <g stroke="var(--c-eri)" stroke-width="2" fill="none">
+                  <path d="M462 84 L456 84 L456 132 L462 132"/>
+                </g>
+                <text x="474" y="102" class="sv-name" fill="var(--c-eri)">ERISIPELA</text>
+                <text x="474" y="117" class="sv-desc">borde neto · linfangitis · fiebre brusca</text>
+
+                <g stroke="var(--c-cel)" stroke-width="2" fill="none">
+                  <path d="M462 136 L456 136 L456 258 L462 258"/>
+                </g>
+                <text x="474" y="190" class="sv-name" fill="var(--c-cel)">CELULITIS</text>
+                <text x="474" y="205" class="sv-desc">borde difuso · edema · puede abscedar</text>
+
+                <g stroke="var(--c-fas)" stroke-width="2" fill="none">
+                  <path d="M462 262 L456 262 L456 308 L462 308"/>
+                </g>
+                <text x="474" y="282" class="sv-name" fill="var(--c-fas)">FASCITIS NECROTIZANTE</text>
+                <text x="474" y="297" class="sv-desc">dolor desproporcionado · quirófano</text>
+
+                <!-- flecha profundidad -->
+                <g>
+                  <line x1="24" y1="44" x2="24" y2="300" stroke="var(--rule-strong)" stroke-width="1"/>
+                  <path d="M20 294 L24 302 L28 294" fill="none" stroke="var(--rule-strong)" stroke-width="1"/>
+                  <text x="18" y="180" class="sv-mono" text-anchor="middle" transform="rotate(-90 18 180)">+ PROFUNDO · + GRAVE</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption>Impétigo y psoriasis comparten piso (epidermis), pero una es infecciosa y aguda y la otra inflamatoria y crónica. De la dermis para abajo, todo es infección bacteriana y la pregunta es siempre <em>hasta dónde llegó</em>.</figcaption>
+          </figure>
+
+          <div class="tscroll">
+            <table>
+              <caption>Tabla madre — la que hay que poder reconstruir de memoria</caption>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th class="h-pso">Psoriasis</th>
+                  <th class="h-imp">Impétigo</th>
+                  <th class="h-eri">Erisipela</th>
+                  <th class="h-cel">Celulitis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th>Naturaleza</th><td>Inflamatoria crónica, inmunomediada</td><td>Infección superficial</td><td>Infección dermo-linfática</td><td>Infección dermo-hipodérmica</td></tr>
+                <tr><th>Capa</th><td>Epidermis</td><td>Epidermis (subcórnea)</td><td>Dermis superficial + linfáticos</td><td>Dermis profunda + TCS</td></tr>
+                <tr><th>Agente</th><td>—</td><td><b>S. aureus</b> &gt; S. pyogenes</td><td><b>S. pyogenes</b> (&gt;90 %)</td><td><b>S. aureus</b> y S. pyogenes</td></tr>
+                <tr><th>Edad típica</th><td>Bimodal: 16–22 y 57–60</td><td>Niños 2–5 años</td><td>Adultos, ancianos</td><td>Adultos</td></tr>
+                <tr><th>Comienzo</th><td>Insidioso, en brotes</td><td>Subagudo, contagio</td><td><b>Brusco</b>: fiebre 39–40° primero, placa después</td><td>Gradual, fiebre menor o tardía</td></tr>
+                <tr><th>Lesión</th><td>Placa eritematosa con escama nacarada seca</td><td>Costra melicérica o ampolla flácida</td><td>Placa roja brillante, edematosa, caliente</td><td>Eritema-edema profundo, mal definido</td></tr>
+                <tr><th>Límites</th><td>Netos</td><td>Netos, lesión pequeña</td><td><b>Netos, borde sobreelevado</b> (escalón palpable)</td><td><b>Difusos</b>, se pierde en piel sana</td></tr>
+                <tr><th>Fiebre</th><td>No (salvo pustulosa/eritrodérmica)</td><td>Ausente o baja</td><td>Alta, precede a la lesión</td><td>Variable, sigue a la lesión</td></tr>
+                <tr><th>Localización</th><td>Extensoras, cuero cabelludo, sacro, uñas</td><td>Perioral/perinasal, cara</td><td>Pierna (70–85 %), cara "en alas de mariposa"</td><td>Pierna, cualquier sitio, periorbitaria</td></tr>
+                <tr><th>Clave</th><td>Raspado de Brocq +</td><td>Color miel</td><td>Escalón + linfangitis + puerta de entrada</td><td>Sin escalón + dolor profundo</td></tr>
+                <tr><th>Riesgo mayor</th><td>Artropatía, riesgo CV</td><td>Glomerulonefritis post-estreptocócica</td><td>Recurrencia → linfedema crónico</td><td>Absceso, fascitis necrotizante</td></tr>
+                <tr><th>Tratamiento</th><td>Tópicos → fototerapia → sistémicos/biológicos</td><td>Mupirocina; cefalexina si extenso</td><td><b>Penicilina</b></td><td><b>Cefalexina</b> (+ cobertura SAMR si hay pus)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PSORIASIS ============ -->
+      <section id="psoriasis" style="--h:var(--c-pso);--ht:var(--t-pso)">
+        <div class="sec-head">
+          <span class="sec-tag">04' · 16 minutos</span>
+          <h2>Psoriasis</h2>
+          <p class="sub">Dermatosis eritematoescamosa crónica, inflamatoria e inmunomediada, de curso en brotes. Afecta al 2–3 % de la población y no es solo piel: es una enfermedad sistémica.</p>
+        </div>
+
+        <div class="body-col">
+
+          <div class="block">
+            <h3>Patogenia en tres frases</h3>
+            <ul class="list">
+              <li>Predisposición genética (<b>HLA-Cw6</b>, gen <i>PSORS1</i>) + un gatillo ambiental activan la vía <b>IL-23 / Th17</b>, con IL-17, IL-22 y TNF-α como efectores.</li>
+              <li>Esas citoquinas producen <b>hiperproliferación del queratinocito</b>: el recambio epidérmico pasa de ~28 días a <b>3–5 días</b>. La célula no alcanza a madurar → paraqueratosis (núcleos en la córnea) y escama.</li>
+              <li>En paralelo hay <b>angiogénesis</b> en la papila dérmica: capilares dilatados y tortuosos, que explican el eritema y el signo de Auspitz.</li>
+            </ul>
+          </div>
+
+          <div class="card tinted">
+            <span class="card-label">Los dos tipos</span>
+            <p><b>Tipo I (75 %)</b> — inicio antes de los 40 (pico 16–22), HLA-Cw6 +, fuerte antecedente familiar, curso más extenso e inestable.<br>
+            <b>Tipo II</b> — inicio después de los 40 (pico 57–60), sin marcador HLA, menos carga familiar, más leve.</p>
+          </div>
+
+          <div class="block">
+            <h3>Factores desencadenantes</h3>
+            <ul class="list">
+              <li><b>Trauma físico</b> → fenómeno de <b>Koebner</b> (lesión isomórfica): aparece psoriasis sobre la zona traumatizada, quemada, rascada o cicatrizal a los 7–14 días.</li>
+              <li><b>Infección estreptocócica faríngea</b> → gatillo típico de la forma <b>guttata</b> (2–3 semanas después).</li>
+              <li><b>Fármacos</b>: litio, β-bloqueantes, antipalúdicos, AINE, IECA, interferón, y sobre todo la <b>suspensión brusca de corticoides sistémicos</b> (rebote, puede desencadenar formas pustulosas o eritrodérmicas).</li>
+              <li>Estrés, alcohol, tabaco, obesidad, hipocalcemia, VIH (psoriasis grave y de difícil manejo).</li>
+            </ul>
+          </div>
+
+          <div class="alarm" style="border-left-color:var(--c-pso)">
+            <span class="card-label" style="color:var(--c-pso)">Regla clínica</span>
+            <p>Nunca se indican <b>corticoides sistémicos</b> en psoriasis: al suspenderlos hay rebote y riesgo de conversión a psoriasis pustulosa generalizada o eritrodérmica.</p>
+          </div>
+
+          <div class="block">
+            <h3>Lesión elemental y semiología</h3>
+            <p>Placa eritematosa, <b>bien delimitada</b>, redondeada u ovalada, cubierta por <b>escamas blanco-nacaradas, secas, gruesas, micáceas</b> (se desprenden en láminas). Distribución <b>simétrica</b> y de predominio en <b>superficies extensoras</b>: codos, rodillas, región sacra, cuero cabelludo (desborda 1–2 cm la línea de implantación del pelo), ombligo, uñas. Prurito presente en ~60 %, en general moderado.</p>
+          </div>
+
+          <div class="keys">
+            <div><b>Brocq 1</b><span><b>Signo de la vela (bujía)</b> — al raspar metódicamente, la escama se desprende en láminas blancas como raspar una vela.</span></div>
+            <div><b>Brocq 2</b><span><b>Membrana de Duncan-Buckley</b> — al seguir raspando aparece una membrana fina, translúcida, que se desprende entera.</span></div>
+            <div><b>Brocq 3</b><span><b>Rocío hemorrágico de Auspitz</b> — puntillado hemorrágico al retirar la membrana; refleja los capilares dilatados de las papilas con epidermis suprapapilar adelgazada.</span></div>
+            <div><b>Woronoff</b><span>Halo o anillo blanquecino pálido alrededor de la placa que está involucionando con tratamiento (fototerapia). Signo de buena respuesta.</span></div>
+          </div>
+
+          <div class="block">
+            <h3>Formas clínicas</h3>
+            <div class="tscroll">
+              <table>
+                <caption>Variantes — reconocerlas es lo que se pregunta con iconografía</caption>
+                <thead><tr><th>Forma</th><th>Cómo se ve</th><th>Dato que la delata</th></tr></thead>
+                <tbody>
+                  <tr><th>En placas (vulgar)</th><td>80–90 % de los casos. Placas grandes en extensoras y sacro.</td><td>Escama nacarada + simetría</td></tr>
+                  <tr><th>Guttata (en gotas)</th><td>Múltiples pápulas de 2–10 mm "en gotas" en tronco y raíz de miembros, niños y jóvenes.</td><td>Faringitis estreptocócica 2–3 semanas antes. Mejor pronóstico, puede autolimitarse.</td></tr>
+                  <tr><th>Invertida (de pliegues)</th><td>Placas rojo brillante, húmedas, lisas, <b>sin escama</b>, en axilas, inguinal, submamario, interglúteo.</td><td>Se confunde con candidiasis o intertrigo. Buscar placas típicas en otro lado.</td></tr>
+                  <tr><th>Palmoplantar</th><td>Hiperqueratosis con fisuras dolorosas, muy incapacitante.</td><td>DD con eccema y tiña</td></tr>
+                  <tr><th>Ungueal</th><td><b>Pitting</b> (uña en dedal), <b>mancha de aceite</b> (mancha salmón subungueal), onicólisis distal, hiperqueratosis subungueal, hemorragias en astilla.</td><td>Presente en 50 %; se asocia fuertemente a <b>artropatía</b></td></tr>
+                  <tr><th>Cuero cabelludo</th><td>Placas adherentes con escama gruesa que desbordan la línea de implantación.</td><td>DD con dermatitis seborreica (escama grasa, amarilla, mal definida)</td></tr>
+                  <tr><th>Eritrodérmica</th><td>Eritema y descamación de &gt;90 % de la superficie corporal.</td><td><b>Urgencia</b>: falla de termorregulación, deshidratación, hipoalbuminemia, riesgo de sepsis. Internar.</td></tr>
+                  <tr><th>Pustulosa generalizada (von Zumbusch)</th><td>Pústulas <b>estériles</b> sobre base eritematosa, en brote, con fiebre y compromiso general.</td><td><b>Urgencia</b>. Suele seguir a la suspensión de corticoides.</td></tr>
+                  <tr><th>Pustulosa localizada</th><td>Palmoplantar de Barber; acrodermatitis continua de Hallopeau (pulpejos y lecho ungueal).</td><td>Muy asociada al tabaquismo</td></tr>
+                  <tr><th>Impétigo herpetiforme</th><td>Psoriasis pustulosa del embarazo (3.º trimestre), con hipocalcemia y riesgo fetal.</td><td>El nombre engaña: <b>no</b> es infección ni herpes</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Artritis psoriásica</h3>
+            <p>Aparece en el <b>10–30 %</b>, generalmente después de la piel (10 años promedio). Es una espondiloartropatía <b>seronegativa</b> (factor reumatoideo negativo).</p>
+            <ul class="list tight">
+              <li><b>Oligoartritis asimétrica</b> — la más frecuente</li>
+              <li><b>Poliartritis simétrica</b> — símil artritis reumatoidea</li>
+              <li><b>Interfalángicas distales</b> — la más característica; casi siempre con compromiso ungueal del mismo dedo</li>
+              <li><b>Espondilitis / sacroileítis</b></li>
+              <li><b>Artritis mutilante</b> — la más grave; imagen de <b>"lápiz en copa"</b> y telescopaje de los dedos</li>
+            </ul>
+            <p>Signos acompañantes: <b>dactilitis</b> ("dedo en salchicha"), <b>entesitis</b> (aquiliana, fascia plantar).</p>
+          </div>
+
+          <div class="card">
+            <span class="card-label">Comorbilidades — la psoriasis no termina en la piel</span>
+            <p>Síndrome metabólico, obesidad, HTA, diabetes 2, dislipemia, <b>riesgo cardiovascular aumentado</b> (inflamación sistémica crónica), hígado graso no alcohólico, enfermedad inflamatoria intestinal, uveítis, depresión y ansiedad. Todo paciente con psoriasis moderada-grave necesita control metabólico y cardiovascular.</p>
+          </div>
+
+          <div class="block">
+            <h3>Histopatología <span class="mono" style="color:var(--ink-3)">(se pregunta)</span></h3>
+            <ul class="list tight">
+              <li><b>Hiperqueratosis con paraqueratosis</b> (núcleos retenidos en la córnea)</li>
+              <li><b>Agranulosis</b> — ausencia o adelgazamiento de la capa granulosa</li>
+              <li><b>Acantosis regular</b> con crestas interpapilares alargadas y engrosadas en su base</li>
+              <li><b>Papilomatosis</b> con capilares dilatados y tortuosos; adelgazamiento suprapapilar</li>
+              <li><b>Microabscesos de Munro</b> — neutrófilos en la capa córnea</li>
+              <li><b>Pústula espongiforme de Kogoj</b> — neutrófilos en la capa espinosa</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Evaluación de gravedad</h3>
+            <p><b>PASI</b> (extensión + eritema, infiltración y descamación), <b>BSA</b> (% de superficie corporal; 1 palma = 1 %) y <b>DLQI</b> (impacto en calidad de vida).</p>
+            <div class="card tinted">
+              <span class="card-label">Regla de los 10</span>
+              <p>PASI &gt; 10 <b>o</b> BSA &gt; 10 % <b>o</b> DLQI &gt; 10 = psoriasis <b>moderada-grave</b> → candidata a tratamiento sistémico. Cara, genitales, palmas, plantas y uñas cuentan como grave aunque el BSA sea bajo, por el impacto funcional.</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Tratamiento</h3>
+            <div class="tscroll">
+              <table>
+                <caption>Escalera terapéutica</caption>
+                <thead><tr><th>Escalón</th><th>Opciones</th><th>Notas</th></tr></thead>
+                <tbody>
+                  <tr><th>Base, siempre</th><td>Emolientes y queratolíticos (ácido salicílico 3–10 %, urea) para descamar antes de aplicar el activo. Educación, cese de tabaco/alcohol, control metabólico.</td><td>Sin descamar previo, ningún tópico penetra</td></tr>
+                  <tr><th>Tópico (leve, &lt;10 %)</th><td><span class="pick">1.ª línea</span> <b>Calcipotriol + betametasona</b> en combinación fija. Solos: corticoides de potencia según zona, análogos de vitamina D (calcipotriol, calcitriol), tazaroteno, alquitrán de hulla, antralina.</td><td>En <b>cara y pliegues</b>: inhibidores de calcineurina (tacrolimus, pimecrolimus) para evitar atrofia por corticoides</td></tr>
+                  <tr><th>Fototerapia</th><td><span class="pick">elección</span> <b>UVB de banda angosta 311 nm</b>; PUVA (psoraleno + UVA) en casos resistentes</td><td>Ideal para formas extensas sin artritis. PUVA aumenta el riesgo de cáncer cutáneo.</td></tr>
+                  <tr><th>Sistémico clásico</th><td><b>Metotrexato</b> semanal + ácido fólico (útil si hay artritis); <b>acitretina</b> (de elección en pustulosa y eritrodérmica); <b>ciclosporina</b> (rápida, para brotes, cursos ≤1 año); <b>apremilast</b> (iPDE4); <b>deucravacitinib</b> (inhibidor de TYK2)</td><td>Metotrexato y acitretina son <b>teratógenos</b> (acitretina: evitar embarazo 3 años). Controlar hepatograma y hemograma; ciclosporina: TA y función renal.</td></tr>
+                  <tr><th>Biológicos</th><td>Anti-TNF: etanercept, adalimumab, infliximab, certolizumab · Anti-IL-12/23: ustekinumab · <b>Anti-IL-17</b>: secukinumab, ixekizumab, brodalumab, bimekizumab · <b>Anti-IL-23</b>: guselkumab, risankizumab, tildrakizumab</td><td>Moderada-grave refractaria. Antes de iniciar: descartar <b>TBC latente</b> (PPD/IGRA), hepatitis B y C, HIV.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Diagnósticos diferenciales</h3>
+            <div class="keys">
+              <div><b>Seborreica</b><span>Escama <b>grasa y amarillenta</b>, bordes mal definidos, en surco nasogeniano, cejas, retroauricular.</span></div>
+              <div><b>Tiña corporis</b><span>Borde activo vesiculoso con centro claro, crecimiento centrífugo, asimétrica. <b>KOH +</b>.</span></div>
+              <div><b>Pitiriasis rosada</b><span>Medallón heráldico inicial y luego lesiones ovales en "árbol de navidad" siguiendo líneas de Langer. Autolimitada en 6–8 semanas.</span></div>
+              <div><b>Sífilis 2.ª</b><span>Roséola o pápulas <b>palmoplantares</b>, collarete de Biett, adenopatías generalizadas, VDRL +.</span></div>
+              <div><b>Liquen plano</b><span>Pápulas poligonales, planas, violáceas, pruriginosas, con estrías de Wickham; flexoras.</span></div>
+              <div><b>Micosis fungoide</b><span>Placas persistentes, de forma caprichosa, en zonas fotoprotegidas ("zona del traje de baño"), que no responden a tratamiento. Biopsiar.</span></div>
+              <div><b>Eccema numular</b><span>Placas en moneda, muy pruriginosas, exudativas, con vesículas y bordes mal definidos.</span></div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:3px solid var(--c-pso)">
+            <span class="card-label">Cómo la reconocés en una foto</span>
+            <p>Placa <b>simétrica</b>, en <b>extensora</b>, con escama <b>blanco-plateada seca</b> y borde <b>neto</b>. Miralo dos veces: si además hay pitting ungueal o placas en el cuero cabelludo que desbordan la línea del pelo, ya está el diagnóstico.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ IMPETIGO ============ -->
+      <section id="impetigo" style="--h:var(--c-imp);--ht:var(--t-imp)">
+        <div class="sec-head">
+          <span class="sec-tag">20' · 8 minutos</span>
+          <h2>Impétigo</h2>
+          <p class="sub">Piodermitis <b>superficial</b> de la epidermis, muy contagiosa y autoinoculable. La infección bacteriana de piel más frecuente en la infancia. <b>No deja cicatriz</b>.</p>
+        </div>
+
+        <div class="body-col">
+          <div class="block">
+            <h3>Datos duros</h3>
+            <ul class="list tight">
+              <li><b>Edad</b>: niños de 2 a 5 años; picos en verano, hacinamiento, mala higiene, contacto estrecho.</li>
+              <li><b>Agentes</b>: <b>S. aureus</b> (hoy el más frecuente, responsable de ambas formas) y <b>S. pyogenes</b> (β-hemolítico grupo A); a veces mixto.</li>
+              <li><b>Puerta de entrada</b>: cualquier solución de continuidad — picaduras, eccema, varicela, herpes, traumatismos. Se lo llama <b>impetiginización</b> cuando complica una dermatosis previa.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Las dos formas</h3>
+            <div class="tscroll">
+              <table>
+                <thead><tr><th></th><th>No ampollar (costroso)</th><th>Ampollar</th></tr></thead>
+                <tbody>
+                  <tr><th>Frecuencia</th><td>70–80 %</td><td>20–30 %</td></tr>
+                  <tr><th>Germen</th><td>S. aureus &gt; S. pyogenes</td><td><b>S. aureus</b> (fago grupo II)</td></tr>
+                  <tr><th>Mecanismo</th><td>Invasión directa sobre piel lesionada</td><td><b>Toxinas exfoliativas ETA/ETB</b> que clivan la <b>desmogleína 1</b> → despegamiento subcórneo</td></tr>
+                  <tr><th>Lesión</th><td>Vesículo-pústula fugaz que se rompe y deja la <b>costra melicérica</b> (color miel)</td><td><b>Ampolla flácida</b> de contenido claro que se enturbia; al romperse deja erosión con <b>collarete escamoso</b> periférico</td></tr>
+                  <tr><th>Sobre qué piel</th><td>Piel previamente lesionada</td><td><b>Piel sana</b></td></tr>
+                  <tr><th>Localización</th><td>Cara: <b>perioral y perinasal</b>, extremidades</td><td>Tronco, periné, axilas, zona del pañal; recién nacidos y lactantes</td></tr>
+                  <tr><th>Extras</th><td>Adenopatía regional frecuente; sin fiebre</td><td>Nikolsky + sobre la lesión; sin adenopatías; puede haber fiebre en el lactante</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card tinted">
+            <span class="card-label">Ectima</span>
+            <p>Impétigo que se profundiza y <b>ulcera hasta la dermis</b>. Costra gruesa y adherente que al desprenderse deja una úlcera "en sacabocado" de bordes netos. Típico en miembros inferiores, en desnutridos o con mala higiene; suele ser por <b>S. pyogenes</b>. A diferencia del impétigo, <b>deja cicatriz</b>.</p>
+          </div>
+
+          <div class="alarm">
+            <span class="card-label">Complicación clave</span>
+            <p><b>Glomerulonefritis post-estreptocócica</b>: aparece 1 a 5 semanas después, por cepas nefritógenas de S. pyogenes. Dato de examen: el tratamiento antibiótico <b>NO previene</b> la glomerulonefritis (sí evita la diseminación y el contagio). Y el impétigo, a diferencia de la faringitis estreptocócica, <b>no produce fiebre reumática</b>.</p>
+            <p>Otras: celulitis, linfangitis, absceso, síndrome estafilocócico de la piel escaldada (SSSS), sepsis (raro).</p>
+          </div>
+
+          <div class="block">
+            <h3>Tratamiento</h3>
+            <ul class="list">
+              <li><b>Medidas locales</b>: descostrado con compresas tibias y antisépticos, higiene con agua y jabón, uñas cortas, no compartir toallas ni ropa de cama. Reintegro escolar a las <b>24–48 h</b> de iniciado el antibiótico.</li>
+              <li><b>Localizado (pocas lesiones)</b>: <span class="pick">1.ª línea</span> <b>mupirocina 2 %</b> o <b>ácido fusídico 2 %</b> tópico, 3 veces por día, 5–7 días (alternativa: retapamulina).</li>
+              <li><b>Extenso, múltiples lesiones, brote o compromiso general</b>: <b>cefalexina</b> <span class="dose">25–50 mg/kg/día c/6–8 h VO, 7 días</span> o amoxicilina-clavulánico. Alérgicos: clindamicina o macrólidos.</li>
+              <li><b>Sospecha de SAMR de la comunidad</b> (falta de respuesta, absceso, brote): TMP-SMX, clindamicina o doxiciclina (&gt;8 años).</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Diferenciales</h3>
+            <div class="keys">
+              <div><b>Herpes</b><span>Vesículas <b>agrupadas en ramillete</b> sobre base eritematosa, ardor previo, recurrente en el mismo sitio. Puede impetiginizarse.</span></div>
+              <div><b>SSSS</b><span>Eritema difuso doloroso + despegamiento generalizado + Nikolsky <b>en piel sana</b>, con compromiso del estado general. La toxina es la misma, pero circula por sangre.</span></div>
+              <div><b>Tiña</b><span>Borde activo, crecimiento centrífugo, KOH +.</span></div>
+              <div><b>Pénfigo</b><span>Ampollas en adultos, mucosas comprometidas, curso crónico, inmunofluorescencia +.</span></div>
+              <div><b>Escabiosis</b><span>Prurito nocturno, surcos, afecta a convivientes; frecuentemente impetiginizada.</span></div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:3px solid var(--c-imp)">
+            <span class="card-label">Cómo lo reconocés en una foto</span>
+            <p>Chico, cara, alrededor de la boca o la nariz, <b>costra amarillenta color miel</b> sobre base eritematosa. Si en vez de costra hay <b>ampollas flácidas con collarete</b> en tronco o pañal, es la forma ampollar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ERISIPELA ============ -->
+      <section id="erisipela" style="--h:var(--c-eri);--ht:var(--t-eri)">
+        <div class="sec-head">
+          <span class="sec-tag">28' · 10 minutos</span>
+          <h2>Erisipela</h2>
+          <p class="sub">Infección aguda de la <b>dermis superficial</b> con compromiso marcado de los <b>linfáticos dérmicos</b>. Ese compromiso linfático es lo que le da el borde neto, el edema y la tendencia a recurrir.</p>
+        </div>
+
+        <div class="body-col">
+          <div class="block">
+            <h3>Agente y contexto</h3>
+            <ul class="list tight">
+              <li><b>Streptococcus pyogenes</b> (β-hemolítico grupo A) en más del 90 %. Menos frecuente: grupos C y G; grupo B en neonatos y diabéticos. Raro S. aureus.</li>
+              <li>Adultos y ancianos; también lactantes. Miembros inferiores en el <b>70–85 %</b>; cara en 5–20 % ("<b>en alas de mariposa</b>", sobre dorso nasal y mejillas).</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Clínica — el orden importa</h3>
+            <p>Comienzo <b>brusco</b>: fiebre alta de 39–40 °C con escalofríos, malestar, cefalea, a veces vómitos. <b>Recién 12 a 24 horas después</b> aparece la placa cutánea. Que los síntomas generales precedan a la lesión es muy característico.</p>
+            <p>La placa es eritematosa roja intensa, <b>edematosa, caliente, dolorosa, brillante y tensa</b>, con aspecto de "piel de naranja". El dato de oro: <b>borde neto, sobreelevado, palpable como un escalón</b> que separa la piel enferma de la sana. Se acompaña de <b>linfangitis</b> (cordón lineal eritematoso hacia la raíz del miembro) y <b>adenopatía regional dolorosa</b>.</p>
+          </div>
+
+          <div class="alarm" style="border-left-color:var(--c-eri)">
+            <span class="card-label" style="color:var(--c-eri)">Buscá siempre la puerta de entrada</span>
+            <p>En la pierna, la más frecuente es el <b>intertrigo micótico interdigital</b> (pie de atleta) — separá los dedos y miralos. También: onicomicosis, úlcera venosa, fisura del talón, herida, picadura. En la cara: otitis, rinitis, fisura retroauricular, conjuntivitis.</p>
+            <p>Si no la tratás, la erisipela recurre. Es la causa número uno de recaída.</p>
+          </div>
+
+          <div class="block">
+            <h3>Factores de riesgo</h3>
+            <p>Insuficiencia venosa crónica, <b>linfedema</b>, obesidad, diabetes, safenectomía o vaciamiento ganglionar previo, inmunodepresión, alcoholismo. El mayor predictor de recurrencia es <b>haber tenido un episodio previo</b>.</p>
+          </div>
+
+          <div class="block">
+            <h3>Formas clínicas</h3>
+            <ul class="list tight">
+              <li><b>Ampollar</b> — flictenas sobre la placa por el edema intenso; la más frecuente de las complicadas.</li>
+              <li><b>Purpúrico-hemorrágica</b> — petequias y equimosis sobre la placa.</li>
+              <li><b>Flemonosa</b> — abscedada, con colección purulenta.</li>
+              <li><b>Necrótica / gangrenosa</b> — evolución grave, obliga a descartar fascitis necrotizante.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Estudios</h3>
+            <ul class="list tight">
+              <li>Diagnóstico <b>clínico</b>. El laboratorio acompaña, no define.</li>
+              <li>Leucocitosis con neutrofilia, <b>PCR y eritrosedimentación elevadas</b>.</li>
+              <li><b>ASTO</b>: se eleva tardíamente → sirve para confirmación retrospectiva, no para decidir el tratamiento.</li>
+              <li>Hemocultivos positivos en <b>menos del 5 %</b> — se piden solo en casos graves, inmunodeprimidos o sepsis.</li>
+              <li>Ecografía de partes blandas si se sospecha absceso; <b>eco-Doppler venoso</b> si el diferencial es trombosis venosa profunda.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Tratamiento</h3>
+            <div class="card tinted">
+              <span class="card-label">Principio</span>
+              <p>S. pyogenes <b>nunca desarrolló resistencia a la penicilina</b>. Por eso la penicilina sigue siendo la droga de elección, y no hace falta cubrir estafilococo si el cuadro es una erisipela típica sin pus.</p>
+            </div>
+            <ul class="list">
+              <li><b>Ambulatorio / leve</b>: <span class="pick">elección</span> penicilina V <span class="dose">500 mg c/6 h VO, 7–10 días</span>; amoxicilina <span class="dose">500–875 mg c/8–12 h</span>; o penicilina G benzatínica <span class="dose">1.200.000 UI IM</span>.</li>
+              <li><b>Internación</b> (cara, fiebre alta persistente, comorbilidad, ancianos, sospecha de sepsis, mala evolución a 48–72 h): penicilina G sódica <span class="dose">2–4 millones UI EV c/4–6 h</span>, o cefazolina EV, con pase a vía oral al mejorar.</li>
+              <li><b>Alergia a penicilina</b>: clindamicina <span class="dose">300–600 mg c/8 h</span>, macrólidos, o vancomicina en casos graves.</li>
+              <li><b>Coadyuvante</b>: reposo con el <b>miembro elevado</b>, analgésicos y antitérmicos, compresas frías, tratamiento antimicótico de la puerta de entrada, higiene e hidratación de la piel, profilaxis antitrombótica si hay inmovilidad. <b>Marcá el borde con lapicera y fecha</b> para objetivar la evolución.</li>
+              <li><b>Recurrencias (≥2–3 por año)</b>: profilaxis con penicilina G benzatínica <span class="dose">2.400.000 UI IM cada 21–28 días</span>, más control del linfedema (compresión elástica) y de la micosis interdigital.</li>
+            </ul>
+            <p class="mono" style="color:var(--ink-3);text-transform:none;letter-spacing:0;font-size:14px">Ojo: en las primeras 24–48 h de tratamiento la placa puede verse peor por la lisis bacteriana. Eso no es fracaso terapéutico.</p>
+          </div>
+
+          <div class="block">
+            <h3>Complicaciones</h3>
+            <p>Absceso, <b>fascitis necrotizante</b>, sepsis, tromboflebitis, glomerulonefritis post-estreptocócica, y — la más frecuente a largo plazo — <b>linfedema crónico secundario</b> por destrucción de los linfáticos, que puede llegar a la <b>elefantiasis nostras verrucosa</b>. Recurrencia en el 20–30 %.</p>
+          </div>
+
+          <div class="card" style="border-left:3px solid var(--c-eri)">
+            <span class="card-label">Cómo la reconocés en una foto</span>
+            <p>Pierna (o cara en mariposa), placa <b>roja intensa, brillante y tensa</b>, con un <b>límite nítido</b> que podés dibujar con el dedo. Buscá el cordón de linfangitis y, en la historia, la fiebre alta que empezó <b>antes</b> que la lesión.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CELULITIS ============ -->
+      <section id="celulitis" style="--h:var(--c-cel);--ht:var(--t-cel)">
+        <div class="sec-head">
+          <span class="sec-tag">38' · 9 minutos</span>
+          <h2>Celulitis</h2>
+          <p class="sub">Infección aguda de la <b>dermis profunda y el tejido celular subcutáneo</b>. Es la hermana profunda de la erisipela: más edema, menos borde, más riesgo.</p>
+        </div>
+
+        <div class="body-col">
+          <div class="block">
+            <h3>Agentes</h3>
+            <ul class="list tight">
+              <li><b>S. aureus</b> (incluido <b>SAMR de la comunidad</b>, sobre todo si hay pus o absceso) y <b>S. pyogenes</b>.</li>
+              <li>Según el contexto: mordedura de perro o gato → <b>Pasteurella multocida</b>, Capnocytophaga · mordedura humana → <b>Eikenella corrodens</b> · agua dulce → <b>Aeromonas hydrophila</b> · agua salada o mariscos → <b>Vibrio vulnificus</b> · pie diabético → polimicrobiana con anaerobios · neutropénico → <b>Pseudomonas aeruginosa</b> · periorbitaria en niños → S. pneumoniae, H. influenzae.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Clínica</h3>
+            <p>Eritema <b>mal delimitado</b>, que se pierde de forma gradual en la piel sana: no hay escalón. Predomina el <b>edema</b> y el <b>dolor profundo</b>, con calor local. Instalación más lenta que la erisipela, y la fiebre suele ser <b>menor y posterior</b> a la lesión. Puede haber pus, absceso, necrosis local. La linfangitis y las adenopatías son menos llamativas.</p>
+          </div>
+
+          <div class="card tinted">
+            <span class="card-label">Periorbitaria vs orbitaria</span>
+            <p><b>Preseptal (periorbitaria)</b>: edema y eritema palpebral, sin compromiso ocular. Tratamiento antibiótico.<br>
+            <b>Postseptal (orbitaria)</b>: agrega <b>proptosis, oftalmoplejía, dolor con los movimientos oculares y caída de la agudeza visual</b> → tomografía de urgencia, antibióticos endovenosos e interconsulta. Riesgo de trombosis del seno cavernoso.</p>
+          </div>
+
+          <div class="block">
+            <h3>Clasificación de Eron — decide dónde se trata</h3>
+            <div class="tscroll">
+              <table>
+                <thead><tr><th>Clase</th><th>Situación</th><th>Conducta</th></tr></thead>
+                <tbody>
+                  <tr><th>I</th><td>Sin signos sistémicos ni comorbilidad</td><td>Ambulatorio, VO</td></tr>
+                  <tr><th>II</th><td>Con signos sistémicos o comorbilidad significativa (diabetes, obesidad, insuficiencia venosa)</td><td>Ambulatorio con control estrecho u hospital de día</td></tr>
+                  <tr><th>III</th><td>Toxicidad sistémica, inestabilidad hemodinámica o comorbilidad descompensada</td><td>Internación, EV</td></tr>
+                  <tr><th>IV</th><td>Sepsis o infección necrotizante</td><td>Internación + <b>evaluación quirúrgica urgente</b></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Tratamiento</h3>
+            <ul class="list">
+              <li><b>No purulenta, leve</b>: <span class="pick">elección</span> cefalexina <span class="dose">500 mg c/6 h VO, 5–7 días</span>. Alternativas: amoxicilina-clavulánico, clindamicina.</li>
+              <li><b>Purulenta o con absceso</b>: lo principal es el <b>drenaje quirúrgico</b>; el antibiótico es complemento. Cobertura para SAMR: TMP-SMX <span class="dose">160/800 mg c/12 h</span>, clindamicina <span class="dose">300–450 mg c/8 h</span> o doxiciclina.</li>
+              <li><b>Internación</b>: cefazolina <span class="dose">1–2 g EV c/8 h</span>; vancomicina si hay SAMR o cuadro grave; ampicilina-sulbactam o piperacilina-tazobactam en mordeduras y pie diabético.</li>
+              <li><b>Coadyuvante</b>: elevación del miembro, analgesia, marcar el borde, tratar la puerta de entrada, compensar la glucemia. Duración 5–10 días; 5 días alcanzan si la evolución es buena.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Diferenciales — el error más común es tratar como celulitis lo que no lo es</h3>
+            <div class="keys">
+              <div><b>Estasis</b><span><b>Dermatitis por estasis</b>: la "pseudocelulitis" más frecuente. <b>Bilateral</b>, crónica, con hiperpigmentación ocre, sin fiebre y con prurito más que dolor. La celulitis verdadera es casi siempre <b>unilateral</b>.</span></div>
+              <div><b>TVP</b><span>Edema, dolor y aumento de temperatura sin eritema tan definido. Ante la duda, <b>eco-Doppler</b>.</span></div>
+              <div><b>Contacto</b><span>Predomina el <b>prurito</b>, no el dolor; hay vesículas, respeta la forma del contactante y no da fiebre.</span></div>
+              <div><b>Gota</b><span>Eritema y dolor intensísimos alrededor de una articulación (1.ª metatarsofalángica), episodios previos.</span></div>
+              <div><b>Otros</b><span>Eritema nodoso, tromboflebitis superficial, linfedema, picadura, síndrome de Wells (celulitis eosinofílica), pioderma gangrenoso.</span></div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left:3px solid var(--c-cel)">
+            <span class="card-label">Cómo la reconocés en una foto</span>
+            <p>Zona eritematosa y <b>edematizada cuyo límite no podés trazar</b>, en un solo miembro, con dolor profundo. Si el paciente tiene ambas piernas iguales, pensá en dermatitis de estasis antes que en celulitis bilateral.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ALARMA ============ -->
+      <section id="alarma" style="--h:var(--c-fas);--ht:var(--t-fas)">
+        <div class="sec-head">
+          <span class="sec-tag">47' · 3 minutos</span>
+          <h2>Cuándo dejar de pensar en piel</h2>
+          <p class="sub">La fascitis necrotizante empieza pareciéndose a una celulitis. Lo que la delata es la desproporción entre lo que ves y lo que el paciente siente.</p>
+        </div>
+
+        <div class="body-col">
+          <div class="alarm">
+            <span class="card-label">Banderas rojas de fascitis necrotizante</span>
+            <ul class="list tight">
+              <li><b>Dolor desproporcionado</b> al hallazgo cutáneo — el signo más precoz y más importante</li>
+              <li><b>Anestesia o hipoestesia</b> de la piel afectada (necrosis de los nervios cutáneos)</li>
+              <li>Edema leñoso que <b>excede</b> el área de eritema</li>
+              <li>Ampollas <b>hemorrágicas</b>, color grisáceo o violáceo, necrosis</li>
+              <li><b>Crepitación</b> (gas en partes blandas)</li>
+              <li>Progresión <b>en horas</b>, toxicidad sistémica, hipotensión</li>
+              <li>Falta de respuesta al antibiótico a las 48 h</li>
+            </ul>
+            <p><b>Conducta</b>: no esperar imágenes. <b>Cirugía urgente</b> (exploración y debridamiento amplio) + antibióticos de amplio espectro — piperacilina-tazobactam o carbapenem + vancomicina + <b>clindamicina</b> (por su efecto antitoxina sobre el estreptococo) + soporte hemodinámico. El score <b>LRINEC</b> (PCR, leucocitos, hemoglobina, sodio, creatinina, glucemia) apoya la sospecha pero <b>no la descarta</b>.</p>
+          </div>
+
+          <div class="tscroll">
+            <table>
+              <caption>Diferenciar por profundidad cuando la pierna está roja</caption>
+              <thead><tr><th></th><th class="h-eri">Erisipela</th><th class="h-cel">Celulitis</th><th class="h-fas">Fascitis necrotizante</th></tr></thead>
+              <tbody>
+                <tr><th>Capa</th><td>Dermis superficial + linfáticos</td><td>Dermis profunda + TCS</td><td>Fascia y planos profundos</td></tr>
+                <tr><th>Borde</th><td>Neto, sobreelevado</td><td>Difuso</td><td>Difuso, con zonas violáceas y necróticas</td></tr>
+                <tr><th>Dolor</th><td>Proporcional</td><td>Proporcional, profundo</td><td><b>Desproporcionado</b>, luego anestesia</td></tr>
+                <tr><th>Velocidad</th><td>Horas a días</td><td>Días</td><td><b>Horas</b></td></tr>
+                <tr><th>Estado general</th><td>Fiebre alta, buen estado</td><td>Variable</td><td>Toxicidad, shock</td></tr>
+                <tr><th>Tratamiento</th><td>Penicilina</td><td>Cefalexina ± SAMR</td><td><b>Cirugía</b> + ATB amplio espectro</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PERLAS ============ -->
+      <section id="perlas">
+        <div class="sec-head">
+          <span class="sec-tag">50' · 3 minutos</span>
+          <h2>Perlas y mnemotecnias</h2>
+          <p class="sub">Lo que conviene tener disponible en los primeros treinta segundos de mirar una imagen.</p>
+        </div>
+
+        <div class="body-col">
+          <div class="mnemo">
+            <div><strong>Color = diagnóstico</strong><span>Psoriasis, <b>plata</b> (escama nacarada). Impétigo, <b>miel</b> (costra melicérica). Erisipela, <b>rojo con escalón</b>. Celulitis, <b>rojo que se pierde</b>.</span></div>
+            <div><strong>I-E-C-F</strong><span>De superficial a profundo: <b>I</b>mpétigo → <b>E</b>risipela → <b>C</b>elulitis → <b>F</b>ascitis. En ese orden aumenta la gravedad y la urgencia.</span></div>
+            <div><strong>E con E, C con C</strong><span><b>E</b>risipela = <b>E</b>streptococo. <b>C</b>elulitis = estafilo<b>c</b>oco (aureus), sobre todo si hay pus.</span></div>
+            <div><strong>BAILA</strong><span>Fármacos que gatillan psoriasis: <b>B</b>etabloqueantes, <b>A</b>ntipalúdicos, <b>I</b>ECA/AINE, <b>L</b>itio, <b>A</b>lfa-interferón (y el rebote por corticoides sistémicos).</span></div>
+            <div><strong>Vela → Membrana → Rocío</strong><span>Los tres tiempos del raspado metódico de Brocq. El tercero es el signo de Auspitz.</span></div>
+            <div><strong>Fiebre primero</strong><span>Si la fiebre alta apareció <b>antes</b> que la placa roja, pensá erisipela. Si apareció después o casi no hay, pensá celulitis.</span></div>
+            <div><strong>Mirá entre los dedos</strong><span>Toda erisipela de pierna obliga a buscar intertrigo micótico interdigital. Si no lo tratás, vuelve.</span></div>
+            <div><strong>Bilateral no es celulitis</strong><span>Las dos piernas rojas casi nunca son celulitis: es dermatitis por estasis. Y siempre descartar TVP.</span></div>
+            <div><strong>El impétigo no da fiebre reumática</strong><span>Solo la faringitis estreptocócica. El impétigo sí puede dar glomerulonefritis, y el antibiótico no la previene.</span></div>
+            <div><strong>Nunca corticoides sistémicos</strong><span>En psoriasis producen rebote y pueden desencadenar formas pustulosas o eritrodérmicas.</span></div>
+            <div><strong>Pitting + artritis</strong><span>El compromiso ungueal se asocia a artritis psoriásica, en especial la de interfalángicas distales del mismo dedo.</span></div>
+            <div><strong>Dolor que no cierra</strong><span>Dolor desproporcionado, anestesia o crepitación en una "celulitis" = fascitis necrotizante hasta demostrar lo contrario. Cirugía, no antibiótico solo.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TEST ============ -->
+      <section id="test">
+        <div class="sec-head">
+          <span class="sec-tag">53' · 7 minutos</span>
+          <h2>Autoevaluación</h2>
+          <p class="sub">Catorce preguntas en formato de caso. Respondé mentalmente antes de abrir. Si fallás una, volvé solo a ese bloque.</p>
+        </div>
+
+        <div class="body-col">
+          <div class="quiz">
+
+            <details class="q"><summary><span class="qn">01</span><span>Varón de 24 años, dos semanas después de una faringitis, presenta cientos de pápulas eritematodescamativas de 3–8 mm en tronco y raíz de miembros. ¿Diagnóstico, germen implicado y pronóstico?</span></summary>
+              <div class="ans"><b>Psoriasis guttata</b>, gatillada por <i>Streptococcus pyogenes</i> faríngeo. Es la forma de <b>mejor pronóstico</b>: puede autolimitarse en semanas a meses. Responde muy bien a UVB de banda angosta.<span class="why">Bloque: Psoriasis · Formas clínicas.</span></div>
+            </details>
+
+            <details class="q"><summary><span class="qn">02</span><span>Al raspar una placa aparecen escamas blancas, luego una membrana fina y finalmente un puntillado hemorrágico. Nombrá los tres signos.</span></summary>
+              <div class="ans">Raspado metódico de <b>Brocq</b>: 1) signo de la <b>vela</b> o bujía; 2) membrana de <b>Duncan-Buckley</b>; 3) rocío hemorrágico de <b>Auspitz</b>.<span class="why">El Auspitz se explica por la papilomatosis con capilares dilatados y el adelgazamiento suprapapilar.</span></div>
+            </details>
+
+            <details class="q"><summary><span class="qn">03</span><span>Mujer de 68 años: fiebre 39,5 °C con escalofríos y, al día siguiente, placa roja brillante en pierna derecha, caliente, con borde elevado palpable y un cordón eritematoso hacia la ingle. ¿Diagnóstico, germen y tratamiento?</span></summary>
+              <div class="ans"><b>Erisipela</b> por <i>S. pyogenes</i>. Tratamiento de elección: <b>penicilina</b> (V oral si es leve, G sódica endovenosa si es grave). Sumar reposo con el miembro elevado y <b>buscar la puerta de entrada</b> — casi siempre intertrigo interdigital.<span class="why">Las claves: fiebre antes que la lesión, borde neto y linfangitis.</span></div>
+            </details>
+
+            <details class="q"><summary><span class="qn">04</span><span>¿Cuál es la puerta de entrada más frecuente de la erisipela de miembro inferior?</span></summary>
+              <div class="ans"><b>Intertrigo micótico interdigital</b> (pie de atleta). Si no se trata, la erisipela recurre; la recurrencia destruye linfáticos y lleva a linfedema crónico.</div>
+            </details>
+
+            <details class="q"><summary><span class="qn">05</span><span>Nene de 4 años con costras color miel alrededor de la boca. La mamá pregunta si puede volver al jardín y si esto le puede "afectar el corazón".</span></summary>
+              <div class="ans"><b>Impétigo no ampollar</b>. Puede volver al jardín <b>24–48 h</b> después de iniciar el antibiótico. <b>No</b> produce fiebre reumática (eso es exclusivo de la faringitis estreptocócica); la complicación posible es la <b>glomerulonefritis post-estreptocócica</b>, que el antibiótico <b>no previene</b>.</div>
+            </details>
+
+            <details class="q"><summary><span class="qn">06</span><span>Lactante con ampollas flácidas de contenido turbio en el área del pañal, que dejan erosiones con collarete. ¿Germen y mecanismo?</span></summary>
+              <div class="ans"><b>Impétigo ampollar</b> por <i>S. aureus</i> (fago grupo II), mediante <b>toxinas exfoliativas ETA/ETB</b> que clivan la <b>desmogleína 1</b> y producen despegamiento subcórneo.<span class="why">La misma toxina, si se disemina por vía hemática, produce el SSSS.</span></div>
+            </details>
+
+            <details class="q"><summary><span class="qn">07</span><span>Diabético de 60 años con eritema y edema en pierna, sin límite preciso, dolor profundo, febrícula y una colección fluctuante de 3 cm. ¿Conducta?</span></summary>
+              <div class="ans"><b>Celulitis purulenta con absceso</b>. Lo principal es el <b>drenaje quirúrgico</b>; el antibiótico acompaña y debe cubrir <b>SAMR de la comunidad</b>: TMP-SMX, clindamicina o doxiciclina. Compensar la glucemia y marcar el borde para seguimiento.</div>
+            </details>
+
+            <details class="q"><summary><span class="qn">08</span><span>Paciente internado por "celulitis" que a las 24 h refiere dolor insoportable, tiene una zona anestesiada, ampollas hemorrágicas y crepitación. ¿Qué pensás y qué hacés?</span></summary>
+              <div class="ans"><b>Fascitis necrotizante</b>. <b>Cirugía urgente</b> para exploración y debridamiento, sin esperar imágenes, más antibióticos de amplio espectro con <b>clindamicina</b> por su efecto antitoxina, y soporte hemodinámico.<span class="why">El dolor desproporcionado es el signo más precoz. Un LRINEC bajo no descarta el diagnóstico.</span></div>
+            </details>
+
+            <details class="q"><summary><span class="qn">09</span><span>Ambas piernas rojas, con edema, hiperpigmentación ocre y prurito, sin fiebre, en una paciente obesa con várices. ¿Es celulitis?</span></summary>
+              <div class="ans">No: es <b>dermatitis por estasis</b>, la pseudocelulitis más frecuente. La celulitis es casi siempre <b>unilateral</b> y con fiebre. Además, ante edema y dolor de pierna, siempre descartar <b>TVP</b> con eco-Doppler.</div>
+            </details>
+
+            <details class="q"><summary><span class="qn">10</span><span>¿Qué diferencia clínica permite separar erisipela de celulitis junto a la cama del paciente?</span></summary>
+              <div class="ans">El <b>borde</b>: en la erisipela es neto y sobreelevado, palpable como un escalón; en la celulitis se pierde de manera difusa. Se suma la <b>cronología de la fiebre</b> (antes en la erisipela, después o ausente en la celulitis) y la profundidad del dolor.</div>
+            </details>
+
+            <details class="q"><summary><span class="qn">11</span><span>Paciente con psoriasis en placas a quien un colega le indicó meprednisona por un brote. Se suspendió y aparecieron pústulas generalizadas con fiebre. ¿Qué pasó?</span></summary>
+              <div class="ans"><b>Psoriasis pustulosa generalizada de von Zumbusch</b> por rebote tras la suspensión de corticoides sistémicos. Es una <b>urgencia dermatológica</b>: internación, soporte, y acitretina o ciclosporina como sistémico. Los corticoides sistémicos no se usan en psoriasis.</div>
+            </details>
+
+            <details class="q"><summary><span class="qn">12</span><span>Placas eritematosas rojo brillante, húmedas y sin escama en axilas e inguinal. ¿Qué forma es y con qué se confunde?</span></summary>
+              <div class="ans"><b>Psoriasis invertida o de pliegues</b>. Se confunde con <b>candidiasis intertriginosa</b> y con intertrigo. La clave es buscar lesiones típicas en otra localización, el compromiso ungueal o el antecedente familiar.</div>
+            </details>
+
+            <details class="q"><summary><span class="qn">13</span><span>Nombrá los hallazgos histológicos de la psoriasis que llevan nombre propio.</span></summary>
+              <div class="ans"><b>Microabscesos de Munro</b> (neutrófilos en la capa córnea) y <b>pústula espongiforme de Kogoj</b> (neutrófilos en la capa espinosa). El resto: hiperqueratosis con paraqueratosis, agranulosis, acantosis regular, papilomatosis con capilares dilatados.</div>
+            </details>
+
+            <details class="q"><summary><span class="qn">14</span><span>Paciente con psoriasis en el 25 % de la superficie corporal y artritis de interfalángicas distales. ¿Qué escalón terapéutico corresponde y qué hay que pedir antes de un biológico?</span></summary>
+              <div class="ans">Es <b>moderada-grave</b> (regla de los 10) con compromiso articular → sistémico: <b>metotrexato</b> como primera opción por cubrir piel y articulación, y biológico (anti-TNF, anti-IL-17 o anti-IL-23) si falla. Antes de iniciar biológicos: descartar <b>TBC latente</b> (PPD/IGRA y radiografía), <b>hepatitis B y C</b> y <b>HIV</b>.</div>
+            </details>
+
+          </div>
+
+          <div class="case">
+            <span class="card-label">Caso integrador</span>
+            <p class="stem">Hombre de 55 años, obeso, con insuficiencia venosa y antecedente de dos episodios similares el año pasado. Consulta por fiebre de 39 °C de comienzo brusco y, doce horas después, una placa eritematosa en pierna izquierda, brillante, caliente, de bordes netos y elevados, con adenopatía inguinal dolorosa. Entre el cuarto y el quinto dedo del pie tiene una fisura macerada.</p>
+            <p><b>Diagnóstico</b>: erisipela de miembro inferior por <i>S. pyogenes</i>, con intertrigo micótico como puerta de entrada. <b>Conducta</b>: penicilina, reposo con elevación del miembro, analgesia, antimicótico tópico para el intertrigo, marcar el borde con lapicera y fecha. <b>Por ser el tercer episodio</b>: profilaxis con penicilina G benzatínica 2.400.000 UI IM cada 21–28 días y manejo del linfedema con compresión elástica, además de bajar de peso y cuidar la piel.</p>
+          </div>
+
+          <div class="foot">
+            <p>Apunte de repaso para el examen de Dermatología. Alineado con el <b>Manual de Dermatología de Driban</b> (UNCUYO). Las dosis son orientativas y de adulto salvo indicación; siempre verificalas con la bibliografía de cátedra antes de usarlas en la práctica.</p>
+            <p class="mono">Fin del recorrido · 60 minutos</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.plan a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  var clock = document.getElementById('clock');
+  var starts = [0,4,20,28,38,47,50,53];
+
+  function update(){
+    var y = window.scrollY + window.innerHeight * 0.28;
+    var idx = 0;
+    for (var i = 0; i < secs.length; i++){
+      if (secs[i] && secs[i].offsetTop <= y) idx = i;
+    }
+    links.forEach(function(a,i){
+      if (i === idx) a.setAttribute('aria-current','true');
+      else a.removeAttribute('aria-current');
+    });
+    if (clock) clock.textContent = 'min ' + starts[idx];
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function(){ update(); ticking = false; });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  update();
+
+  // Recordar qué preguntas ya abriste, por si volvés a la página.
+  var quiz = document.querySelectorAll('details.q');
+  var KEY = 'derma-quiz-abiertas';
+  var seen = {};
+  try { seen = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ seen = {}; }
+  Array.prototype.forEach.call(quiz, function(d, i){
+    if (seen[i]) d.open = true;
+    d.addEventListener('toggle', function(){
+      seen[i] = d.open;
+      try { localStorage.setItem(KEY, JSON.stringify(seen)); } catch(e){}
+    });
+  });
+})();
+</script>
