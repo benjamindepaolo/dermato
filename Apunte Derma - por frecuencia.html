@@ -1,0 +1,1673 @@
+<title>Derma en Dos Días</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --paper:#FAF8F4;
+  --surface:#FFFFFF;
+  --panel:#F2EFE8;
+  --ink:#17201D;
+  --ink-2:#3D4844;
+  --muted:#6E7975;
+  --line:#DDD8CE;
+  --line-soft:#E9E5DC;
+  --accent:#0E5045;
+  --accent-soft:#D6E6E0;
+  --rust:#A9480F;
+  --rust-soft:#F3E3D6;
+  --shadow:rgba(23,32,29,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111614;
+    --surface:#171E1B;
+    --panel:#1D2622;
+    --ink:#E9ECE7;
+    --ink-2:#BEC6C1;
+    --muted:#8B968F;
+    --line:#2C3733;
+    --line-soft:#242D29;
+    --accent:#5CC4A8;
+    --accent-soft:#1B322C;
+    --rust:#E39258;
+    --rust-soft:#2E2118;
+    --shadow:rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111614;
+  --surface:#171E1B;
+  --panel:#1D2622;
+  --ink:#E9ECE7;
+  --ink-2:#BEC6C1;
+  --muted:#8B968F;
+  --line:#2C3733;
+  --line-soft:#242D29;
+  --accent:#5CC4A8;
+  --accent-soft:#1B322C;
+  --rust:#E39258;
+  --rust-soft:#2E2118;
+  --shadow:rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Literata",Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 96px;}
+
+/* ---------- masthead ---------- */
+.mast{
+  border-bottom:2px solid var(--ink);
+  padding:44px 0 22px;
+  margin-bottom:34px;
+}
+.kicker{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rust);margin:0 0 14px;
+}
+h1{
+  font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  font-weight:800;font-size:clamp(2.3rem,6vw,3.9rem);
+  line-height:.98;letter-spacing:-.025em;margin:0 0 16px;
+  text-wrap:balance;
+}
+.dek{
+  max-width:62ch;color:var(--ink-2);font-size:1.05rem;margin:0 0 22px;
+}
+.mast-meta{
+  display:flex;flex-wrap:wrap;gap:8px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.04em;
+}
+.mast-meta span{
+  border:1px solid var(--line);border-radius:2px;
+  padding:5px 9px;color:var(--muted);background:var(--surface);
+}
+
+/* ---------- how to read ---------- */
+.howto{
+  background:var(--panel);border:1px solid var(--line-soft);
+  padding:20px 22px;margin-bottom:40px;border-radius:3px;
+}
+.howto h2{
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:700;
+  font-size:.95rem;letter-spacing:.02em;margin:0 0 10px;
+}
+.howto p{margin:0 0 10px;font-size:.94rem;color:var(--ink-2);max-width:70ch}
+.howto p:last-child{margin-bottom:0}
+.srckey{
+  display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:14px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  color:var(--muted);
+}
+.srckey b{color:var(--ink-2);font-weight:600}
+
+/* ---------- layout ---------- */
+.cols{display:block}
+@media (min-width:1000px){
+  .cols{display:grid;grid-template-columns:212px minmax(0,1fr);gap:56px;align-items:start}
+  .rail{position:sticky;top:22px;max-height:calc(100vh - 44px);overflow-y:auto}
+}
+.rail{display:none}
+@media (min-width:1000px){.rail{display:block}}
+.rail h3{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 10px;font-weight:600;
+}
+.rail ol{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-direction:column;gap:1px}
+.rail a{
+  display:flex;gap:8px;text-decoration:none;color:var(--ink-2);
+  font-size:12.5px;line-height:1.35;padding:4px 6px;border-radius:2px;
+}
+.rail a:hover,.rail a:focus-visible{background:var(--accent-soft);color:var(--ink);outline:none}
+.rail a i{
+  font-family:"IBM Plex Mono",monospace;font-style:normal;
+  color:var(--muted);font-size:11px;min-width:16px;
+}
+
+/* ---------- tier headers ---------- */
+.tier{
+  margin:52px 0 26px;padding-top:22px;border-top:2px solid var(--ink);
+}
+.tier:first-of-type{margin-top:0;border-top:none;padding-top:0}
+.tier .t-lab{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rust);margin:0 0 6px;
+}
+.tier h2{
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;
+  font-size:1.6rem;letter-spacing:-.015em;margin:0 0 6px;line-height:1.1;
+}
+.tier p{margin:0;color:var(--muted);font-size:.92rem;max-width:64ch}
+
+/* ---------- topic ---------- */
+.topic{
+  padding:30px 0 34px;border-bottom:1px solid var(--line-soft);
+  scroll-margin-top:20px;
+}
+.t-head{display:flex;gap:16px;align-items:baseline;margin-bottom:6px}
+.t-num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:600;
+  font-size:1.05rem;color:var(--rust);min-width:2.1em;
+  font-variant-numeric:tabular-nums;
+}
+.topic h3{
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:700;
+  font-size:1.45rem;letter-spacing:-.012em;line-height:1.15;margin:0;
+  text-wrap:balance;flex:1;
+}
+.freq{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  margin:0 0 20px 0;padding-left:calc(2.1em + 16px);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;
+  color:var(--muted);font-variant-numeric:tabular-nums;
+}
+@media (max-width:620px){
+  .t-head{gap:10px}
+  .freq{padding-left:0}
+}
+.bar{display:flex;gap:2.5px}
+.bar i{width:9px;height:9px;border-radius:1px;background:var(--line);display:block}
+.bar i.on{background:var(--accent)}
+.qty{color:var(--ink-2)}
+
+/* asked block */
+.asked{
+  background:var(--panel);border-left:3px solid var(--rust);
+  padding:15px 18px 16px;margin:0 0 20px;border-radius:0 3px 3px 0;
+}
+.asked h4{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:600;
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--rust);margin:0 0 11px;
+}
+.asked ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.asked li{font-size:.93rem;line-height:1.5;color:var(--ink-2);padding-left:15px;position:relative}
+.asked li::before{
+  content:"›";position:absolute;left:0;top:-1px;color:var(--rust);font-weight:600;
+}
+.asked q{font-style:italic;quotes:"«" "»"}
+.asked b{color:var(--ink);font-weight:600;font-style:normal}
+.src{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;
+  color:var(--muted);letter-spacing:.03em;white-space:nowrap;
+}
+
+/* know block */
+.know{max-width:70ch}
+.know h4{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:600;
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 11px;
+}
+.know p{margin:0 0 11px}
+.know ul{margin:0 0 11px;padding-left:19px;display:flex;flex-direction:column;gap:5px}
+.know li{padding-left:2px}
+.know strong{font-weight:600}
+.know em{color:var(--accent);font-style:normal;font-weight:600}
+.know .lead{
+  font-size:1.02rem;color:var(--ink);border-left:2px solid var(--accent-soft);
+  padding-left:14px;margin-bottom:14px;
+}
+.warn{
+  background:var(--rust-soft);border:1px solid var(--rust);
+  padding:11px 14px;margin:14px 0 0;font-size:.9rem;border-radius:3px;
+  color:var(--ink-2);
+}
+.warn b{color:var(--rust);font-weight:600}
+.tbl{overflow-x:auto;margin:0 0 12px}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:380px}
+th,td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+}
+footer{
+  margin-top:60px;padding-top:22px;border-top:2px solid var(--ink);
+  font-size:.88rem;color:var(--muted);max-width:70ch;
+}
+footer p{margin:0 0 9px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker">Dermatología · FCM UNCUYO · Examen viernes 28/08, 8:30</p>
+  <h1>Derma en dos días</h1>
+  <p class="dek">Todos los temas que aparecieron en las seis fuentes de tu carpeta, ordenados de mayor a menor frecuencia. Cada tema abre con <strong>lo que preguntaron, textual</strong>, y sigue con lo mínimo que hay que saber para contestarlo.</p>
+  <div class="mast-meta">
+    <span>6 fuentes cruzadas</span>
+    <span>~380 preguntas contadas</span>
+    <span>36 temas · ninguno omitido</span>
+    <span>Formato: 40 casos clínicos con iconografía</span>
+  </div>
+</header>
+
+<div class="howto">
+  <h2>Cómo leer esto</h2>
+  <p>El orden es el ranking de frecuencia. Si leés de arriba hacia abajo, siempre estás estudiando lo que más rinde por minuto. Los cuadraditos verdes son en cuántas de las seis fuentes apareció el tema; el número al lado es cuántas preguntas se contaron en total.</p>
+  <p><strong>El bloque naranja es lo importante.</strong> No es un resumen: son las preguntas reales, como las hicieron, con la respuesta que dieron por correcta. Si reconocés el patrón de la pregunta, la contestás aunque el caso venga disfrazado.</p>
+  <div class="srckey">
+    <span><b>[Moodle]</b> cuestionarios oficiales de la cátedra, 2022</span>
+    <span><b>[Imágenes]</b> banco de 95 fotos del examen</span>
+    <span><b>[Final]</b> final recordado con respuestas</span>
+    <span><b>[2022]</b> final 2022</span>
+    <span><b>[2024]</b> exámenes 2024</span>
+    <span><b>[Oral]</b> orales 2014-15</span>
+  </div>
+</div>
+
+<div class="cols">
+<nav class="rail" aria-label="Índice">
+  <h3>Índice</h3>
+  <ol>
+    <li><a href="#t0"><i>00</i>Lesiones elementales</a></li>
+    <li><a href="#t1"><i>01</i>Carcinoma basocelular</a></li>
+    <li><a href="#t2"><i>02</i>Melanoma</a></li>
+    <li><a href="#t3"><i>03</i>Pénfigo y penfigoide</a></li>
+    <li><a href="#t4"><i>04</i>Carcinoma espinocelular</a></li>
+    <li><a href="#t5"><i>05</i>Hemangioma y malformaciones</a></li>
+    <li><a href="#t6"><i>06</i>Piodermitis</a></li>
+    <li><a href="#t7"><i>07</i>Psoriasis</a></li>
+    <li><a href="#t8"><i>08</i>Acné</a></li>
+    <li><a href="#t9"><i>09</i>Dermatomiositis</a></li>
+    <li><a href="#t10"><i>10</i>Patología oral</a></li>
+    <li><a href="#t11"><i>11</i>Nevos</a></li>
+    <li><a href="#t12"><i>12</i>Herpes simple y zóster</a></li>
+    <li><a href="#t13"><i>13</i>Tiñas y micosis</a></li>
+    <li><a href="#t14"><i>14</i>Eczema de contacto</a></li>
+    <li><a href="#t15"><i>15</i>Escabiosis</a></li>
+    <li><a href="#t16"><i>16</i>Sífilis</a></li>
+    <li><a href="#t17"><i>17</i>Rosácea</a></li>
+    <li><a href="#t18"><i>18</i>EM / SSJ / NET / DRESS</a></li>
+    <li><a href="#t19"><i>19</i>Urticaria y angioedema</a></li>
+    <li><a href="#t20"><i>20</i>Liquen plano</a></li>
+    <li><a href="#t21"><i>21</i>Queratosis seborreica</a></li>
+    <li><a href="#t22"><i>22</i>Lupus cutáneo</a></li>
+    <li><a href="#t23"><i>23</i>Verrugas y HPV</a></li>
+    <li><a href="#t24"><i>24</i>Dermatitis atópica</a></li>
+    <li><a href="#t25"><i>25</i>Esclerodermia</a></li>
+    <li><a href="#t26"><i>26</i>Queratosis actínica</a></li>
+    <li><a href="#t27"><i>27</i>Pediculosis</a></li>
+    <li><a href="#t28"><i>28</i>Mancha mongólica</a></li>
+    <li><a href="#t29"><i>29</i>Fibromas péndulos</a></li>
+    <li><a href="#t30"><i>30</i>Vitiligo</a></li>
+    <li><a href="#t31"><i>31</i>Sarcoma de Kaposi</a></li>
+    <li><a href="#t32"><i>32</i>Queratoacantoma</a></li>
+    <li><a href="#t33"><i>33</i>Pitiriasis rosada</a></li>
+    <li><a href="#t34"><i>34</i>Lepra</a></li>
+    <li><a href="#t35"><i>35</i>Eritema nodoso</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============ TRANSVERSAL ============ -->
+<div class="tier">
+  <p class="t-lab">Transversal</p>
+  <h2>Esto va primero</h2>
+  <p>No es un tema de patología. Es la pregunta 1 de casi todos los casos del banco de la cátedra. Diez minutos acá valen más que una hora en cualquier otro tema de la lista.</p>
+</div>
+
+<section class="topic" id="t0">
+  <div class="t-head"><span class="t-num">00</span><h3>Lesiones elementales</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">11 preguntas propias + abre casi todos los casos clínicos</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Niño de 9 años con lesiones palpables con leve prurito en frente y mejillas, ¿cómo describiría sus lesiones?</q> → <b>Placas hipopigmentadas</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué lesión elemental presenta la paciente en la zona centro facial?</q> → <b>Mácula</b>. Y enseguida: <q>¿de qué forma la describiría con mayor exactitud?</q> → <b>Mácula eritematosa</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué lesión elemental presenta el paciente en cuero cabelludo?</q> → <b>Escama</b>. Seguido de: <q>¿de qué tipo de lesión elemental se trata?</q> → <b>Secundaria</b> <span class="src">[Moodle]</span></li>
+      <li><q>Paciente de 55 años, presenta desde hace 24 horas esta lesión en cara</q> → <b>Roncha</b>. Y en el párpado → <b>Angioedema</b> <span class="src">[Moodle]</span></li>
+      <li><q>Niña de 6 años con fiebre y lesiones en tronco, ¿qué lesión elemental primaria presenta?</q> → <b>Pústulas</b>; la secundaria → <b>Costra</b> <span class="src">[Moodle]</span></li>
+      <li><q>Niño de 10 años con ardor y prurito peribucal, ¿qué lesión elemental presenta?</q> → <b>Costras melicéricas</b>, secundarias a <b>desecación de exudado</b> <span class="src">[Moodle]</span></li>
+      <li><q>Roncha o habón, ¿a qué patología corresponde?</q> → <b>Urticaria</b> <span class="src">[Final]</span></li>
+      <li><q>Describir la lesión de queratosis actínica</q> → <b>Placas eritemato-escamosas</b> (el distractor era «placa eritemato-violácea con estrías de Wickham», que es liquen plano) <span class="src">[Final]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">El patrón es siempre el mismo: te muestran una foto y te piden nombrar la lesión, después si es primaria o secundaria, y recién después el diagnóstico. Si te equivocás en la primera, arrastrás el error.</p>
+    <div class="tbl">
+    <table>
+      <tr><th>Primaria</th><th>Qué es</th></tr>
+      <tr><td><strong>Mácula</strong></td><td>Cambio de color, <em>no palpable</em>, plana. Eritematosa, hipo o hiperpigmentada.</td></tr>
+      <tr><td><strong>Pápula</strong></td><td>Sobreelevada, sólida, &lt;1 cm.</td></tr>
+      <tr><td><strong>Placa</strong></td><td>Sobreelevada, &gt;1 cm. Puede nacer de pápulas confluentes.</td></tr>
+      <tr><td><strong>Nódulo</strong></td><td>Sólido, profundo (dermis/hipodermis), se palpa más de lo que se ve.</td></tr>
+      <tr><td><strong>Vesícula</strong></td><td>Contenido líquido, &lt;0,5 cm.</td></tr>
+      <tr><td><strong>Ampolla</strong></td><td>Contenido líquido, &gt;0,5 cm.</td></tr>
+      <tr><td><strong>Pústula</strong></td><td>Contenido purulento.</td></tr>
+      <tr><td><strong>Roncha / habón</strong></td><td>Edema de la dermis, <em>fugaz</em>: dura horas, &lt;24 h. Si es más profundo y dura hasta 72 h, es angioedema.</td></tr>
+    </table>
+    </div>
+    <div class="tbl">
+    <table>
+      <tr><th>Secundaria</th><th>Qué es</th></tr>
+      <tr><td><strong>Escama</strong></td><td>Desprendimiento de estrato córneo.</td></tr>
+      <tr><td><strong>Costra</strong></td><td><em>Desecación de un exudado.</em> Melicérica (miel) = impétigo.</td></tr>
+      <tr><td><strong>Erosión</strong></td><td>Pérdida superficial, epidermis. No deja cicatriz.</td></tr>
+      <tr><td><strong>Úlcera</strong></td><td>Pérdida profunda, llega a dermis. Deja cicatriz.</td></tr>
+      <tr><td><strong>Escoriación</strong></td><td>Pérdida lineal por rascado.</td></tr>
+      <tr><td><strong>Liquenificación</strong></td><td>Engrosamiento con acentuación de los pliegues. Rascado crónico.</td></tr>
+      <tr><td><strong>Fisura</strong></td><td>Solución de continuidad lineal.</td></tr>
+      <tr><td><strong>Atrofia</strong></td><td>Adelgazamiento de la piel.</td></tr>
+    </table>
+    </div>
+    <p><strong>Los tres pares que confunden en el examen:</strong> mácula vs. placa (¿se palpa?) · vesícula vs. pústula (¿claro o purulento?) · erosión vs. úlcera (¿cicatriza sin marca?).</p>
+  </div>
+</section>
+
+<!-- ============ NÚCLEO ============ -->
+<div class="tier">
+  <p class="t-lab">Núcleo · aparecen en las 6 fuentes</p>
+  <h2>Los nueve que no podés no saber</h2>
+  <p>Están en el banco de la cátedra, en el banco de imágenes y en todos los finales recordados. Si algo entra seguro, es esto.</p>
+</div>
+
+<section class="topic" id="t1">
+  <div class="t-head"><span class="t-num">01</span><h3>Carcinoma basocelular</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~25 preguntas · 11 imágenes en el banco</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Paciente con una lesión con ulceración central, sin mucho pigmento, ¿cuál es el dx?</q> (foto con borde perlado) → <b>Carcinoma basocelular</b> <span class="src">[2022]</span></li>
+      <li><q>(Imagen de lesión papular de bordes telangiectásicos y color negruzco) patología más probable</q> → <b>Basocelular pigmentado</b> <span class="src">[Final]</span></li>
+      <li><q>¿Cuál de las siguientes opciones es correcta para el CBC?</q> a) se encuentra en mucosas · b) da metástasis · c) puede contener pigmento → <b>c</b> <span class="src">[Final]</span></li>
+      <li><q>¿Qué hallazgo semiológico buscaría en el examen físico?</q> → <b>Borde perlado en el borde de la úlcera</b> (los distractores: signo del ABCD = nevo displásico; tapón queratósico = queratoacantoma; adenomegalia = no, el CBC no metastatiza) <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué dato del interrogatorio le parece relevante?</q> → <b>Su evolución lenta</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué esperaría encontrar en la histopatología?</q> → <b>Nidos de células basaloides con retracción del colágeno periférico</b> <span class="src">[Moodle / Final]</span></li>
+      <li><q>El carcinoma basocelular se origina en:</q> → <b>Célula indiferenciada del folículo piloso</b> <span class="src">[Moodle]</span></li>
+      <li><q>Tres CBC en cara, ¿qué antecedente rescata?</q> → <b>Exposición prolongada a luz ultravioleta</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué tratamiento elegiría?</q> (lesiones grandes en cara) → <b>Cirugía micrográfica de Mohs</b> <span class="src">[Moodle]</span></li>
+      <li><q>(Imagen de CBC ulcerado) tratamiento</q> → <b>Cirugía con márgenes de 2 mm</b> <span class="src">[Final]</span></li>
+      <li>Variedades clínicas, síndrome de Gorlin, y <q>¿por qué no puede ser melanoma?</q> → <b>por el tiempo de evolución</b> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Anciano, cara, años de evolución, crecimiento lento, nódulo brillante con telangiectasias y <em>borde perlado</em>. Si está ulcerado en el centro, es ulcus rodens. No da metástasis casi nunca, pero destruye localmente.</p>
+    <ul>
+      <li><strong>Origen:</strong> célula indiferenciada del folículo piloso (no la basal de la epidermis — es un distractor clásico).</li>
+      <li><strong>Factor de riesgo #1:</strong> exposición UV acumulada. Después: fototipo I-II, edad avanzada, arsénico, radioterapia.</li>
+      <li><strong>No aparece en mucosas.</strong> Sí puede tener pigmento (variante pigmentada, se confunde con melanoma).</li>
+      <li><strong>Variedades:</strong> nodular (la más frecuente) · pigmentado · superficial · esclerodermiforme/morfeiforme · <em>ulcus rodens</em> · <em>Pinkus</em> (fibroepitelioma, placa vegetante en espalda).</li>
+      <li><strong>Histología:</strong> nidos de células basaloides en empalizada periférica, con retracción/pseudo-retracción del colágeno alrededor.</li>
+      <li><strong>Diagnóstico de certeza:</strong> biopsia. Ayuda: dermatoscopia.</li>
+      <li><strong>Tratamiento:</strong> cirugía con margen 2-5 mm. Cuando es grande, recidivante o está en zona de riesgo de la cara → <em>Mohs</em>. Alternativas en superficiales: imiquimod, criocirugía, electrocoagulación.</li>
+      <li><strong>Síndrome de Gorlin</strong> (nevo basocelular nevoide): CBC múltiples de aparición temprana + quistes odontogénicos + pits palmoplantares + calcificación de la hoz cerebral.</li>
+    </ul>
+    <div class="warn"><b>Ojo:</b> si la lesión apareció a los 12 años o hay muchos CBC juntos, la respuesta que buscan es Gorlin, no «exposición solar».</div>
+  </div>
+</section>
+
+<section class="topic" id="t2">
+  <div class="t-head"><span class="t-num">02</span><h3>Melanoma · Breslow y Clark</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~22 preguntas · 7 imágenes en el banco</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>(Foto de melanoma elevado) ¿qué nivel presenta?</q> a) Clark 1 · b) Breslow 2 · c) Brocq 2 → <b>Breslow 2</b>. El razonamiento que dejaron escrito: <em>Clark 1 es solo epidermis, si ya se ve bien elevado seguro la superó</em> <span class="src">[2022]</span></li>
+      <li><q>¿A qué variedad de melanoma corresponde?</q> (lesión en espalda, sin nódulo aún, con ABCD clásico) → <b>Melanoma extensivo superficial</b> <span class="src">[Moodle]</span></li>
+      <li><q>AP: melanocitos atípicos en nidos que comprometen la epidermis en todo su espesor, dermis sin células atípicas, profundidad 0,7 mm</q> → <b>Breslow 1, Clark 1</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál sería su conducta terapéutica?</q> → <b>Extirpación-biopsia con margen de aproximadamente 1 cm</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es el pronóstico?</q> → <b>Bueno, si la extirpación fue completa</b> (porque Breslow y Clark &lt;1 mm) <span class="src">[Moodle]</span></li>
+      <li><q>Características histológicas del melanoma</q> → <b>melanocitos con núcleos atípicos, nucléolos evidentes, mitosis poco frecuentes</b> <span class="src">[Final]</span></li>
+      <li><q>¿Cuál es el melanoma de crecimiento radial más lento?</q> → <b>Lentigo maligno</b> <span class="src">[Final]</span></li>
+      <li><q>Melanoma extirpado completo, ¿qué medidas?</q> → ampliar margen / evaluar ganglio centinela <span class="src">[2024]</span></li>
+      <li><q>Si sospecho metástasis, ¿dónde busco la lesión inicial?</q> → <b>espalda en hombre, piernas en mujer</b>; también mucosas y ocular; la primaria puede haber involucionado. <q>¿Dónde metastatiza más?</q> → <b>SNC y pulmón</b> <span class="src">[Oral]</span></li>
+      <li><q>¿Para qué sirve el índice de Breslow y cómo lo saco?</q> → <b>es pronóstico; se mide desde la capa granulosa hasta la célula más profunda que invade</b> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Breslow es <em>milímetros de profundidad</em> y es el factor pronóstico. Clark es <em>qué capa anatómica</em> invade. Los mezclan a propósito en las opciones.</p>
+    <ul>
+      <li><strong>Breslow:</strong> se mide con micrómetro desde la <em>capa granulosa</em> hasta la célula tumoral más profunda. &lt;1 mm = buen pronóstico.</li>
+      <li><strong>Clark:</strong> I epidermis (in situ) · II dermis papilar · III llena la papilar · IV dermis reticular · V hipodermis.</li>
+      <li><strong>ABCDE:</strong> Asimetría · Bordes irregulares · Color heterogéneo · Diámetro &gt;6 mm · Evolución/elevación.</li>
+      <li><strong>Variedades:</strong> <em>extensivo superficial</em> (el más frecuente, crecimiento radial, espalda en hombre y piernas en mujer) · <em>nodular</em> (el más agresivo, crecimiento vertical desde el inicio) · <em>lentigo maligno</em> (el de crecimiento radial más lento, cara de ancianos) · <em>lentiginoso acral</em> (palmas, plantas, uñas) · <em>amelanótico</em> (sin pigmento, engaña).</li>
+      <li><strong>Lesiones precursoras:</strong> nevo displásico, nevo congénito (sobre todo el gigante), lentigo maligno, nevo azul. El que se extirpa sí o sí es el <em>congénito grande</em>.</li>
+      <li><strong>Conducta:</strong> extirpación-biopsia con ~1 cm de margen y luego ampliación según Breslow. Ganglio centinela cuando Breslow &gt;0,8-1 mm.</li>
+      <li><strong>Metástasis:</strong> SNC y pulmón. También hígado y hueso.</li>
+    </ul>
+    <div class="warn"><b>Contradicción entre tus fuentes.</b> Un final recordado dice <q>extirpación quirúrgica de 5 cm de margen</q> para un melanoma de &gt;1,5 mm de Breslow. El banco oficial de la cátedra dice <b>1 cm y ampliación posterior</b>, que es el criterio correcto y actual (máximo 2 cm). Si te dan a elegir, la del banco.</div>
+  </div>
+</section>
+
+<section class="topic" id="t3">
+  <div class="t-head"><span class="t-num">03</span><h3>Pénfigo y penfigoide · el signo de Nikolsky</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~21 preguntas · el cuestionario más largo del banco (14)</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>(Imagen de lesiones ampollosas en tronco que rompen con facilidad) ¿cuál es el método diagnóstico de elección?</q> → <b>Signo de Nikolsky +</b> <span class="src">[Final]</span></li>
+      <li><q>(Imagen de ampollas firmes y tensas) marque la correcta</q> → <b>Signo de Nikolsky −</b> <span class="src">[Final]</span></li>
+      <li><q>Un paciente presenta ampollas tensas en tronco, ¿qué es?</q> → <b>Penfigoide ampollar</b>. <q>¿Cómo sería el Nikolsky?</q> → <b>Negativo</b> <span class="src">[2022]</span></li>
+      <li><q>Con respecto al pénfigo vulgar:</q> → <b>Tienen anticuerpos anti-desmogleína 3 y 1</b> <span class="src">[Moodle]</span></li>
+      <li><q>Penfigoide ampollar, marque la correcta</q> → <b>Los antígenos son proteínas estructurales del hemidesmosoma</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es INCORRECTA?</q> → <b>«El signo de Nikolsky positivo es exclusivo del pénfigo»</b> (es falso: también en NET y SSSS) <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es CORRECTA?</q> → <b>Las lesiones del penfigoide tienen distribución centrípeta</b> <span class="src">[Moodle]</span></li>
+      <li>V/F del banco: <q>el pénfigo vulgar puede tener sólo compromiso oral</q> → <b>V</b> · <q>los hemidesmosomas contienen los antígenos del pénfigo vulgar</q> → <b>F</b> · <q>las ampollas del pénfigo vulgar son subcórneas</b> → <b>F</b> · <q>el penfigoide es común en ancianos</q> → <b>V</b> · <q>la lesión del penfigoide es una ampolla fláccida</q> → <b>F</b> <span class="src">[Moodle]</span></li>
+      <li><q>El pénfigo paraneoplásico es secundario a una neoplasia interna</q> → <b>V</b>; las neoplasias más frecuentes son <b>linfoproliferativas</b> <span class="src">[Moodle]</span></li>
+      <li><q>Síndrome paraneoplásico con lesión en paladar</q> → <b>Pénfigo paraneoplásico</b> <span class="src">[2024]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Todo el tema se resuelve con una tabla de dos columnas. Aprendela y contestás las catorce.</p>
+    <div class="tbl">
+    <table>
+      <tr><th></th><th>Pénfigo vulgar</th><th>Penfigoide ampollar</th></tr>
+      <tr><td><strong>Ampolla</strong></td><td>Fláccida, se rompe fácil</td><td>Tensa, firme</td></tr>
+      <tr><td><strong>Nivel</strong></td><td><em>Intraepidérmica</em> (suprabasal)</td><td><em>Subepidérmica</em></td></tr>
+      <tr><td><strong>Mecanismo</strong></td><td>Acantólisis</td><td>Sin acantólisis</td></tr>
+      <tr><td><strong>Antígeno</strong></td><td>Desmogleína 3 y 1 — <em>desmosoma</em></td><td>BP180/BP230 — <em>hemidesmosoma</em></td></tr>
+      <tr><td><strong>Nikolsky</strong></td><td>Positivo</td><td>Negativo</td></tr>
+      <tr><td><strong>Mucosas</strong></td><td>Sí, y puede empezar sólo por boca</td><td>Raro</td></tr>
+      <tr><td><strong>Edad</strong></td><td>40-60 años</td><td>Ancianos</td></tr>
+      <tr><td><strong>Distribución</strong></td><td>—</td><td>Centrípeta; prurito importante</td></tr>
+      <tr><td><strong>Tzanck</strong></td><td>Útil (células acantolíticas)</td><td>No sirve</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><strong>Nikolsky:</strong> presión tangencial sobre piel sana y se desprende la epidermis. Positivo en pénfigo, <em>pero también en NET y en síndrome de piel escaldada estafilocócica</em>. No es exclusivo — eso lo preguntan.</li>
+      <li><strong>Pénfigo foliáceo:</strong> ampollas subcórneas, sin compromiso mucoso, sólo anti-desmogleína 1.</li>
+      <li><strong>Pénfigo paraneoplásico:</strong> compromiso mucoso severo (paladar, labios), asociado a neoplasias linfoproliferativas.</li>
+      <li><strong>Diagnóstico:</strong> biopsia + inmunofluorescencia directa. Pénfigo: depósito intercelular «en panal de abeja». Penfigoide: banda lineal en la unión dermoepidérmica.</li>
+      <li><strong>Tratamiento:</strong> corticoides sistémicos ± inmunosupresores (azatioprina, micofenolato); rituximab en pénfigo. En penfigoide localizado alcanzan corticoides tópicos de <em>alta</em> potencia — el banco marcó como incorrecta la opción «baja potencia».</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t4">
+  <div class="t-head"><span class="t-num">04</span><h3>Carcinoma espinocelular</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~19 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Paciente con lesión en la mano, muy sobreelevada, que creció en 3 meses; tiene queratosis seborreicas en otras zonas. ¿Qué tipo de tumor es?</q> → <b>Espinocelular</b> <span class="src">[2022]</span></li>
+      <li><q>Hombre fumador con lesión en labio de 2 años más adenopatía cervical</q> → <b>CEC</b> <span class="src">[2024]</span></li>
+      <li><q>(Imagen de CEC ulcerado en labio) preguntaba la histología</q> → <b>proliferación de células espinosas que destruyen la membrana basal e invaden dermis, perla córnea, disqueratosis</b> <span class="src">[Final]</span></li>
+      <li>Paciente trasplantado con úlcera en cuero cabelludo: <q>¿qué dato del interrogatorio es más relevante?</q> → <b>Que es trasplantado y recibe inmunosupresores</b>. <q>¿Qué otro hallazgo buscaría?</q> → <b>Adenomegalias submaxilares</b>. <q>¿Qué factor etiopatológico?</q> → <b>HPV por su inmunosupresión</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué espera encontrar en la histopatología?</q> → <b>Perlas córneas, disqueratosis y mitosis atípicas</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué conducta elegiría?</q> → <b>Estadificar el tumor con AP, exámenes complementarios e imágenes antes de la cirugía</b> <span class="src">[Moodle]</span></li>
+      <li>Patología oral: <q>la localización más frecuente es en la unión del tercio ___ con el ___ del borde de la lengua</q> → <b>medio / posterior</b>. <q>Otra localización frecuente</q> → <b>labio inferior</b>. <q>La ausencia de hábito de fumar ___ descarta el diagnóstico</q> → <b>no</b> <span class="src">[Moodle]</span></li>
+      <li><q>Lesiones preneoplásicas para CEC</q> → queratosis actínica, leucoplasia, cicatrices, radiodermitis, úlceras crónicas <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Lo que lo separa del basocelular: crece <em>rápido</em> (meses, no años), aparece sobre una <em>lesión previa</em>, toma <em>mucosas</em> y <em>da metástasis</em>. Por eso acá sí se palpan ganglios.</p>
+    <ul>
+      <li><strong>Clínica:</strong> nódulo o placa queratósica, ulcerada, de bordes evertidos e indurados. Labio inferior, dorso de manos, pabellón auricular, cuero cabelludo calvo, lengua.</li>
+      <li><strong>Precursoras:</strong> queratosis actínica (la principal), leucoplasia, cicatrices de quemadura, úlceras crónicas, radiodermitis, liquen plano erosivo.</li>
+      <li><strong>Factores:</strong> UV acumulada, tabaco y alcohol (mucosa oral y labio), HPV, arsénico, hidrocarburos, y sobre todo <em>inmunosupresión</em> — en trasplantados el CEC es más frecuente y más agresivo que el CBC.</li>
+      <li><strong>Histología:</strong> células espinosas atípicas que rompen la membrana basal, <em>perlas córneas</em>, disqueratosis, mitosis atípicas, pérdida de puentes intercelulares.</li>
+      <li><strong>Metástasis:</strong> vía linfática → ganglio regional. Siempre palpar cadenas.</li>
+      <li><strong>Conducta:</strong> biopsia → estadificar (AP, imágenes) → cirugía con margen 4-6 mm (más amplio que el CBC), Mohs en zonas de riesgo. Radioterapia si no es operable.</li>
+    </ul>
+    <div class="warn"><b>Queratoacantoma:</b> es el gran diferencial. Nódulo con <em>tapón queratósico central</em>, crecimiento muy rápido en semanas y tendencia a involucionar solo. En el examen el «tapón queratósico central» es la pista que lo distingue del CBC (borde perlado) y del CEC.</div>
+  </div>
+</section>
+
+<section class="topic" id="t5">
+  <div class="t-head"><span class="t-num">05</span><h3>Hemangioma infantil y malformaciones vasculares</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~19 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Foto de paciente con mancha en vino de Oporto que afecta toda la mitad de la cara, ¿cuál es la actitud a tomar?</q> a) esperar y tranquilizar, es sólo estético · b) <b>hacer RMN para descartar lesiones en cerebro</b> → <b>b</b>. La nota del alumno: <em>si fuese más chica es estético</em> <span class="src">[2022 / 2024]</span></li>
+      <li><q>¿Qué es correcto del hemangioma infantil?</q> → <b>Hacen crecimiento, reposo y regresión</b> <span class="src">[Final]</span></li>
+      <li><q>Características de las malformaciones vasculares</q> → <b>están desde el nacimiento, crecen con el niño, no involucionan, pueden afectar todos los vasos</b> <span class="src">[Final]</span></li>
+      <li>V/F del banco: <q>los hemangiomas infantiles son tumores presentes desde el nacimiento</q> → <b>F</b> (aparecen en las primeras semanas de vida) · <q>el estadio proliferativo comienza al año</q> → <b>F</b> (proliferan los primeros 6-8 meses) · <q>todos deben ser tratados</q> → <b>F</b> · <q>son tumores de frecuente malignización</q> → <b>F</b> <span class="src">[Moodle]</span></li>
+      <li><q>Las malformaciones vasculares responden eficazmente a los betabloqueantes</q> → <b>F</b>, responden a <b>láser de colorante pulsado</b> <span class="src">[Moodle]</span></li>
+      <li><q>El timolol es un betabloqueante tópico útil en hemangiomas superficiales o pequeños</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>El tratamiento de un hemangioma ulcerado debe indicarse una vez que el tumor haya proliferado totalmente</q> → <b>F</b>, debe indicarse <b>precozmente</b> <span class="src">[Moodle]</span></li>
+      <li><q>Hemangioma ulcerado, ¿qué predispone?</q> → nena, embarazo múltiple, prematura <span class="src">[2024]</span></li>
+      <li><q>¿Cómo comprobarías que es un hemangioma con una maniobra semiológica? ¿Cómo le explico a la madre que es mejor no operarlo?</q> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Un tumor que aparece después de nacer e involuciona solo, contra una malformación que ya está al nacer y no se va nunca. Todas las preguntas salen de esa diferencia.</p>
+    <div class="tbl">
+    <table>
+      <tr><th></th><th>Hemangioma infantil</th><th>Malformación vascular</th></tr>
+      <tr><td><strong>Naturaleza</strong></td><td>Tumor (proliferación endotelial)</td><td>Error de la morfogénesis</td></tr>
+      <tr><td><strong>Al nacer</strong></td><td>No; aparece en las primeras semanas</td><td>Sí, presente desde el nacimiento</td></tr>
+      <tr><td><strong>Evolución</strong></td><td>Prolifera 6-8 meses → reposo → <em>regresión</em></td><td>Crece con el niño, <em>no involuciona</em></td></tr>
+      <tr><td><strong>Tratamiento</strong></td><td>Propranolol oral; timolol tópico si es chico</td><td>Láser de colorante pulsado</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><strong>Cuándo se trata un hemangioma:</strong> no todos. Sí cuando ulcera, sangra, compromete función (párpado, vía aérea, labio) o deja secuela estética grave. Y se trata <em>precoz</em>, no esperando que termine de proliferar. Cirugía casi nunca.</li>
+      <li><strong>Factores de riesgo de hemangioma:</strong> sexo femenino, prematurez, bajo peso, embarazo múltiple.</li>
+      <li><strong>Mancha en vino de Oporto</strong> (malformación capilar): mácula rosada de bordes netos que con los años se oscurece a rojo-púrpura. Si toma el territorio del trigémino V1 / una hemicara → <em>pedir RMN para descartar síndrome de Sturge-Weber</em> (angioma leptomeníngeo, convulsiones, glaucoma). Esta es la pregunta que más se repite del tema.</li>
+      <li><strong>Maniobra semiológica:</strong> vitropresión/diascopia — las lesiones vasculares palidecen a la presión.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t6">
+  <div class="t-head"><span class="t-num">06</span><h3>Piodermitis · impétigo, erisipela, celulitis</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~17 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>(Foto de nene con impétigo ampollar) ¿a qué puede evolucionar si no se lo trata precozmente?</q> → <b>Síndrome de piel escaldada estafilocócica</b> <span class="src">[Final / 2022]</span></li>
+      <li><q>El impétigo ampollar es causado por</q> → <b>Staphylococcus aureus</b>. <q>El impétigo NO ampollar es causado por</q> → <b>Streptococcus pyogenes y Staphylococcus aureus</b> (¡las dos!) <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué opción terapéutica es correcta para el impétigo?</q> → <b>Mupirocina 2% crema</b>. Si es extenso o con síntomas sistémicos → cefalexina VO <span class="src">[Moodle]</span></li>
+      <li><q>Impétigo en enfermera</q> → <b>desinfectante + mupirocina 2%</b> <span class="src">[2024]</span></li>
+      <li><q>¿Cuál es cierta sobre la erisipela?</q> → <b>Placa eritematosa, dolorosa, de bordes netos e irregulares</b>. Y: <b>infección estreptocócica que compromete dermis, TCS superficial y vasos linfáticos</b> <span class="src">[Moodle]</span></li>
+      <li><q>Tratamiento de elección de la erisipela</q> → <b>Penicilina G sódica 2-6.000.000 UI cada 4-6 h EV</b> <span class="src">[Moodle]</span></li>
+      <li><q>Localización más frecuente de la erisipela</q> → <b>Miembro inferior</b> <span class="src">[Moodle]</span></li>
+      <li><q>Agente etiológico más frecuente de la erisipela</q> → <b>Streptococcus pyogenes</b> <span class="src">[2024]</span></li>
+      <li><q>¿Cuál es cierta sobre la celulitis?</q> → <b>Los agentes más frecuentes son S. pyogenes y S. aureus</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es cierta sobre la foliculitis?</q> → <b>Pápulas y pústulas eritematosas centradas por un pelo</b>. <q>Un forúnculo es</q> → <b>Nódulo subcutáneo inflamatorio del folículo pilosebáceo</b> <span class="src">[Moodle]</span></li>
+      <li><q>El síndrome del shock tóxico es</q> → <b>causado por la toxina-1 y las enterotoxinas A y C de S. aureus, asociado a tampones absorbentes</b> <span class="src">[Moodle]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Impétigo ampollar:</strong> siempre <em>S. aureus</em> (toxina exfoliativa que rompe la desmogleína 1 → acantólisis). Ampollas fláccidas que dejan collarete. En niños.</li>
+      <li><strong>Impétigo no ampollar</strong> (vesico-pustuloso, costroso, vulgar): <em>S. pyogenes solo o con S. aureus</em>. Costra melicérica peribucal. Es la forma más frecuente.</li>
+      <li><strong>Complicación del impétigo ampollar:</strong> SSSS (síndrome de piel escaldada estafilocócica) = la forma sistémica, por diseminación de las toxinas exfoliativas A y B. Nikolsky positivo.</li>
+      <li><strong>Tratamiento impétigo:</strong> mupirocina 2% ungüento 3 v/día × 5 días, o ácido fusídico 2%. Si es extenso: cefalexina 50-100 mg/kg/día.</li>
+      <li><strong>Erisipela:</strong> dermis + TCS superficial + <em>linfáticos</em>. Placa roja brillante, caliente, dolorosa, <em>de bordes netos y sobreelevados</em>, con fiebre. Miembro inferior. <em>S. pyogenes</em>. Buscar puerta de entrada (intertrigo, onicomicosis, aritos). Penicilina G sódica EV. Internar si es extensa o facial.</li>
+      <li><strong>Celulitis:</strong> más profunda, hasta TCS, <em>bordes mal definidos</em>. S. pyogenes y S. aureus.</li>
+      <li><strong>Foliculitis</strong> (superficial, pústula centrada por pelo) → <strong>forúnculo</strong> (nódulo profundo) → <strong>ántrax</strong> (varios forúnculos confluentes). Todos S. aureus.</li>
+      <li><strong>Escarlatina:</strong> S. pyogenes productor de exotoxinas pirogénicas.</li>
+    </ul>
+    <div class="warn"><b>El par que separan siempre:</b> erisipela = bordes <em>netos</em> y sobreelevados, dermis superficial, estrepto. Celulitis = bordes <em>difusos</em>, más profunda, estrepto + estafilo.</div>
+  </div>
+</section>
+
+<section class="topic" id="t7">
+  <div class="t-head"><span class="t-num">07</span><h3>Psoriasis</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~15 preguntas · 9 imágenes en el banco</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Paciente con placa gigante eritematoescamosa blanco nacarada en zona lumbar, el padre también las padece, ¿cómo confirmaría el dx?</q> a) biopsia · b) cultivo · <b>c) raspado metódico de Brocq</b> <span class="src">[2022]</span></li>
+      <li><q>Es una enfermedad que se caracteriza por</q> → <b>Presentar hiperproliferación epidérmica e inflamación dérmica</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál afirmación es correcta?</q> → <b>Enfermedad inflamatoria crónica que afecta piel, uñas y articulaciones</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué factor desencadena una forma más severa?</q> → <b>Ingesta de corticoesteroides</b> (el rebote al suspenderlos) <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es la forma clínica más frecuente?</q> → <b>En placa</b> <span class="src">[Moodle]</span></li>
+      <li><q>La psoriasis invertida se caracteriza por</q> → <b>Localización en los pliegues</b> <span class="src">[Moodle]</span></li>
+      <li><q>La psoriasis guttata o en gota se caracteriza por</q> → <b>Placas eritemato-escamosas pequeñas</b> <span class="src">[Moodle]</span></li>
+      <li><q>Con respecto al diagnóstico, ¿cuál es correcta?</q> → <b>El raspado metódico de Brocq es positivo</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es INCORRECTA?</q> → <b>«La forma eritrodérmica se acompaña de ampollas»</b> <span class="src">[Moodle]</span></li>
+      <li><q>La mayoría de los pacientes con artritis psoriásica desarrollan cambios ungueales</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cómo trataría la psoriasis?</q> → <b>Corticoides tópicos y metotrexato oral</b> <span class="src">[2022]</span></li>
+      <li><q>Características histológicas de la psoriasis</q> → <b>hiperqueratosis con paraqueratosis, acantosis, papilomatosis (papilas en palillo de tambor), microabscesos de Munro, vasodilatación</b> <span class="src">[Final]</span></li>
+      <li><q>Guttata: diagnóstico y tratamiento</q> → <b>tratar la infección estreptocócica</b>; pedir VSG, ASTO y reactantes de fase aguda <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Placa eritematosa bien delimitada con escama blanco-nacarada, en zonas de extensión (codos, rodillas, sacro, cuero cabelludo). Antecedente familiar. Curso crónico en brotes.</p>
+    <ul>
+      <li><strong>Raspado metódico de Brocq</strong> — la maniobra que preguntan siempre. Tres signos en orden: <em>1)</em> signo de la bujía (escama que se desprende como cera raspada) · <em>2)</em> membrana de Duncan-Buckley (película translúcida) · <em>3)</em> rocío hemorrágico de Auspitz (puntillado sangrante). Confirma clínicamente; no hace falta biopsia.</li>
+      <li><strong>Formas:</strong> <em>en placa / vulgar</em> (la más frecuente) · <em>guttata</em> (pequeñas gotas, en jóvenes, tras faringitis estreptocócica) · <em>invertida</em> (pliegues, sin escama porque la humedad la macera) · <em>pustulosa</em> (pústulas <em>estériles</em>) · <em>eritrodérmica</em> (&gt;90% de superficie, sin ampollas) · <em>ungueal</em> · <em>artropática</em>.</li>
+      <li><strong>Uñas:</strong> pitting (piqueteado), onicólisis, mancha en aceite, hiperqueratosis subungueal. La mayoría de los que tienen artritis psoriásica tienen cambios ungueales.</li>
+      <li><strong>Desencadenantes:</strong> corticoides sistémicos (y su suspensión → rebote), infección estreptocócica, estrés, litio, betabloqueantes, trauma local (<em>fenómeno de Koebner</em>), alcohol.</li>
+      <li><strong>Asociaciones:</strong> síndrome metabólico, obesidad, riesgo cardiovascular. Lo preguntan en el oral.</li>
+      <li><strong>Histología:</strong> hiperqueratosis con paraqueratosis, acantosis, papilomatosis con papilas en palillo de tambor, adelgazamiento suprapapilar, <em>microabscesos de Munro</em>, vasodilatación.</li>
+      <li><strong>Tratamiento:</strong> leve/localizada → tópico (corticoides + análogos de vitamina D como calcipotriol, queratolíticos). Moderada-severa → fototerapia UVB banda angosta, metotrexato, acitretina, ciclosporina, biológicos. <em>Nunca corticoides sistémicos</em> — provocan rebote pustuloso.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t8">
+  <div class="t-head"><span class="t-num">08</span><h3>Acné</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~12 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>(Imagen de acné severo grado 3 que comienza con isotretinoína) ¿qué estudios se deben hacer antes de empezar?</q> → <b>Hemograma, lipidograma, hepatograma y subunidad beta</b> <span class="src">[Final / 2022 — repetida en 3 fuentes]</span></li>
+      <li><q>Tratamiento para acné leve</q> → <b>Eritromicina</b> (no mupirocina ni ácido fusídico). También clindamicina y peróxido de benzoilo <span class="src">[2022 / Final]</span></li>
+      <li><q>Acné pustuloso nodular, ¿tratamiento?</q> → <b>Isotretinoína</b> <span class="src">[2024]</span></li>
+      <li><q>¿Cuál es la reacción adversa de la minociclina?</q> → <b>Fotosensibilidad</b>. Y en 2024: <q>fármaco más fotosensibilizante</q> → <b>tetraciclina</b> <span class="src">[Final / 2024]</span></li>
+      <li><q>El acné por fármacos se caracteriza por presentar comedones, pápulas y pústulas</q> → <b>F</b>: <em>no presenta comedones y es monomorfo</em> <span class="src">[Moodle]</span></li>
+      <li><q>El acné neonatal debe tratarse suspendiendo la lactancia materna</q> → <b>F</b>, se resuelve espontáneamente <span class="src">[Moodle]</span></li>
+      <li><q>El ácido salicílico 2-4% y el ácido retinoico 0,1-0,3% se usan en el acné comedónico</q> → <b>V</b>, por acción queratolítica <span class="src">[Moodle]</span></li>
+      <li><q>Los cuatro factores patogénicos del acné son hiperqueratosis ductal, hipersecreción sebácea, alteración de la microbiota e inflamación</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Propionibacterium acnes y demodex folliculorum son factores patogénicos del acné inflamatorio</q> → <b>F</b>: <em>demodex no participa en esta patología</em> (es de rosácea) <span class="src">[Moodle]</span></li>
+      <li><q>Tratamiento del acné leve, no olvidar tetraciclinas, ¿cuál?</q> → <b>Minociclina</b> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Los 4 factores patogénicos</strong> (los preguntan literal): hiperqueratosis ductal · hipersecreción sebácea andrógeno-dependiente · alteración de la microbiota (<em>Cutibacterium/Propionibacterium acnes</em>) · inflamación.</li>
+      <li><strong>Lesión inicial:</strong> el comedón (abierto = punto negro, cerrado = punto blanco). Después pápulas, pústulas, nódulos, quistes, cicatrices.</li>
+      <li><strong>Grados:</strong> I comedónico · II pápulo-pustuloso · III nódulo-quístico · IV conglobata.</li>
+      <li><strong>Tratamiento por grado:</strong>
+        <ul>
+          <li><em>Comedónico:</em> queratolíticos — ácido salicílico 2-4%, ácido retinoico/tretinoína 0,1-0,3%.</li>
+          <li><em>Leve pápulo-pustuloso:</em> tópicos — eritromicina, clindamicina, peróxido de benzoilo.</li>
+          <li><em>Moderado:</em> tetraciclinas orales — doxiciclina o <em>minociclina</em>.</li>
+          <li><em>Severo (III-IV):</em> isotretinoína oral.</li>
+        </ul>
+      </li>
+      <li><strong>Isotretinoína — lo que preguntan:</strong> antes de iniciar pedir <em>hemograma, hepatograma, lipidograma y subunidad beta-hCG</em>. Es teratogénica: anticoncepción obligatoria. Efectos adversos: queilitis, xerosis, aumento de transaminasas y triglicéridos, pseudotumor cerebri (¡el mismo que la griseofulvina!).</li>
+      <li><strong>Acné por fármacos</strong> (corticoides, anabólicos, litio, anticonvulsivantes): erupción <em>monomorfa</em>, todas las lesiones iguales, <em>sin comedones</em>. Es la trampa.</li>
+      <li><strong>Acné neonatal:</strong> no se trata, involuciona solo.</li>
+      <li><strong>Demodex es de rosácea, no de acné.</strong> Lo cruzan a propósito.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t9">
+  <div class="t-head"><span class="t-num">09</span><h3>Dermatomiositis</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+    <span class="qty">6/6 fuentes · ~11 preguntas · 4 imágenes en el banco</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Clínica de la dermatomiositis</q> → <b>Pápulas y signo de Gottron</b> <span class="src">[Final]</span></li>
+      <li><q>Estas pápulas se denominan</q> → <b>Pápulas de Gottron</b>. <q>Las pápulas eritematovioláceas sobre nudillos</q> → <b>Son patognomónicas de la enfermedad</b> <span class="src">[Moodle]</span></li>
+      <li><q>El rash facial que se asocia a fotosensibilidad se denomina</q> → <b>Rash heliotropo</b> (distractores: rash en alas de mariposa = lupus; evanescente; urticariano) <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué analítica le solicitaría?</q> → <b>Enzimas musculares y anti-Jo</b> <span class="src">[Moodle]</span></li>
+      <li><q>Describe la clínica de una dermatomiositis, ¿qué pediría en laboratorio?</q> → <b>los Ac específicos (Jo-1 y Mi-2)</b>; en el oral: <b>CPK y aldolasa aumentadas</b> <span class="src">[2022 / Oral]</span></li>
+      <li><q>DM, ¿estudio?</q> → CPK, etc. <span class="src">[2024]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Dos signos cutáneos y un laboratorio. Con eso contestás todo lo que preguntaron.</p>
+    <ul>
+      <li><strong>Signos patognomónicos:</strong>
+        <ul>
+          <li><em>Pápulas de Gottron:</em> pápulas eritematovioláceas <em>sobre los nudillos</em> (articulaciones IF y MCF). Patognomónicas.</li>
+          <li><em>Signo de Gottron:</em> máculas eritematovioláceas en la cara dorsal de las mismas articulaciones, sin pápula.</li>
+        </ul>
+      </li>
+      <li><strong>Rash heliotropo:</strong> eritema violáceo periorbitario con o sin edema palpebral. Fotosensible. Es el que confunden con el eritema en alas de mariposa del lupus — <em>heliotropo = párpados; mariposa = mejillas y dorso nasal respetando surcos nasogenianos</em>.</li>
+      <li><strong>Otros:</strong> signo del chal (V del escote y espalda alta), telangiectasias periungueales con cutícula distrófica, poiquilodermia, calcinosis cutis (más en la juvenil), manos de mecánico.</li>
+      <li><strong>Muscular:</strong> debilidad <em>proximal y simétrica</em> — le cuesta subir escaleras, peinarse, levantarse de la silla.</li>
+      <li><strong>Laboratorio:</strong> CPK (el más sensible), aldolasa, GOT, LDH · <em>anti-Jo-1</em> (asociado a enfermedad pulmonar intersticial) y <em>anti-Mi-2</em> (más cutáneo, mejor pronóstico) · electromiograma alterado · biopsia muscular.</li>
+      <li><strong>Es un síndrome paraneoplásico</strong> en el adulto: buscar neoplasia oculta (ovario, pulmón, mama, colon, gástrico). Esto lo preguntan como «qué más pediría».</li>
+      <li><strong>Tratamiento:</strong> corticoides sistémicos + inmunosupresores (metotrexato, azatioprina) + fotoprotección.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ALTA ============ -->
+<div class="tier">
+  <p class="t-lab">Alta frecuencia · 5 de 6 fuentes</p>
+  <h2>Los ocho que siguen</h2>
+  <p>Faltan en una sola fuente, casi siempre en la que menos importa. Patología oral abre el bloque porque es, en números absolutos, el tema con más preguntas del banco entero.</p>
+</div>
+
+<section class="topic" id="t10">
+  <div class="t-head"><span class="t-num">10</span><h3>Patología oral</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">5/6 fuentes · <strong>~41 preguntas</strong> — el tema con más preguntas del banco</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li>Son <b>seis casos clínicos completos</b> de completar-espacios, no multiple choice. El formato es: te dan la foto y vas llenando la descripción hasta llegar al diagnóstico.</li>
+      <li><strong>Caso 1 — Leucoplasia:</strong> <q>la ___ es una ___ o una ___ blanca</q> → <b>leucoplasia / mancha / placa</b> · <q>se considera un desorden ___</q> → <b>potencialmente maligno</b> · <q>si presenta zonas de eritema se denomina ___ o ___, signo de ___ agresividad</q> → <b>leucoeritroplasia / leucoplasia moteada / mayor</b> · <q>se debe diferenciar de la ___, que se presenta en ___ y se relaciona con virus ___, localizada en ___</q> → <b>leucoplasia vellosa / inmunocomprometidos / Epstein-Barr / bordes de lengua</b> <span class="src">[Moodle]</span></li>
+      <li><strong>Caso 2 — Liquen plano bucal:</strong> <q>lesiones elementales presentes</q> → <b>pápulas, manchas, placas, atrofia, ampollas</b> · <q>la presencia de lesiones ___ ayuda al diagnóstico</q> → <b>lineales</b> · <q>zona frecuentemente afectada</q> → <b>mucosa yugal, sector posterior</b> · <q>dos hechos histopatológicos</q> → <b>vacuolización de la capa basal e infiltrado en banda</b> <span class="src">[Moodle]</span></li>
+      <li><strong>Caso 3 — Leucoplasia + candidiasis:</strong> <q>placa blanca con zonas de eritema</q> · <q>suele verse en pacientes ___</q> → <b>fumadores</b> · <q>se asocia con la presencia de ___</q> → <b>candidiasis</b> · <q>si con tratamiento médico no remite se debe realizar una ___</q> → <b>biopsia</b> · <q>el riesgo es la transformación a carcinoma ___</q> → <b>espinocelular</b> <span class="src">[Moodle]</span></li>
+      <li><strong>Caso 4 — Queilitis angular:</strong> <q>las lesiones son ___</q> → <b>pápulas y fisuras</b> · <q>la etiología más probable en un adulto mayor</q> → <b>candidiasis crónica</b> · <q>enfermedades metabólicas como ___ predisponen</q> → <b>diabetes</b> · <q>las prótesis mal adaptadas ___ son factor predisponente</q> → <b>también</b> · <q>es una entidad ___</q> → <b>inflamatoria benigna</b> <span class="src">[Moodle]</span></li>
+      <li><strong>Caso 5 — Herpes zóster bucal:</strong> <q>distribución ___</q> → <b>metamérica</b> · <q>se acompaña de dolores ___</q> → <b>neurálgicos</b> · <q>la afectación bucal es por compromiso de la ___ rama del trigémino</q> → <b>tercera</b> · <q>las lesiones intrabucales son ___</q> → <b>unilaterales</b> · <q>la primoinfección es la ___</q> → <b>varicela</b> · <q>por el trauma deglutorio se ven ___ en lugar de ___</q> → <b>erosiones / vesículas</b> <span class="src">[Moodle]</span></li>
+      <li><strong>Caso 6 — CEC de lengua:</strong> <q>la localización en borde de lengua es ___ frecuente</q> → <b>muy</b> · <q>hay formas ___ y ___</q> → <b>ulcerativas / vegetantes</b> · <q>la ___ y la ___ son importantes para el diagnóstico</q> → <b>inspección y palpación</b> · <q>localización más frecuente: unión del tercio ___ con el ___</q> → <b>medio / posterior</b> <span class="src">[Moodle]</span></li>
+      <li><q>Paciente con placas blancas y friables en la lengua, dx?</q> → <b>Candidiasis oral</b> <span class="src">[2022]</span></li>
+      <li><q>SIDA: leucoplasia vellosa y queilitis angular</q> <span class="src">[Imágenes]</span></li>
+      <li><q>HIV con lesión en encía</q> → posiblemente pénfigo <span class="src">[2024]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Cinco entidades blancas de la boca que hay que poder separar entre sí. Ese es todo el tema.</p>
+    <div class="tbl">
+    <table>
+      <tr><th>Lesión</th><th>Cómo se reconoce</th><th>Clave</th></tr>
+      <tr><td><strong>Leucoplasia</strong></td><td>Mancha o placa blanca que <em>no se desprende</em> al raspado y no se explica por otra causa</td><td>Desorden <em>potencialmente maligno</em> → CEC. Fumadores.</td></tr>
+      <tr><td><strong>Candidiasis pseudomembranosa</strong></td><td>Placa blanquecina friable que <em>sí se desprende</em> al raspado</td><td>Nistatina suspensión oral</td></tr>
+      <tr><td><strong>Liquen plano bucal</strong></td><td>Lesiones <em>lineales</em> reticuladas (estrías de Wickham), mucosa yugal posterior</td><td>Potencialmente maligno. Vacuolización basal + infiltrado en banda</td></tr>
+      <tr><td><strong>Leucoplasia vellosa</strong></td><td>Placa vellosa en <em>bordes de lengua</em>, no se desprende</td><td><em>Inmunocomprometidos + virus Epstein-Barr</em>. Marcador de HIV</td></tr>
+      <tr><td><strong>Queilitis angular</strong></td><td>Fisuras y maceración en comisuras</td><td>Cándida. Prótesis mal adaptadas, diabetes, ancianos. Benigna</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><strong>Leucoplasia con zonas rojas = leucoeritroplasia o leucoplasia moteada</strong> → mayor riesgo de malignización. Si no remite con tratamiento médico: <em>biopsia</em>.</li>
+      <li><strong>CEC de lengua:</strong> unión del tercio medio con el posterior del borde lateral; también labio inferior. Formas ulcerativa y vegetante. Tabaco y alcohol, pero no fumar <em>no</em> lo descarta. Diagnóstico por inspección y <em>palpación</em> (induración) + biopsia. Buscar adenopatías submaxilares.</li>
+      <li><strong>Herpes zóster bucal:</strong> distribución metamérica <em>unilateral</em>, dolor neurálgico previo, tercera rama del trigémino (mandibular). En boca las vesículas se rompen por la deglución y se ven como <em>erosiones</em>. Primoinfección = varicela.</li>
+      <li><strong>Candidiasis oral:</strong> nistatina en suspensión es el tratamiento de elección. Cándida no es siempre patógena: coloniza mucosas sanas y se vuelve patógena cuando el entorno lo favorece.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t11">
+  <div class="t-head"><span class="t-num">11</span><h3>Nevos · adquirido, congénito, displásico</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">5/6 fuentes · ~25 preguntas · 6 imágenes</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><strong>Nevo nevocelular adquirido</strong> (V/F): <q>aparece principalmente durante la infancia</q> → <b>F</b> · <q>comienza como una mácula pigmentada</q> → <b>V</b> · <q>la presencia de pelos es signo de malignidad</q> → <b>F</b> · <q>debe extirparse durante la adolescencia</q> → <b>F</b> · <q>en la 6ª década se observa como pápula color piel</q> → <b>V</b> · <q>presenta 15% de progresión a melanoma</q> → <b>F</b> <span class="src">[Moodle]</span></li>
+      <li><strong>Nevo melanocítico congénito</strong> (V/F): <q>aparece luego del primer año</q> → <b>F</b> · <q>se manifiesta como mácula eritematosa en cara</q> → <b>F</b> · <q>debe extirparse durante la adolescencia</q> → <b>V</b> · <q>presenta 5-15% de progresión a melanoma según el tamaño</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><strong>Nevo displásico</strong> (V/F): <q>aparece principalmente durante la adolescencia</q> → <b>V</b> · <q>es asimétrico con bordes irregulares</q> → <b>V</b> · <q>la presencia de pelos es signo de malignidad</q> → <b>F</b> · <q>se recomienda control una o dos veces al año</q> → <b>V</b> · <q>se observan principalmente en cara</q> → <b>F</b> · <q>presenta un pequeño porcentaje de pasaje a melanoma</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Múltiples nevus displásicos y con halo, ¿conducta?</q> → <b>Observación y seguimiento</b> <span class="src">[2024]</span></li>
+      <li><q>¿Qué factores favorecen la aparición de nevus displásicos? ¿Cómo me doy cuenta de que son displásicos? ¿Cada cuánto control?</q> → <b>exposición solar y antecedentes familiares · ABCDE y dermatoscopio · cada 6 meses</b> <span class="src">[Oral]</span></li>
+      <li><q>¿Qué lesiones me pueden dar melanoma? ¿Cuál de estos se debe extirpar?</q> → <b>nevus displásicos, lentigos malignos, nevus congénitos, nevus azul — se extirpa el congénito</b> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <div class="tbl">
+    <table>
+      <tr><th></th><th>Aparece</th><th>Conducta</th><th>Riesgo</th></tr>
+      <tr><td><strong>Adquirido</strong></td><td>Adolescencia-adultez joven (no infancia)</td><td>Nada</td><td>Muy bajo</td></tr>
+      <tr><td><strong>Congénito</strong></td><td>Presente al nacer o primer año</td><td><em>Extirpar</em>, sobre todo el gigante</td><td>5-15% según tamaño</td></tr>
+      <tr><td><strong>Displásico</strong></td><td>Adolescencia</td><td>Control 1-2 v/año + dermatoscopia</td><td>Pequeño pero real</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><strong>Evolución del nevo adquirido:</strong> empieza como <em>mácula</em> pigmentada (nevo de la unión) → se eleva a pápula pigmentada (compuesto) → en la 6ª década queda como <em>pápula color piel</em> que perdió el pigmento (intradérmico). Esa secuencia es lo que preguntan en las seis V/F.</li>
+      <li><strong>La presencia de pelos NO es signo de malignidad</strong> — al contrario, suele hablar de benignidad. Es la trampa que repiten en los tres cuestionarios.</li>
+      <li><strong>Displásico:</strong> asimétrico, bordes irregulares, &gt;5 mm, color heterogéneo. Predominio en <em>tronco</em>, no en cara. Factores: exposición solar y antecedentes familiares.</li>
+      <li><strong>Síndrome del nevo displásico:</strong> muchos nevos atípicos + antecedente familiar de melanoma. Seguimiento estrecho.</li>
+      <li><strong>Nevo halo (de Sutton):</strong> halo acrómico alrededor. Benigno, regresión inmunológica. Conducta: observación.</li>
+      <li><strong>Mancha mongólica:</strong> ver punto 28.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t12">
+  <div class="t-head"><span class="t-num">12</span><h3>Herpes simple y herpes zóster</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">5/6 fuentes · ~23 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Paciente con vesículas en el borde del labio, que tuvo dolor/ardor antes de que aparecieran, ¿cómo lo trato?</q> → <b>Aciclovir</b> <span class="src">[2022]</span></li>
+      <li><q>Sobre el tratamiento con aciclovir, ¿qué es correcto?</q> → <b>Se debe instaurar en las primeras 48 h de aparecidos los síntomas</b> <span class="src">[2022]</span></li>
+      <li>Caso del banco (mujer 45 años, vesículas y ampollas en distribución lineal en espalda, cuello y retroauricular, dolor intenso previo): <q>su diagnóstico presuntivo es un eccema herpético por VHS-1</q> → <b>F</b>: <em>sigue trayecto de dermatomas, es unilateral, corresponde a herpes zóster por VVZ</em> <span class="src">[Moodle]</span></li>
+      <li><q>Debo iniciar aciclovir VO 200 mg 5 v/día por 5 días</q> → <b>F</b>: <em>la dosis debe ser 800 mg 5 v/día por 7 días</em> <span class="src">[Moodle]</span></li>
+      <li><q>Debo derivar a ORL por posibilidad de afectación timpánica</q> → <b>V</b>: complicaciones por afectación del <b>VIII par</b> <span class="src">[Moodle]</span></li>
+      <li><q>Por la edad y la extensión debo solicitar estudios completos de rutina</q> → <b>V</b>: <em>en jóvenes con formas extendidas hay que buscar inmunosupresión</em> <span class="src">[Moodle]</span></li>
+      <li><q>Para el diagnóstico de herpes zóster se requiere en todos los casos test de Tzanck</q> → <b>F</b>: <em>el diagnóstico es clínico; Tzanck sólo en dudas</em> <span class="src">[Moodle]</span></li>
+      <li><q>La mayoría de los que se infectan por primera vez con VHS-1 desarrollan gingivoestomatitis herpética</q> → <b>F</b>: <em>la mayoría son asintomáticos</em> <span class="src">[Moodle]</span></li>
+      <li><q>La encefalitis herpética es la forma más común del VHS-2</q> → <b>F</b>: <em>la más frecuente es el herpes genital</em> <span class="src">[Moodle]</span></li>
+      <li><q>Paciente con radioterapia por cáncer de mama + herpes zóster</q> → <b>Aciclovir</b> <span class="src">[2024]</span></li>
+      <li><q>Herpes zóster hemorrágico en hombro: preguntar si el paciente está inmunosuprimido</q>; etiología, complicaciones y tratamiento <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Herpes simple:</strong> vesículas agrupadas en ramillete sobre base eritematosa, precedidas de <em>ardor/dolor prodrómico</em>. VHS-1 orolabial, VHS-2 genital. Primoinfección: casi siempre <em>asintomática</em>; cuando da síntomas en VHS-1 es la gingivoestomatitis herpética. Recurre por estrés, sol, fiebre, menstruación.</li>
+      <li><strong>Herpes zóster:</strong> reactivación del VVZ. Vesículas agrupadas de distribución <em>metamérica y unilateral</em>, dolor neurálgico que suele preceder a las lesiones. La primoinfección es la <em>varicela</em>.</li>
+      <li><strong>Dosis — la diferencia que preguntan:</strong> herpes simple aciclovir 200-400 mg 5 v/día × 5 días. <em>Zóster: 800 mg 5 v/día × 7 días.</em> Siempre dentro de las <em>primeras 72 h</em> (el final recordado dice 48 h).</li>
+      <li><strong>Complicaciones del zóster:</strong> neuralgia postherpética (la más frecuente) · <em>zóster oftálmico</em> (V1, signo de Hutchinson en punta nasal → urgencia oftalmológica) · <em>síndrome de Ramsay-Hunt</em> (ganglio geniculado, VII y VIII par: parálisis facial, vesículas en CAE, hipoacusia, vértigo — de ahí la derivación a ORL).</li>
+      <li><strong>Zóster en joven o multimetamérico → buscar inmunosupresión</strong> (HIV, neoplasia). Es la pregunta con la que cierran el caso.</li>
+      <li><strong>Diagnóstico:</strong> clínico. Test de Tzanck (células gigantes multinucleadas) sólo en casos atípicos o inmunosuprimidos. No distingue VHS de VVZ.</li>
+      <li><strong>Eccema herpético (Kaposi-Juliusberg):</strong> VHS diseminado sobre dermatitis atópica. Es el diferencial que plantean en el caso.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t13">
+  <div class="t-head"><span class="t-num">13</span><h3>Tiñas y micosis superficiales</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">5/6 fuentes · ~19 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>¿Cuál es el tratamiento de la tiña corporis?</q> → <b>Imidazólicos tópicos</b> (aclaración del alumno: <em>ojo, la griseofulvina es para la capitis</em>) <span class="src">[Final ×3 / 2024]</span></li>
+      <li><q>Tiña capitis, ¿tratamiento?</q> → <b>Griseofulvina</b> <span class="src">[2024 ×2]</span></li>
+      <li><q>¿Cuál de las siguientes NO se trata con imidazoles?</q> a) tiña capitis · b) micosis fungoide · c) tiña interdigital → <b>b</b> <span class="src">[Final]</span></li>
+      <li><q>¿Cuáles son las lesiones del querion de Celso?</q> → <b>Placa eritemato-escamosa con pústulas, nódulos y absceso, con adenopatía regional, fiebre y malestar general</b> <span class="src">[Final]</span></li>
+      <li><q>¿Cuál es el tratamiento del querion de Celso?</q> → <b>Antimicóticos (griseofulvina), antibióticos y corticoides</b> — porque es inflamatorio <span class="src">[Final ×3]</span></li>
+      <li><q>Características de la lesión de tiña capitis</q> → <b>Placas escamosas eritematosas, pueden tener pústulas, borde definido</b> <span class="src">[Final]</span></li>
+      <li><q>Tiña corporis ocurre solamente en piel vellosa</q> → <b>F</b>: <em>ocurre en piel lampiña</em> <span class="src">[Moodle]</span></li>
+      <li><q>La tiña pedis escamosa e hiperqueratósica está en bordes laterales, talones y pulpejos</q> → <b>V</b>: <em>se denomina «en mocasín»</em> <span class="src">[Moodle]</span></li>
+      <li><q>En la pitiriasis versicolor las zonas hipocrómicas se deben a que el hongo produce ácido azelaico</q> → <b>V</b>: <em>inhibe la dopa-tirosinasa</em> <span class="src">[Moodle]</span></li>
+      <li><q>La onicomicosis distal subungueal produce hiperqueratosis y ataca el borde libre</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li>Candidiasis: <q>la placa blanquecina es adherente y de difícil extracción al raspado</q> → <b>F</b>, <em>se desprende fácilmente, así se diferencia del liquen oral</em> · <q>nistatina suspensión es el tratamiento de elección</q> → <b>V</b> · <q>cándida es siempre patógena</q> → <b>F</b> <span class="src">[Moodle]</span></li>
+      <li><q>La paroniquia se caracteriza por tumefacción y dolor de los pliegues ungueales con retracción de la cutícula</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Tiña corporis: agente si jugó con perro o gato</q> → <b>Microsporum canis</b>; dosis y tiempo de griseofulvina en niño y adulto <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">La única regla que necesitás: <em>pelo y uña = vía oral; piel lampiña = tópico.</em></p>
+    <div class="tbl">
+    <table>
+      <tr><th>Cuadro</th><th>Clínica</th><th>Tratamiento</th></tr>
+      <tr><td><strong>Tiña corporis</strong></td><td>Placa anular con borde activo y centro claro («escarapela»), piel lampiña</td><td><em>Imidazoles tópicos</em></td></tr>
+      <tr><td><strong>Tiña capitis</strong></td><td>Placa alopécica escamosa con pelos cortados, en niños</td><td><em>Griseofulvina VO</em></td></tr>
+      <tr><td><strong>Querion de Celso</strong></td><td>Tiña capitis inflamatoria: placa con pústulas, nódulos, absceso, adenopatía, fiebre</td><td>Griseofulvina + ATB + <em>corticoides</em></td></tr>
+      <tr><td><strong>Tiña pedis</strong></td><td>Interdigital, vesiculosa o «en mocasín» (bordes, talones, pulpejos)</td><td>Imidazoles tópicos</td></tr>
+      <tr><td><strong>Onicomicosis</strong></td><td>Distal subungueal, hiperqueratosis desde el borde libre</td><td>Terbinafina o itraconazol VO</td></tr>
+      <tr><td><strong>Pitiriasis versicolor</strong></td><td>Máculas hipo/hipercrómicas descamativas en tronco</td><td>Imidazoles tópicos, ketoconazol</td></tr>
+      <tr><td><strong>Candidiasis</strong></td><td>Placas blancas <em>que se desprenden</em>, intertrigo, paroniquia</td><td>Nistatina / imidazoles</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><strong>Agentes:</strong> <em>Microsporum canis</em> (contacto con perro/gato — preguntan la anamnesis) · <em>Trichophyton rubrum</em> (pedis, corporis, uñas) · <em>Malassezia furfur</em> (versicolor) · <em>Candida albicans</em>.</li>
+      <li><strong>Pitiriasis versicolor:</strong> la hipopigmentación es por el <em>ácido azelaico</em> que produce Malassezia, que inhibe la dopa-tirosinasa. Signo de la uñada (descama al rascar). Recidiva mucho.</li>
+      <li><strong>Griseofulvina:</strong> efecto adverso que preguntan → <em>pseudotumor cerebri</em> (igual que los retinoides).</li>
+      <li><strong>Cándida no es siempre patógena:</strong> coloniza mucosas sanas. Se vuelve patógena con humedad, oclusión, prótesis, diabetes, ATB, inmunosupresión.</li>
+      <li><strong>Micosis fungoide no es un hongo</strong> — es un linfoma cutáneo T. No se trata con imidazoles. Trampa clásica.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t14">
+  <div class="t-head"><span class="t-num">14</span><h3>Eczema / dermatitis de contacto</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">5/6 fuentes · ~14 preguntas · 6 imágenes</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li>Caso «Paula» del banco (dermatosis crónica pruriginosa, intolerancia a bijouterie, lesiones en sitios de contacto con broches metálicos): <q>¿qué dermatosis padece?</q> → <b>Eccema alérgico de contacto</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué lesión elemental la caracteriza?</q> → <b>Vesícula</b> (espongiótica, por edema intercelular) <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué mecanismo fisiopatológico está involucrado?</q> → <b>Hipersensibilidad tipo IV</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es el elemento involucrado?</q> → <b>Níquel (metales)</b> — la causa más común de DAC en el mundo <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es el método complementario más utilizado para el diagnóstico?</q> → <b>Test del parche o testificación cutánea</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es el tratamiento?</q> → <b>Corticoides locales, antiH1 orales y evitar contacto con la sustancia agresora</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál de los siguientes NO es dx diferencial de eczema?</q> a) psoriasis · <b>b) morfea</b> · c) pitiriasis rosada · d) tiña corporis <span class="src">[2022]</span></li>
+      <li><q>Dermatitis de contacto en manos, ¿lesión?</q> → <b>vesícula, erosión, costra, eritema</b> <span class="src">[2024]</span></li>
+      <li><q>Eczema de contacto por níquel</q> <span class="src">[Imágenes]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Lesión elemental:</strong> <em>vesícula espongiótica</em> — el edema intercelular (espongiosis) es el hallazgo histológico del eczema.</li>
+      <li><strong>Fases:</strong> aguda (eritema, vesículas, exudación) → subaguda (costras, descamación) → crónica (liquenificación, fisuras).</li>
+      <li><strong>Alérgica vs. irritativa:</strong>
+        <ul>
+          <li><em>Alérgica:</em> hipersensibilidad <em>tipo IV</em> (retardada, mediada por linfocitos T). Requiere sensibilización previa. Se extiende más allá de la zona de contacto.</li>
+          <li><em>Irritativa:</em> daño directo, sin sensibilización, aparece en el primer contacto. Más frecuente en manos.</li>
+        </ul>
+      </li>
+      <li><strong>Alérgenos que preguntan:</strong> níquel (bijouterie, broches, aritos — el #1) · cromo (cemento) · látex (gomas) · parafenilendiamina (tinturas).</li>
+      <li><strong>Diagnóstico:</strong> <em>test del parche</em> (patch test / testificación cutánea). Lectura a las 48-96 h.</li>
+      <li><strong>Tratamiento:</strong> evitar el alérgeno + corticoides tópicos de mediana potencia (mometasona, betametasona) 2 v/día × 7 días + antihistamínicos H1 orales.</li>
+      <li><strong>Diferenciales:</strong> psoriasis, tiña corporis, pitiriasis rosada, dermatitis atópica. <em>La morfea no</em> — es esclerodermia localizada, una placa esclerótica, no inflamatoria-pruriginosa.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t15">
+  <div class="t-head"><span class="t-num">15</span><h3>Escabiosis</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">5/6 fuentes · ~11 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Paciente con pápulas y vesículas en mamas y genitales, pican más de noche y su pareja también tiene lesiones, ¿cómo lo trataría?</q> → <b>Permetrina 5%</b> <span class="src">[2022 / 2024]</span></li>
+      <li><q>¿Qué datos de la historia clínica son relevantes para el diagnóstico?</q> → <b>Prurito preferentemente nocturno, localización de lesiones, epidemiología</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es el diagnóstico más probable?</q> (opciones: prúrigo impetiginizado, escabiosis, varicela impetiginizada, eczema atópico severo) → <b>Escabiosis</b> <span class="src">[Moodle]</span></li>
+      <li><q>El tratamiento de elección sería</q> → <b>Permetrina 5%, antihistamínicos y medidas generales</b> (+ cefalexina si hay sobreinfección) <span class="src">[Moodle]</span></li>
+      <li><q>Lactante de 2 meses con pápulas y papulovesículas en espalda, axilas, palmas, plantas, cara y cuero cabelludo. ¿En qué enfermedad piensa?</q> → <b>Escabiosis en lactante</b> (afecta zonas atípicas) <span class="src">[Moodle]</span></li>
+      <li><q>¿Dónde buscaría lesiones en la madre?</q> → <b>Surco acarino, pápulas y vesículas muy pruriginosas en pliegues, muñecas y espacios interdigitales</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué tratamiento indicaría a la madre en período de lactancia?</q> → <b>Vaselina azufrada 6%</b> <span class="src">[Moodle]</span></li>
+      <li><q>De qué se alimenta el sarcoptes</q> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Prurito nocturno + varios convivientes con lo mismo + lesiones en pliegues = escabiosis. Ese trío es la pregunta.</p>
+    <ul>
+      <li><strong>Agente:</strong> <em>Sarcoptes scabiei var. hominis</em>. La hembra cava el túnel.</li>
+      <li><strong>Lesión patognomónica:</strong> el <em>surco acarino</em> (galería o túnel), con la eminencia acarina en un extremo.</li>
+      <li><strong>Localizaciones típicas en adulto</strong> (en orden): espacios interdigitales, muñecas, codos, axilas, zona periumbilical, pelvis, nalgas, pene, rodillas, bordes de los pies. <em>Respeta cara y cuero cabelludo.</em></li>
+      <li><strong>En el lactante es al revés:</strong> afecta zonas atípicas — cara, cuero cabelludo, <em>palmas y plantas</em>. Esa inversión es la pregunta del caso.</li>
+      <li><strong>Tratamiento:</strong>
+        <ul>
+          <li><em>Adultos y niños &gt;2 meses:</em> permetrina <em>5%</em> crema, de cuello para abajo, toda la noche, repetir a los 7 días.</li>
+          <li><em>Lactantes &lt;2 meses y embarazo/lactancia:</em> <em>vaselina azufrada 6%</em>, 3 noches consecutivas.</li>
+          <li>Antihistamínicos para el prurito (evita escoriaciones), cefalexina si hay impetiginización.</li>
+          <li><em>Tratar a todos los convivientes</em> y lavar ropa y sábanas con agua caliente.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="warn"><b>No confundir las concentraciones.</b> Permetrina <b>5%</b> = escabiosis. Permetrina <b>1%</b> = pediculosis. Aparecen en el mismo examen para que las cruces.</div>
+  </div>
+</section>
+
+<section class="topic" id="t16">
+  <div class="t-head"><span class="t-num">16</span><h3>Sífilis</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">5/6 fuentes · ~10 preguntas · 4 imágenes</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Paciente con placas blancas en la lengua, lesiones maculopapulares eritematosas de amplia distribución y alopecia difusa, ¿cuál sería la terapéutica?</q> → <b>Penicilina benzatínica 2.400.000 U IM</b> (sífilis secundaria) <span class="src">[2022]</span></li>
+      <li><q>(Imagen del borde de la lengua con lesiones blanquecinas + alopecia difusa) ¿qué estudio se le debe realizar?</q> → <b>VDRL</b> <span class="src">[Final ×3]</span></li>
+      <li><q>Chica con alopecia y lesiones en palmas, ¿estudio?</q> → <b>VDRL</b> <span class="src">[2024]</span></li>
+      <li><q>Paciente con alopecia difusa, fiebre, astenia</q> → <b>Sífilis secundaria</b> <span class="src">[2024]</span></li>
+      <li><q>Roséola sifilítica</q> <span class="src">[2024 / Imágenes]</span></li>
+      <li><q>Condiloma acuminado vs. condiloma plano por sífilis</q> — diferenciar <span class="src">[Imágenes / Oral]</span></li>
+      <li><q>Secundarismo de sífilis entero, no olvidar la disfonía; tratamiento y reacción de Jarisch-Herxheimer</q> <span class="src">[Oral]</span></li>
+      <li><q>Tratamiento de la sífilis según OMS y cuándo doy penicilina sódica</q> → <b>embarazo, neurosífilis</b> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">La combinación que arma el caso siempre es la misma: <em>lesiones en palmas y plantas + alopecia + placas en mucosa oral</em>. Con eso pedís VDRL y das penicilina.</p>
+    <ul>
+      <li><strong>Agente:</strong> <em>Treponema pallidum</em>.</li>
+      <li><strong>Primaria:</strong> chancro duro — úlcera <em>única, indolora, indurada, de fondo limpio</em>, con adenopatía regional. Cura solo en 3-6 semanas.</li>
+      <li><strong>Secundaria</strong> (la que preguntan): a las 6-8 semanas.
+        <ul>
+          <li><em>Roséola sifilítica:</em> máculas eritematosas en tronco, no pruriginosas.</li>
+          <li><em>Sifílides papulosas</em> en <em>palmas y plantas</em> — la clave que da el diagnóstico.</li>
+          <li><em>Alopecia en claros</em> («en pisada de nieve» / apolillada) y alopecia difusa.</li>
+          <li><em>Placas mucosas:</em> lengua en pradera segada, placas opalinas.</li>
+          <li><em>Condiloma plano:</em> lesiones húmedas, color piel, vegetantes pero planas, malolientes, en pliegues y genitales.</li>
+          <li>Síntomas generales: fiebre, astenia, poliadenopatías, <em>disfonía</em>.</li>
+        </ul>
+      </li>
+      <li><strong>Terciaria:</strong> gomas, sífilis cardiovascular, neurosífilis.</li>
+      <li><strong>Diagnóstico:</strong> no treponémicas (<em>VDRL</em>, RPR) para tamizaje y seguimiento del tratamiento; treponémicas (FTA-Abs, TPHA) para confirmar.</li>
+      <li><strong>Tratamiento:</strong> <em>penicilina G benzatínica 2.400.000 UI IM</em>, dosis única en primaria/secundaria/latente precoz; 3 dosis semanales en latente tardía. <em>Penicilina G sódica EV</em> en neurosífilis y en embarazo con alergia desensibilizada. Alérgicos: doxiciclina (nunca en embarazo).</li>
+      <li><strong>Reacción de Jarisch-Herxheimer:</strong> fiebre, escalofríos y agravamiento de las lesiones a las horas de la primera dosis, por lisis masiva de treponemas. Avisarle al paciente; no es alergia.</li>
+    </ul>
+    <div class="warn"><b>Agujero en tus fuentes.</b> Sífilis aparece en cinco de las seis fuentes pero <b>no tiene cuestionario en el PDF de Moodle</b> — faltan los módulos 9 y 10. Si podés entrar a Moodle, bajalos: es el tema más probable de los que no tenés cubiertos con el banco oficial.</div>
+  </div>
+</section>
+
+<section class="topic" id="t17">
+  <div class="t-head"><span class="t-num">17</span><h3>Rosácea</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+    <span class="qty">5/6 fuentes · ~7 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Tratamiento de rosácea</q> → <b>Fotoprotección, agua blanca del Codex, metronidazol tópico y sistémico, tetraciclinas sistémicas</b> <span class="src">[Final]</span></li>
+      <li><q>Las manifestaciones primarias de la rosácea incluyen comedones cerrados, pápulas y pústulas</q> → <b>F</b>: <em>no presenta comedones</em> <span class="src">[Moodle]</span></li>
+      <li><q>Las lesiones de la rosácea se localizan preferentemente en mejilla, región periférica de cara y cuello</q> → <b>F</b>: <em>la región periférica de cara y cuello es típica del daño actínico crónico</em> <span class="src">[Moodle]</span></li>
+      <li><q>La rosácea fimatosa se caracteriza por ostium foliculares dilatados, engrosamiento de la piel y nódulos en áreas convexas</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>La protección solar está indicada en todos los tipos de rosácea</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Demodex folliculorum es responsable de provocar pápulas inflamatorias en pacientes con rosácea</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Pústula, vesícula, eritema</q> → <b>Rosácea</b> · <q>Rosácea papulopustulosa, en calor, verano</q> <span class="src">[2024]</span></li>
+      <li><q>¿Cómo diferencio de erisipela y de lupus? ¿Qué factores la agravan?</q> → <b>eritema en cuadrilátero; calor, sol, comidas picantes, alcohol</b> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p class="lead">Acné sin comedones, en el centro de la cara, en adulto, que empeora con el calor. Esa frase resuelve casi todo.</p>
+    <ul>
+      <li><strong>Localización:</strong> <em>centro facial</em> — mejillas, nariz, frente, mentón. <em>No</em> la periferia de cara y cuello (eso es daño actínico).</li>
+      <li><strong>Estadios:</strong> <em>1)</em> eritematotelangiectásica (flushing, eritema persistente, telangiectasias) · <em>2)</em> papulopustulosa · <em>3)</em> fimatosa (rinofima: ostium dilatados, piel engrosada, nódulos en áreas convexas) · <em>4)</em> ocular (blefaritis, conjuntivitis).</li>
+      <li><strong>Sin comedones</strong> — es la diferencia con el acné y la preguntan literal.</li>
+      <li><strong>Desencadenantes:</strong> calor, sol, comidas picantes, alcohol, bebidas calientes, estrés, corticoides tópicos.</li>
+      <li><strong>Demodex folliculorum</strong> sí participa en la rosácea (y <em>no</em> en el acné).</li>
+      <li><strong>Tratamiento:</strong> fotoprotección siempre + evitar desencadenantes + <em>agua blanca del Codex</em> (compresas) + metronidazol tópico o ácido azelaico. Si es severa: metronidazol o tetraciclinas (doxiciclina) sistémicas. Telangiectasias y rinofima: láser / cirugía.</li>
+      <li><strong>Diferenciales del eritema facial:</strong> rosácea (eritema en cuadrilátero, con pápulo-pústulas, sin compromiso sistémico) · lupus (alas de mariposa, respeta surcos nasogenianos, con laboratorio alterado) · erisipela (aguda, dolorosa, febril, bordes netos) · dermatomiositis (heliotropo periorbitario).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ MEDIA ============ -->
+<div class="tier">
+  <p class="t-lab">Media · 4 de 6 fuentes</p>
+  <h2>Los que entran si hay tiempo</h2>
+  <p>Bien representados en el banco de la cátedra pero flojos en los finales recordados, o al revés. Léelos, no los memorices.</p>
+</div>
+
+<section class="topic" id="t18">
+  <div class="t-head"><span class="t-num">18</span><h3>Eritema multiforme, SSJ, NET y DRESS</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~14 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Paciente que tuvo herpes, luego de unos días presenta lesiones en palmas con vesícula central, ¿a qué se debe?</q> → <b>Eritema multiforme</b> <span class="src">[2022]</span></li>
+      <li><q>El eritema multiforme es causado en la mayoría de los casos por anticonvulsivantes</q> → <b>F</b>: <em>la causa más común es el herpes simple 1 y 2</em> <span class="src">[Moodle]</span></li>
+      <li><q>SSJ y NET son espectros de una misma entidad</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>El SSJ se caracteriza por compromiso del 30% de la superficie corporal</q> → <b>F</b>: <em>SSJ 10%, NET 30%</em> <span class="src">[Moodle]</span></li>
+      <li><q>Mycoplasma pneumoniae es el agente que desencadena más frecuentemente SSJ</q> → <b>F</b>: <em>la causa más frecuente son las drogas</em> <span class="src">[Moodle]</span></li>
+      <li><q>La mucosa genital es la única que no se afecta en SSJ y NET</q> → <b>F</b>: <em>todas las mucosas pueden afectarse</em> <span class="src">[Moodle]</span></li>
+      <li><q>El desprendimiento cutáneo en la NET se produce por</q> → <b>Acantólisis secundaria al daño de las células epidérmicas</b> <span class="src">[Moodle]</span></li>
+      <li>Caso: 28 años, pápulas y placas confluentes con centro violáceo en cara y tronco superior, inyección conjuntival y compromiso de mucosa oral, 10 días antes amoxicilina-clavulánico → <b>SSJ</b> <span class="src">[Moodle]</span></li>
+      <li><q>En la NET está recomendado el uso de ATB VO como primera línea</q> → <b>F</b>: <em>suspender la droga causal, equilibrio hidroelectrolítico e IGEV</em> <span class="src">[Moodle]</span></li>
+      <li><q>En el DRESS la reacción puede ocurrir hasta 6 semanas después</q> → <b>V</b>: <em>inicio retardado, 2 a 6 semanas</em> <span class="src">[Moodle]</span></li>
+      <li><q>Lesión de EM</q> → <b>escarapela / diana</b> <span class="src">[2024]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Eritema multiforme:</strong> lesión <em>en diana o escarapela</em> (tres anillos, vesícula o centro oscuro), acral — palmas, plantas, dorso de manos. Causa #1: <em>herpes simple</em>. Autolimitado.</li>
+      <li><strong>SSJ / NET:</strong> el mismo espectro; los separa la superficie desprendida — <em>SSJ &lt;10%, superposición 10-30%, NET &gt;30%</em>. Causa #1: <em>drogas</em> (sulfas, alopurinol, anticonvulsivantes, betalactámicos, AINEs). Nikolsky positivo. Compromiso de <em>todas</em> las mucosas, incluida la genital. Anexos afectados en la NET.</li>
+      <li><strong>Mecanismo de la NET:</strong> apoptosis masiva de queratinocitos → acantólisis <em>secundaria</em> al daño celular (no primaria, como en el pénfigo).</li>
+      <li><strong>Tratamiento de NET:</strong> suspender la droga, unidad de quemados, reposición hidroelectrolítica, IGEV. Los ATB sistémicos profilácticos son <em>controvertidos</em>, no primera línea.</li>
+      <li><strong>DRESS:</strong> exantema + fiebre + eosinofilia + adenopatías + compromiso visceral (hepatitis). Inicio <em>retardado, 2 a 6 semanas</em> tras la droga. Esa latencia es lo que lo distingue.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t19">
+  <div class="t-head"><span class="t-num">19</span><h3>Urticaria y angioedema</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~13 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>La lesión elemental de la urticaria es una placa eritemato-escamosa</q> → <b>F</b>: <em>es una roncha o habón causado por edema de la dermis</em> <span class="src">[Moodle]</span></li>
+      <li><q>Roncha o habón, ¿a qué patología corresponde?</q> → <b>Urticaria</b> <span class="src">[Final]</span></li>
+      <li><q>¿Cuánto tiempo tarda el habón en desaparecer?</q> a) horas · b) días · c) semanas → <b>horas</b> <span class="src">[Final]</span></li>
+      <li><q>En la forma aguda la causa más frecuente suele ser la alimentaria</q> → <b>F</b>: <em>50% son idiopáticas, luego medicamentos en adultos e infecciones de VAS en niños</em> <span class="src">[Moodle]</span></li>
+      <li><q>Los ATB más implicados son betalactámicos y sulfamidas</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Es crónica cuando los brotes ocurren durante cuatro semanas</q> → <b>F</b>: <em>a partir de 6 semanas</em> <span class="src">[Moodle]</span></li>
+      <li><q>En el angioedema las lesiones duran menos de 24 h</q> → <b>F</b>: <em>hasta 72 h, el edema es más profundo</em> <span class="src">[Moodle]</span></li>
+      <li><q>La urticaria crónica inducible es causada por estímulos físicos</q> → <b>V</b> (frío, presión, calor, sol, agua) <span class="src">[Moodle]</span></li>
+      <li><q>La urticaria colinérgica puede desencadenarse por fiebre, ejercicio, agua caliente</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li>Caso: brotes de 2-3 días con lesiones purpúricas residuales, biopsia con vasculitis necrotizante → <b>Urticaria vasculitis</b>. <q>¿Qué examen pediría?</q> → <b>Hemograma, VSG, PCR, ANA, FR, dosaje de complemento</b> <span class="src">[Moodle]</span></li>
+      <li><q>El tratamiento de primera línea son los antiH1 de primera generación</q> → <b>F</b>: <em>los de segunda generación, por los efectos adversos de los de primera sobre SNC y cardiovascular</em> <span class="src">[Moodle]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Roncha/habón:</strong> edema de la <em>dermis superficial</em>, fugaz, <em>dura menos de 24 h</em> y se va sin dejar marca. Angioedema: edema <em>más profundo</em> (dermis profunda y TCS), dura hasta <em>72 h</em>, afecta párpados, labios, genitales.</li>
+      <li><strong>Aguda vs. crónica:</strong> el corte es <em>6 semanas</em>.</li>
+      <li><strong>Causas:</strong> 50% idiopáticas. Después: medicamentos en adultos (betalactámicos, sulfamidas, AINEs), infecciones de vía aérea superior en niños. La alimentaria está sobrevalorada — es la trampa.</li>
+      <li><strong>Crónica inducible:</strong> por estímulo físico — frío, presión, calor, solar, acuagénica, dermografismo. <em>Colinérgica:</em> ronchas pequeñas por aumento de la temperatura corporal (ejercicio, fiebre, ducha caliente), mediada por acetilcolina.</li>
+      <li><strong>Urticaria vasculitis:</strong> sospechala cuando las lesiones <em>duran más de 24 h</em>, arden más de lo que pican y dejan <em>púrpura o hiperpigmentación residual</em>. Biopsia: vasculitis leucocitoclástica/necrotizante de vénulas. Pedir hemograma, VSG, PCR, ANA, FR y <em>complemento</em>.</li>
+      <li><strong>Tratamiento:</strong> antihistamínicos H1 de <em>segunda</em> generación (cetirizina, loratadina, fexofenadina), pudiendo cuadruplicar la dosis. Los de primera generación no son primera línea.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t20">
+  <div class="t-head"><span class="t-num">20</span><h3>Liquen plano</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~10 preguntas · 3 imágenes</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li>Caso completo de <b>liquen plano bucal</b> en el banco: lesiones elementales (pápulas, manchas, placas, atrofia, ampollas) · <q>la presencia de lesiones ___ ayuda al diagnóstico</q> → <b>lineales</b> · zona: <b>mucosa yugal posterior</b> · histopatología: <b>vacuolización de la capa basal e infiltrado en banda</b> · <q>se considera un desorden ___</q> → <b>potencialmente maligno</b> <span class="src">[Moodle]</span></li>
+      <li>Como distractor en queratosis actínica: <q>placa eritemato-violácea con <b>estrías de Wickham</b></q> <span class="src">[Final]</span></li>
+      <li><q>Liquen plano (estrías de Wickham)</q> <span class="src">[Imágenes ×3]</span></li>
+      <li><q>Liquen plano: definición, clínica, etiología</q> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Las 5 P:</strong> pápulas Poligonales, Planas, Púrpuras (violáceas), Pruriginosas, con estrías blanquecinas en la superficie.</li>
+      <li><strong>Estrías de Wickham:</strong> retículo blanquecino sobre la pápula. Es el signo que preguntan y el que usan de distractor en otras preguntas.</li>
+      <li><strong>Localización:</strong> cara flexora de muñecas y antebrazos, tobillos, región lumbar. <em>Fenómeno de Koebner</em> positivo (lesiones lineales sobre el rascado — de ahí «lesiones lineales ayudan al diagnóstico»).</li>
+      <li><strong>Liquen plano bucal:</strong> retículo blanco en <em>mucosa yugal posterior</em>. Formas reticular, atrófica, erosiva, ampollar. La erosiva es <em>potencialmente maligna</em> → CEC.</li>
+      <li><strong>Histología:</strong> hiperqueratosis, hipergranulosis, <em>vacuolización/degeneración hidrópica de la capa basal</em> e <em>infiltrado linfocitario en banda</em> en dermis papilar.</li>
+      <li><strong>Asociaciones:</strong> hepatitis C, fármacos (liquenoides), estrés.</li>
+      <li><strong>Tratamiento:</strong> corticoides tópicos de alta potencia; sistémicos o inhibidores de calcineurina en formas extensas o erosivas.</li>
+    </ul>
+    <div class="warn"><b>No confundir:</b> estrías de Wickham = liquen plano · signo de la bujía y Auspitz = psoriasis · borde perlado = basocelular · perlas córneas = espinocelular. Los cuatro «perla/estría» del examen.</div>
+  </div>
+</section>
+
+<section class="topic" id="t21">
+  <div class="t-head"><span class="t-num">21</span><h3>Queratosis seborreica y signo de Leser-Trélat</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~10 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Marcar lo correcto respecto a la queratosis seborreica</q> → <b>Son lesiones benignas</b> <span class="src">[Final / 2022]</span></li>
+      <li><q>¿Qué descripción elegiría para estas lesiones?</q> → <b>Pápulas y placas hiperpigmentadas de superficie verrugosa y aspecto untuoso</b> <span class="src">[Moodle]</span></li>
+      <li><q>Diagnóstico más probable</q> (evolución larga, asintomáticas, examen normal) → <b>Queratosis seborreicas</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuáles son datos esenciales para esta patología?</q> → <b>Apariencia clínica y evolución crónica</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Con cuál opción se llega al diagnóstico?</q> → <b>Antecedentes, inspección clínica y dermatoscopia</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es su conducta terapéutica?</q> → <b>Conducta expectante y sólo tratarlas con electrocoagulación o criocirugía por motivos estéticos</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál sería su conducta si las lesiones aparecieron súbitamente en 3 meses, múltiples y pruriginosas, con pérdida de peso y astenia?</q> → <b>Síndrome paraneoplásico de Leser-Trélat</b> <span class="src">[Moodle]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Clínica:</strong> pápulas y placas marrón-amarillentas a oscuras, de superficie verrugosa y <em>aspecto untuoso/graso</em>, con orificios foliculares y escamas grasas que se desprenden. Parecen «pegadas» sobre la piel. Cara y tórax; nunca palmas ni plantas.</li>
+      <li><strong>Son benignas.</strong> Diagnóstico clínico + dermatoscopia; no hace falta biopsia.</li>
+      <li><strong>Conducta:</strong> expectante. Sólo se sacan por estética o si molestan: electrocoagulación, criocirugía.</li>
+      <li><strong>Dermatosis papulosa nigra:</strong> variante pequeña y oscura en cara, en fototipos altos.</li>
+      <li><strong>Signo de Leser-Trélat:</strong> aparición <em>súbita y eruptiva</em> de múltiples queratosis seborreicas, o crecimiento rápido de las existentes, a veces pruriginosas. Es <em>paraneoplásico</em>: adenocarcinoma de esófago, pulmón o colon. La pregunta se arma agregando pérdida de peso y astenia.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t22">
+  <div class="t-head"><span class="t-num">22</span><h3>Lupus eritematoso cutáneo</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~9 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Signo característico del lupus cutáneo agudo</q> → <b>Eritema en alas de mariposa</b> <span class="src">[Final]</span></li>
+      <li>Caso del banco: <q>por la forma anular y confluente de las lesiones y su presentación en áreas expuestas, Ud. piensa en</q> → <b>Lupus eritematoso cutáneo subagudo (LECSA)</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué estudios de laboratorio solicitaría?</q> → <b>Hemograma, VSG, ANA y Ac anti-Ro y anti-La</b> <span class="src">[Moodle]</span></li>
+      <li><q>De acuerdo a su sospecha, Ud. decide</q> → <b>Realizar una biopsia de la lesión</b> <span class="src">[Moodle]</span></li>
+      <li><q>Una vez realizado el diagnóstico Ud. indica</q> → <b>Fotoprotectores, corticoides tópicos e hidroxicloroquina</b> <span class="src">[Moodle]</span></li>
+      <li><q>Lupus cutáneo crónico, alopecia «en pisada de nieve»</q> · <q>Alopecia del LECC: cicatrizal</q> <span class="src">[2024]</span></li>
+      <li><q>Lupus eritematoso discoide crónico</q> <span class="src">[Imágenes ×2]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <div class="tbl">
+    <table>
+      <tr><th>Forma</th><th>Lesión</th><th>Serología</th></tr>
+      <tr><td><strong>Agudo (LECA)</strong></td><td>Eritema <em>en alas de mariposa</em>: mejillas y dorso nasal, <em>respeta surcos nasogenianos</em></td><td>ANA, anti-DNA. Se asocia a LES activo</td></tr>
+      <tr><td><strong>Subagudo (LECSA)</strong></td><td>Lesiones <em>anulares</em> o pápuloescamosas confluentes en <em>áreas fotoexpuestas</em></td><td>ANA en el 70%, <em>anti-Ro/SSA y anti-La/SSB</em></td></tr>
+      <tr><td><strong>Crónico / discoide (LECC)</strong></td><td>Placas eritematosas con escama adherente, tapones foliculares, atrofia central y <em>alopecia cicatrizal</em></td><td>Poca serología; suele ser sólo cutáneo</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li><strong>El discoide deja alopecia cicatrizal</strong> — es la respuesta a «patologías que dan alopecia cicatrizal».</li>
+      <li><strong>Diagnóstico:</strong> biopsia de la lesión (+ IFD: banda lúpica).</li>
+      <li><strong>Tratamiento:</strong> <em>fotoprotección</em> siempre + corticoides tópicos + <em>hidroxicloroquina</em> VO en casos extendidos.</li>
+      <li><strong>Diferencial con dermatomiositis:</strong> mariposa = mejillas, respeta surcos · heliotropo = párpados. Y en manos: en lupus el eritema respeta los nudillos y toma el espacio interarticular; en DM es al revés (Gottron <em>sobre</em> los nudillos).</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t23">
+  <div class="t-head"><span class="t-num">23</span><h3>Verrugas, HPV y condilomas</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~9 preguntas · 3 imágenes</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>(Imagen de lesión verrugosa en cuello de mujer adulta) etiología más probable</q> → <b>HPV</b> <span class="src">[Final ×3]</span></li>
+      <li><q>(Foto de verruga) tratamiento</q> → <b>Queratolítico (ácido salicílico)</b> <span class="src">[Final]</span></li>
+      <li><q>En la superficie de las verrugas plantares se observan puntos negros que corresponden a partículas virales</q> → <b>F</b>: <em>corresponden a trombosis de capilares de las papilas dérmicas</em> <span class="src">[Moodle]</span></li>
+      <li><q>Todas las verrugas genitales deben evaluarse por su capacidad de transformación carcinomatosa</q> → <b>F</b>: <em>las de los subtipos 16, 18 y 31 principalmente</em> <span class="src">[Moodle]</span></li>
+      <li><q>En la histopatología de las verrugas se ve degeneración balonizante de la capa basal</q> → <b>F</b>: <em>eso es herpes; en HPV son característicos los coilocitos</em> <span class="src">[Moodle]</span></li>
+      <li><q>Cuerno, verruga</q> → <b>HPV</b> · <q>Niño 13 años con lesión papuloverrugosa</q> → verruga plana <span class="src">[2024]</span></li>
+      <li><q>Condilomas acuminados: diagnóstico diferencial con condiloma plano, recomendación y tratamiento</q> → <b>vacuna del calendario oficial; imiquimod si es superficial, si no criocirugía o cirugía</b> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Tipos de verruga:</strong> vulgar (dorso de manos) · plana (cara y dorso de manos, en niños) · plantar (dolorosa, con puntos negros) · <em>condiloma acuminado</em> (genital, vegetante, en coliflor).</li>
+      <li><strong>Los puntos negros de la plantar</strong> son <em>capilares trombosados</em> de las papilas dérmicas, no partículas virales. Sirven para diferenciarla del callo (que no los tiene y no duele a la presión lateral).</li>
+      <li><strong>Histología:</strong> <em>coilocitos</em> — queratinocitos con núcleo picnótico excéntrico y halo perinuclear claro. (La degeneración balonizante es del herpes.)</li>
+      <li><strong>Subtipos:</strong> 6 y 11 → condilomas, bajo riesgo. <em>16, 18, 31</em> → alto riesgo oncogénico.</li>
+      <li><strong>Condiloma acuminado vs. condiloma plano (sífilis):</strong> el acuminado es vegetante, seco, en coliflor, color piel-rosado. El plano es <em>plano, húmedo, maloliente</em>, y viene con el resto del secundarismo sifilítico (roséola, palmas, lengua en pradera segada).</li>
+      <li><strong>Tratamiento:</strong> verrugas comunes → queratolíticos (ácido salicílico), criocirugía. Condilomas → imiquimod si son superficiales, si no criocirugía o cirugía. <em>Prevención:</em> vacuna cuadrivalente/nonavalente del calendario oficial + preservativo.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t24">
+  <div class="t-head"><span class="t-num">24</span><h3>Dermatitis atópica</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~7 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>La lesión elemental corresponde</q> → <b>Placa</b> (<em>lesión de más de 1 cm, sobreelevada, con eritema, vesículas, costras y liquenificación por evolución crónica</em>) <span class="src">[Moodle]</span></li>
+      <li><q>El mecanismo fisiopatológico se debe a</q> → <b>Alteración de la barrera cutánea, hipersensibilidad tipo I, factores desencadenantes</b> (se altera la <em>filagrina</em>) <span class="src">[Moodle]</span></li>
+      <li><q>La localización característica en la etapa escolar (2-12 años) es</q> → <b>Pliegues antecubital y poplíteo, auricular, dedos de manos y pies</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál sería el mejor abordaje terapéutico en formas leves y moderadas?</q> → <b>Syndets, emolientes, corticoides tópicos y UVB banda angosta</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál sería la complicación más frecuente?</q> → <b>Sobreinfección bacteriana</b> (y compromiso de mucosas) <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es un tipo de dermatitis atópica?</q> → <b>Pitiriasis alba</b> <span class="src">[Final]</span></li>
+      <li><q>Bebé con eccema atópico: enfermedades asociadas (asma, familiares), puede tener impétigo y molusco contagioso con frecuencia</q> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Mecanismo:</strong> alteración genética de la <em>filagrina</em> → barrera cutánea defectuosa + hipersensibilidad <em>tipo I</em> mediada por IgE con respuesta Th2 + desencadenantes (irritantes, alérgenos, polen, mascotas, <em>S. aureus</em>).</li>
+      <li><strong>Distribución por edad</strong> — lo preguntan literal:
+        <ul>
+          <li><em>Lactante (2 meses-2 años):</em> mejillas, frente, tronco, zonas de extensión.</li>
+          <li><em>Infancia (2-12 años):</em> <em>pliegues antecubital y poplíteo</em>, auricular, pulpejos de dedos de manos y pies.</li>
+          <li><em>Adolescente y adulto (&gt;12):</em> xerosis y liquenificación en dorso de manos, periorificial, zonas de extensión de brazos.</li>
+        </ul>
+      </li>
+      <li><strong>Atopia:</strong> asma, rinitis alérgica, conjuntivitis, alergia alimentaria, antecedentes familiares.</li>
+      <li><strong>Complicaciones:</strong> <em>sobreinfección bacteriana</em> (S. aureus) — la más frecuente; molusco contagioso; <em>eccema herpético</em> (Kaposi-Juliusberg).</li>
+      <li><strong>Pitiriasis alba:</strong> máculas hipopigmentadas mal delimitadas y finamente descamativas en cara de niños. Es una forma menor de atopia.</li>
+      <li><strong>Tratamiento:</strong> educación + higiene con <em>syndets</em> (no jabón común) + <em>emolientes</em> siempre. Leve: corticoides de baja-mediana potencia o inhibidores de calcineurina. Moderada: terapias húmedas oclusivas, <em>UVB banda angosta</em>, antimicrobianos si hay sobreinfección. Severa: cursos cortos de corticoides orales, inmunosupresores, <em>dupilumab</em> (anti IL-4/13).</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t25">
+  <div class="t-head"><span class="t-num">25</span><h3>Esclerodermia y esclerosis sistémica</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~7 preguntas · 2 imágenes</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li>Caso del banco: <q>ante este cuadro clínico, su impresión diagnóstica es</q> → <b>Esclerosis sistémica</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué estudios de laboratorio solicitaría?</q> → <b>Hemograma completo, VSG, anti-Scl 70 y test de función renal</b> <span class="src">[Moodle]</span></li>
+      <li><q>Scl70 (+), videoendoscopía alta con disminución del peristaltismo. Su impresión diagnóstica es</q> → <b>Esclerosis sistémica generalizada</b> <span class="src">[Moodle]</span></li>
+      <li><q>De acuerdo a su diagnóstico Ud. le indica</q> → <b>Corticoides sistémicos, metotrexato y medidas de sostén</b> <span class="src">[Moodle]</span></li>
+      <li>Comentario de la cátedra: <b>la esclerosis sistémica LIMITADA o síndrome CREST</b> = Calcinosis, Raynaud, disfunción Esofágica, eSclerodactilia, Telangiectasias <span class="src">[Moodle]</span></li>
+      <li><q>Señora con facies de pájaro</q> → <b>Esclerodermia</b>. Clasificación, formas clínicas, y <q>¿cómo descarto que no sea rosácea?</q> → <b>eritema en cuadrilátero</b> <span class="src">[Oral]</span></li>
+      <li><q>Morfea</q> — como distractor de «no es diagnóstico diferencial de eczema» <span class="src">[2022]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Localizada (morfea):</strong> placas escleróticas, induradas, blanco-marfil con halo violáceo, sin compromiso sistémico. Formas: en placa, lineal, «en golpe de sable». Tratamiento: corticoides tópicos + calcipotriol, inmunomoduladores.</li>
+      <li><strong>Sistémica limitada = CREST:</strong> <em>C</em>alcinosis · fenómeno de <em>R</em>aynaud · disfunción <em>E</em>sofágica · e<em>S</em>clerodactilia · <em>T</em>elangiectasias. Anti-centrómero. Mejor pronóstico.</li>
+      <li><strong>Sistémica generalizada / difusa:</strong> esclerosis proximal extensa, compromiso pulmonar (fibrosis), renal (crisis renal esclerodérmica), cardíaco. <em>Anti-Scl 70 (anti-topoisomerasa I)</em>. Peor pronóstico.</li>
+      <li><strong>Facies esclerodérmica:</strong> «facies de pájaro» — nariz afilada, microstomía, surcos peribucales radiados, pérdida de la mímica.</li>
+      <li><strong>Laboratorio:</strong> hemograma, VSG, <em>anti-Scl 70</em>, función renal. Videoendoscopía para el esófago.</li>
+      <li><strong>Tratamiento sistémico:</strong> corticoides sistémicos, metotrexato, antipalúdicos, medidas de sostén.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t26">
+  <div class="t-head"><span class="t-num">26</span><h3>Queratosis actínica</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~6 preguntas</span>
+  </div>
+
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Imagen de un anciano con lesiones de queratosis actínica en frente, pedía describir la lesión</q> a) placa eritemato-violácea con estrías de Wickham · <b>b) placas eritemato-escamosas</b> <span class="src">[Final]</span></li>
+      <li><q>Múltiples lesiones, exposición al sol</q> → <b>QA</b> · <q>QA en cuero cabelludo</q> · <q>QA fotos</q> <span class="src">[2024 ×3]</span></li>
+      <li><q>Queratosis actínica (hiperqueratósica)</q> <span class="src">[Imágenes]</span></li>
+      <li><q>Lesiones preneoplásicas para carcinoma espinocelular</q> <span class="src">[Oral]</span></li>
+    </ul>
+  </div>
+
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li><strong>Clínica:</strong> placas o máculas <em>eritemato-escamosas</em> ásperas al tacto (se palpan más de lo que se ven), en áreas fotoexpuestas de ancianos: frente, cuero cabelludo calvo, dorso de nariz, orejas, dorso de manos, labio inferior (<em>queilitis actínica</em>).</li>
+      <li><strong>Es una lesión precancerosa</strong> → carcinoma <em>espinocelular</em>. Es la principal precursora del CEC y por eso la preguntan siempre en pareja con él.</li>
+      <li><strong>Signos de progresión:</strong> induración, dolor, crecimiento rápido, ulceración, sangrado → biopsiar.</li>
+      <li><strong>Tratamiento:</strong> crioterapia (lesiones aisladas) · 5-fluorouracilo tópico, imiquimod o terapia fotodinámica (campo de cancerización) · fotoprotección estricta.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ COLA ============ -->
+<div class="tier">
+  <p class="t-lab">Cola · 3 fuentes o menos</p>
+  <h2>Los últimos nueve</h2>
+  <p>Están acá porque prometí no omitir ninguno. Léelos una vez, en voz alta si querés, y seguí. Ninguno merece más de tres minutos — salvo Kaposi, que explico abajo.</p>
+</div>
+
+<section class="topic" id="t27">
+  <div class="t-head"><span class="t-num">27</span><h3>Pediculosis</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+    <span class="qty">3/6 fuentes · ~5 preguntas</span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Respecto a la pediculosis capitis</q> → <b>El prurito y las liendres se localizan preferentemente en nuca y región retroauricular</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es el enunciado correcto?</q> → <b>Ningún pediculicida disponible es 100% ovicida</b> (por eso se repite a los 7 días + extracción manual de liendres) <span class="src">[Moodle]</span></li>
+      <li><q>El tratamiento de primera elección es</q> → <b>Permetrina 1%</b> <span class="src">[Moodle]</span></li>
+      <li><q>Tratamiento de la pediculosis</q> → <b>Permetrina al 1%</b> <span class="src">[Final]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <ul>
+      <li>El piojo <em>no salta ni vuela</em>: el contagio es por contacto directo cabeza-cabeza. Sí sobrevive un tiempo fuera de la cabeza. No genera inmunidad — se reinfestan.</li>
+      <li>Liendres y prurito en <em>nuca y retroauricular</em>: encontrar liendres ahí es diagnóstico de certeza.</li>
+      <li><strong>Permetrina 1%</strong> en crema o loción, y repetir a los 7 días porque ningún pediculicida mata todos los huevos. Extracción manual de liendres con peine fino.</li>
+      <li>Alternativas: ivermectina oral en casos resistentes. El lindano está en desuso por toxicidad.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="topic" id="t28">
+  <div class="t-head"><span class="t-num">28</span><h3>Mancha mongólica</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span>
+    <span class="qty">2/6 fuentes · 5 preguntas (un cuestionario entero del banco)</span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Se produce por la presencia de melanocitos en la dermis</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Es frecuente en recién nacidos con ascendencia indígena</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Generalmente involuciona al año</q> → <b>V</b> <span class="src">[Moodle]</span></li>
+      <li><q>Se relaciona con malformaciones de columna vertebral</q> → <b>F</b> <span class="src">[Moodle]</span></li>
+      <li><q>Presenta 1-3% de progresión a melanoma según el tamaño</q> → <b>F</b> — <em>no maligniza</em> <span class="src">[Moodle]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p>Mácula azul-grisácea en región lumbosacra del recién nacido, por melanocitos <em>dérmicos</em> (dispersión de la luz = efecto Tyndall). Frecuente en ascendencia indígena y asiática. <strong>Involuciona sola alrededor del año</strong>, no se trata, <strong>no maligniza</strong> y <strong>no se asocia a disrafismo espinal</strong>. Las cinco V/F son estas cinco frases.</p>
+  </div>
+</section>
+
+<section class="topic" id="t29">
+  <div class="t-head"><span class="t-num">29</span><h3>Fibromas péndulos (acrocordones)</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span>
+    <span class="qty">2/6 fuentes · 5 preguntas (un cuestionario entero del banco)</span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>¿Cuál sería su descripción semiológica?</q> → <b>Múltiples pápulas del color de la piel, algunas pedunculadas</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál sería el diagnóstico más probable?</q> → <b>Fibromas péndulos</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Qué antecedentes considera importantes de recoger?</q> → <b>Padecer síndrome metabólico u obesidad</b> <span class="src">[Moodle]</span></li>
+      <li><q>Para realizar el diagnóstico se basa en</q> → <b>Anamnesis y examen físico</b> <span class="src">[Moodle]</span></li>
+      <li><q>¿Cuál es la conducta terapéutica?</q> → <b>Eliminar por electrocoagulación o criocirugía sólo por motivos estéticos</b> <span class="src">[Moodle]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p>Lesiones pedunculadas color piel o amarronadas en <em>pliegues</em>: cuello, axilas, ingles, párpados. Múltiples. Aumentan con el <strong>peso, la obesidad, el síndrome metabólico y el embarazo</strong>. Diagnóstico <strong>clínico</strong>. Se sacan sólo por estética o si son grandes y sintomáticas (pueden necrosarse si se torsiona el pedículo). Histología: tallo de tejido conectivo laxo con vasos dilatados, recubierto de epidermis normal.</p>
+  </div>
+</section>
+
+<section class="topic" id="t30">
+  <div class="t-head"><span class="t-num">30</span><h3>Vitiligo</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span>
+    <span class="qty">2/6 fuentes · ~4 preguntas · 2 imágenes</span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Vitiligo, antecedentes de tiroides / fumar</q> → <b>hipotiroidismo</b> <span class="src">[2024]</span></li>
+      <li><q>Vitiligo, ¿antecedente?</q> → <b>Tiroiditis de Hashimoto</b> <span class="src">[2024]</span></li>
+      <li><q>Vitiligo</q> <span class="src">[Imágenes ×2]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p>Máculas <strong>acrómicas</strong> (blanco tiza) de bordes netos, simétricas, en zonas periorificiales, dorso de manos, codos, rodillas, genitales. Destrucción autoinmune de melanocitos. <strong>La pregunta es siempre la asociación autoinmune: tiroiditis de Hashimoto / hipotiroidismo</strong>; también diabetes tipo 1, anemia perniciosa, alopecia areata, Addison. Fenómeno de Koebner positivo. Tratamiento: corticoides o inhibidores de calcineurina tópicos, fototerapia UVB banda angosta, fotoprotección.</p>
+  </div>
+</section>
+
+<section class="topic" id="t31">
+  <div class="t-head"><span class="t-num">31</span><h3>Sarcoma de Kaposi</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+    <span class="qty">4/6 fuentes · ~4 preguntas · <strong>cero presencia en el banco de Moodle</strong></span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>(Imagen de lesiones papulosas y purpúricas en planta del pie y miembros inferiores, hombre en verano, antecedente de trasplante de riñón) ¿cuál es la patología más probable?</q> → <b>Sarcoma de Kaposi</b> <span class="src">[Final ×3]</span></li>
+      <li><q>¿Cuál es la etiología del sarcoma de Kaposi?</q> → <b>HHV-8</b> <span class="src">[Final ×3]</span></li>
+      <li><q>Paciente trasplantado de riñón hace 5 años con placas rojo-violáceas en piernas, ¿qué es?</q> → <b>Sarcoma de Kaposi</b> <span class="src">[2022]</span></li>
+      <li><q>Sarcoma de Kaposi, inmunosuprimido</q> · <q>antecedente de trasplante renal, con foto</q> <span class="src">[2024 ×2]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <div class="warn" style="margin-top:0;margin-bottom:14px"><b>Por qué está acá abajo pero conviene saberlo:</b> el banco oficial de la cátedra no lo cubre, pero aparece en <b>cuatro finales recordados distintos</b>, siempre con el mismo enunciado. Es una pregunta que repiten y que el banco no te va a preparar. Tres minutos bien invertidos.</div>
+    <p>Tumor vascular por <strong>virus herpes humano 8 (HHV-8)</strong>. Máculas, pápulas y placas <strong>rojo-violáceas o purpúricas</strong>, en miembros inferiores y plantas, a veces con linfedema. Formas: clásica (ancianos mediterráneos), endémica africana, <strong>asociada a inmunosupresión — trasplantados</strong> e <strong>iatrogénica</strong>, y epidémica (HIV/SIDA, enfermedad marcadora). El caso que arman siempre es el mismo: <em>trasplantado renal + placas rojo-violáceas en piernas</em>. Tratamiento: reducir la inmunosupresión, TARV si es por HIV, y según extensión radioterapia, quimioterapia local o sistémica.</p>
+  </div>
+</section>
+
+<section class="topic" id="t32">
+  <div class="t-head"><span class="t-num">32</span><h3>Queratoacantoma</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+    <span class="qty">3/6 fuentes · ~3 apariciones · 2 imágenes</span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li>Como distractor en el caso de basocelular: <q>tapón queratósico central</q> → <em>la nota de la cátedra aclara que ese signo es característico del queratoacantoma</em> <span class="src">[Moodle]</span></li>
+      <li>Como opción en <q>con estos datos usted haría el diagnóstico de</q> (CBC / melanoma ulcerado / <b>queratoacantoma</b> / CEC) <span class="src">[Moodle ×2]</span></li>
+      <li><q>Queratoacantoma: diagnósticos diferenciales, descripción de la lesión y localización</q> <span class="src">[Oral]</span></li>
+      <li><q>Queratoacantoma</q> <span class="src">[Imágenes ×2]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p>Nódulo cupuliforme color piel con <strong>tapón o cráter queratósico central</strong>, en áreas fotoexpuestas. <strong>Crecimiento muy rápido</strong> (semanas) y tendencia a la <strong>involución espontánea</strong>. Diferencial obligado con el <strong>CEC</strong> — histológicamente son muy parecidos, y muchos lo consideran una variante bien diferenciada. Por las dudas se extirpa. En el examen funciona sobre todo como <em>distractor</em>: si te ofrecen «tapón queratósico central» en un caso de basocelular, esa opción es queratoacantoma, no la respuesta.</p>
+  </div>
+</section>
+
+<section class="topic" id="t33">
+  <div class="t-head"><span class="t-num">33</span><h3>Pitiriasis rosada de Gibert</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+    <span class="qty">3/6 fuentes · ~4 apariciones · 3 imágenes</span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li>Como opción en <q>¿cuál de los siguientes NO es dx diferencial de eczema?</q> → <b>pitiriasis rosada sí lo es</b> (la que no era es morfea) <span class="src">[2022]</span></li>
+      <li>Como distractor en el caso de LECSA: <q>pitiriasis rosada</q> <span class="src">[Moodle]</span></li>
+      <li><q>Pitiriasis rosada de Gibert</q>, y <q>sífilis secundaria DD pitiriasis rosada</q> <span class="src">[Imágenes ×3]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p>Empieza con la <strong>placa heraldo o medallón de Gibert</strong>: una placa ovalada eritemato-escamosa con collarete de escamas, mayor que las demás. Días después brota un exantema de placas ovaladas más chicas en tronco, con el eje mayor siguiendo las líneas de tensión — <strong>«en árbol de navidad»</strong>. Autolimitada en 6-8 semanas. Se asocia a HHV-6/7. <strong>El diferencial que importa es la sífilis secundaria</strong> — por eso aparece en el banco de imágenes junto a ella: ante una erupción papuloescamosa en tronco, si toma <em>palmas y plantas</em> o hay alopecia, pedí VDRL.</p>
+  </div>
+</section>
+
+<section class="topic" id="t34">
+  <div class="t-head"><span class="t-num">34</span><h3>Lepra</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="qty">1/6 fuentes · 1 imagen</span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Lepra lepromatosa</q> — aparece como la primera diapositiva del banco de imágenes del examen <span class="src">[Imágenes]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p><em>Mycobacterium leprae</em>. Lo único que necesitás para reconocerla en una foto: <strong>lepromatosa</strong> = múltiples nódulos infiltrados (lepromas), <strong>facies leonina</strong>, madarosis (pérdida de cejas), inmunidad celular baja, baciloscopía positiva, muy contagiosa. <strong>Tuberculoide</strong> = pocas placas anestésicas de bordes netos con engrosamiento de nervios, baciloscopía negativa. Signo clave en cualquier forma: <strong>la lesión pierde la sensibilidad</strong>. Tratamiento: poliquimioterapia OMS (rifampicina, dapsona, clofazimina).</p>
+  </div>
+</section>
+
+<section class="topic" id="t35">
+  <div class="t-head"><span class="t-num">35</span><h3>Eritema nodoso</h3></div>
+  <div class="freq">
+    <span class="bar"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="qty">1/6 fuentes · 1 imagen (con DD urticaria)</span>
+  </div>
+  <div class="asked">
+    <h4>Lo que preguntaron</h4>
+    <ul>
+      <li><q>Eritema nodoso, DD urticaria</q> — en el banco de imágenes del examen <span class="src">[Imágenes]</span></li>
+    </ul>
+  </div>
+  <div class="know">
+    <h4>Lo que hay que saber</h4>
+    <p><strong>Paniculitis septal</strong>: nódulos eritematosos, <strong>dolorosos</strong>, calientes, en <strong>cara anterior de piernas</strong>, bilaterales. <strong>No ulceran</strong> y curan sin cicatriz, pasando por colores de hematoma. Es una reacción de hipersensibilidad: infección estreptocócica, tuberculosis, sarcoidosis, EII, fármacos (anticonceptivos, sulfas), embarazo; muchas veces idiopático. Lo importante en el examen es <strong>buscar la causa de base</strong>. Tratamiento: reposo, AINEs, tratar la causa.</p>
+  </div>
+</section>
+
+<div class="tier">
+  <p class="t-lab">Última hoja</p>
+  <h2>Los pares que cruzan a propósito</h2>
+  <p>Todo lo de abajo salió de opciones que aparecieron juntas en una misma pregunta. Si te queda tiempo el viernes a la mañana, leé sólo esto.</p>
+</div>
+
+<section class="topic">
+  <div class="know" style="max-width:none">
+    <div class="tbl">
+    <table>
+      <tr><th>Si dice…</th><th>Es…</th><th>Y no…</th></tr>
+      <tr><td>Borde perlado</td><td>Basocelular</td><td>Espinocelular</td></tr>
+      <tr><td>Perlas córneas (histología)</td><td>Espinocelular</td><td>Basocelular</td></tr>
+      <tr><td>Tapón queratósico central</td><td>Queratoacantoma</td><td>Basocelular</td></tr>
+      <tr><td>Estrías de Wickham</td><td>Liquen plano</td><td>Queratosis actínica</td></tr>
+      <tr><td>Raspado de Brocq / Auspitz</td><td>Psoriasis</td><td>Eczema</td></tr>
+      <tr><td>Ampolla fláccida, Nikolsky +</td><td>Pénfigo vulgar</td><td>Penfigoide</td></tr>
+      <tr><td>Ampolla tensa, Nikolsky −</td><td>Penfigoide</td><td>Pénfigo</td></tr>
+      <tr><td>Desmosoma / desmogleína</td><td>Pénfigo</td><td>Penfigoide</td></tr>
+      <tr><td>Hemidesmosoma</td><td>Penfigoide</td><td>Pénfigo</td></tr>
+      <tr><td>Eritema en alas de mariposa</td><td>Lupus agudo</td><td>Dermatomiositis</td></tr>
+      <tr><td>Rash heliotropo (párpados)</td><td>Dermatomiositis</td><td>Lupus</td></tr>
+      <tr><td>Pápulas de Gottron sobre nudillos</td><td>Dermatomiositis</td><td>Lupus (respeta nudillos)</td></tr>
+      <tr><td>Permetrina 5%</td><td>Escabiosis</td><td>Pediculosis</td></tr>
+      <tr><td>Permetrina 1%</td><td>Pediculosis</td><td>Escabiosis</td></tr>
+      <tr><td>Griseofulvina</td><td>Tiña capitis (pelo)</td><td>Tiña corporis</td></tr>
+      <tr><td>Imidazoles tópicos</td><td>Tiña corporis (piel lampiña)</td><td>Tiña capitis</td></tr>
+      <tr><td>Bordes netos y sobreelevados</td><td>Erisipela</td><td>Celulitis</td></tr>
+      <tr><td>Sin comedones, centro facial</td><td>Rosácea</td><td>Acné</td></tr>
+      <tr><td>Sin comedones, monomorfo</td><td>Acné por fármacos</td><td>Acné vulgar</td></tr>
+      <tr><td>Demodex folliculorum</td><td>Rosácea</td><td>Acné</td></tr>
+      <tr><td>Placa blanca que se desprende</td><td>Candidiasis</td><td>Leucoplasia</td></tr>
+      <tr><td>Placa blanca que no se desprende</td><td>Leucoplasia</td><td>Candidiasis</td></tr>
+      <tr><td>Presente al nacer, no involuciona</td><td>Malformación vascular</td><td>Hemangioma</td></tr>
+      <tr><td>Aparece a las semanas, involuciona</td><td>Hemangioma infantil</td><td>Malformación</td></tr>
+      <tr><td>Coilocitos</td><td>HPV / verrugas</td><td>Herpes</td></tr>
+      <tr><td>Degeneración balonizante</td><td>Herpes</td><td>HPV</td></tr>
+      <tr><td>Lesiones en palmas y plantas + alopecia</td><td>Sífilis secundaria</td><td>Pitiriasis rosada</td></tr>
+      <tr><td>Diana o escarapela</td><td>Eritema multiforme</td><td>Tiña corporis</td></tr>
+      <tr><td>Micosis fungoide</td><td>Linfoma T cutáneo</td><td>Un hongo</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p><strong>De dónde salió cada cosa.</strong> Las preguntas del bloque naranja son textuales de los seis archivos de tu carpeta de Exámenes. Las respuestas marcadas son las que esas fuentes dieron por correctas — en el caso de los cuestionarios de Moodle, es el criterio de la propia cátedra.</p>
+  <p><strong>Dos cosas que no puedo resolver desde acá.</strong> Faltan los módulos 9 y 10 del banco de Moodle, y sífilis es el tema grande que queda sin cubrir por el banco oficial. Y donde tus fuentes se contradicen entre sí lo dejé señalado en rojo en vez de elegir por vos — el caso más importante es el margen quirúrgico del melanoma.</p>
+  <p><strong>El orden es la recomendación.</strong> No hay tiempo para todo con el mismo detalle: leído de arriba hacia abajo, en cualquier momento que pares, paraste habiendo cubierto lo que más rendía.</p>
+</footer>
+</div>
