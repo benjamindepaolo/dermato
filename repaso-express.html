@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los 40 del final</title>
+<meta name="description" content="Repaso ultrabreve ordenado por frecuencia en los finales escritos de Dermatología 2020+.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F5F2F1; --surface:#FFFDFC; --surface-2:#EFEAE9;
+  --ink:#23191C; --ink-2:#5F5055; --ink-3:#8F8085;
+  --rule:#E1D7D6; --accent:#A61E32;
+  --hot:#A61E32; --mid:#96660D; --cool:#4F6377;
+  --f-d:"Newsreader",Georgia,serif;
+  --f-b:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-m:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --shadow:0 1px 2px rgba(35,25,28,.05),0 8px 24px -18px rgba(35,25,28,.25);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#171215; --surface:#1F181B; --surface-2:#271F22;
+    --ink:#F0E7E6; --ink-2:#BCACAF; --ink-3:#8E7E82;
+    --rule:#362B2F; --accent:#E8798C;
+    --hot:#EA7A8B; --mid:#DCA94B; --cool:#A3B7CC;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px -20px rgba(0,0,0,.85);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171215; --surface:#1F181B; --surface-2:#271F22;
+  --ink:#F0E7E6; --ink-2:#BCACAF; --ink-3:#8E7E82;
+  --rule:#362B2F; --accent:#E8798C;
+  --hot:#EA7A8B; --mid:#DCA94B; --cool:#A3B7CC;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px -20px rgba(0,0,0,.85);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-b);
+  font-size:16.5px;line-height:1.52;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 20px 70px}
+
+/* header */
+.eyebrow{font-family:var(--f-m);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 12px}
+h1{font-family:var(--f-d);font-weight:500;letter-spacing:-.022em;
+  font-size:clamp(2.3rem,6.5vw,3.5rem);margin:.2em 0 .12em;line-height:1.08}
+h1 i{font-style:italic;color:var(--accent)}
+.dek{color:var(--ink-2);max-width:66ch;margin:0;font-size:1.02rem}
+
+/* fuentes */
+.src{margin:22px 0 30px;border:1px solid var(--rule);border-radius:3px;background:var(--surface);
+  padding:14px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
+.src h2{font-family:var(--f-m);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);margin:0;font-weight:600}
+.src ul{margin:0;padding-left:1.1em;font-size:14.2px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
+.src .out{font-size:13.6px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:8px;margin:0}
+
+/* podio */
+.podium{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:34px}
+.podium a{font-family:var(--f-m);font-size:11px;letter-spacing:.04em;text-decoration:none;
+  background:var(--surface);border:1px solid var(--rule);border-radius:2px;padding:5px 9px;color:var(--ink-2)}
+.podium a b{color:var(--hot);font-weight:600}
+.podium a:hover{border-color:var(--accent);color:var(--ink)}
+
+/* items */
+h2.sec{font-family:var(--f-m);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;margin:0 0 12px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
+.items{display:flex;flex-direction:column;gap:9px;margin-bottom:38px}
+.it{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--k,var(--cool));
+  border-radius:0 3px 3px 0;padding:13px 16px;box-shadow:var(--shadow);scroll-margin-top:14px}
+.it .hd{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.it .rk{font-family:var(--f-m);font-size:11px;color:var(--ink-3);font-weight:600;width:20px;flex:none}
+.it h3{font-family:var(--f-d);font-size:1.28rem;font-weight:600;margin:0;letter-spacing:-.01em;line-height:1.15}
+.it .n{margin-left:auto;font-family:var(--f-m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--k,var(--cool));font-weight:600;white-space:nowrap;background:var(--surface-2);padding:2px 7px;border-radius:2px}
+.foto{font-size:14.6px;color:var(--ink-2);margin:0 0 7px;padding-left:30px;border-left:0}
+.foto b{color:var(--ink)}
+.foto::before{content:"LA FOTO / EL ENUNCIADO";display:block;font-family:var(--f-m);font-size:8.5px;
+  letter-spacing:.14em;color:var(--ink-3);margin-bottom:2px;font-weight:600}
+ul.qa{margin:0;padding:0 0 0 30px;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:15px}
+ul.qa li{padding-left:14px;position:relative;color:var(--ink-2)}
+ul.qa li::before{content:"›";position:absolute;left:0;color:var(--k,var(--cool));font-weight:700}
+ul.qa b{color:var(--ink)}
+.warn{margin:7px 0 0 30px;font-size:13.4px;color:var(--ink-2);background:var(--surface-2);
+  border-radius:2px;padding:7px 10px;border-left:2px solid var(--mid)}
+.warn b{color:var(--ink)}
+
+/* tabla gatillo */
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface);margin-bottom:38px;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.6px}
+th,td{padding:8px 14px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-family:var(--f-m);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-2);background:var(--surface-2);font-weight:600}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{color:var(--ink-2)}
+td:last-child b{color:var(--ink)}
+
+.foot{border-top:1px solid var(--rule);padding-top:18px;color:var(--ink-3);font-size:13.4px;max-width:70ch;
+  display:flex;flex-direction:column;gap:6px}
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .it,.tw,.src{box-shadow:none;break-inside:avoid}
+  .podium{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow"><span>Dermatología</span><span>·</span><span>Finales escritos 2020+</span><span>·</span><span>Última leída</span></div>
+  <h1>Los 40 <i>del</i> final</h1>
+  <p class="dek">Todo lo que apareció en los finales escritos, ordenado por cuántas veces se tomó. Sin teoría de más: la imagen, la pregunta y la respuesta.</p>
+</header>
+
+<div class="src">
+  <h2>De dónde salió este orden</h2>
+  <ul>
+    <li><b>Final Dermatología 2022</b> — 25 preguntas</li>
+    <li><b>FINAL DERMATO</b> — 41 preguntas (está duplicado en dos PDFs: <i>(1)</i> con respuestas y <i>(2)</i> sin ellas; se contó <b>una sola vez</b>)</li>
+    <li><b>Exámenes Dermato 2024</b> — ~95 ítems en dos bloques</li>
+    <li>Como refuerzo de la parte iconográfica: el <b>banco de imágenes del examen</b> (95 diapositivas), que no suma al conteo pero confirma qué fotos usan</li>
+  </ul>
+  <p class="out">Quedaron afuera, como pediste: <b>"Final Dermatología _ Facebook"</b> (son exámenes <b>orales</b> de 2014–2016) y <b>"Cuestionarios todos"</b> (Moodle). El número de cada tarjeta es la cantidad de apariciones en esos tres finales.</p>
+</div>
+
+<nav class="podium">
+  <a href="#t1"><b>12</b> Tiñas</a>
+  <a href="#t2"><b>12</b> Ampollares</a>
+  <a href="#t3"><b>11</b> Basocelular</a>
+  <a href="#t4"><b>10</b> Melanoma</a>
+  <a href="#t5"><b>9</b> Acné</a>
+  <a href="#t6"><b>9</b> Hemangioma/malformación</a>
+  <a href="#t7"><b>8</b> Sífilis 2ª</a>
+  <a href="#t8"><b>7</b> Espinocelular</a>
+  <a href="#t9"><b>7</b> Herpes/EM</a>
+  <a href="#t10"><b>6</b> Escabiosis</a>
+</nav>
+
+<h2 class="sec">Bloque caliente — el 70 % del examen</h2>
+<div class="items">
+
+  <article class="it" id="t1" style="--k:var(--hot)">
+    <div class="hd"><span class="rk">01</span><h3>Tiñas y querion de Celso</h3><span class="n">12 apariciones</span></div>
+    <p class="foto">Placa pseudoalopécica descamativa en cuero cabelludo de un chico, con pelos que se desprenden solos. O placa anular con <b>borde activo y centro claro</b>, con antecedente de mascota.</p>
+    <ul class="qa">
+      <li>Tiña <b>capitis</b> → <b>griseofulvina VO</b>, 10–15 mg/kg/día, 45 días, con comida grasa. Agente: <i>M. canis</i>.</li>
+      <li>Tiña <b>corporis</b> → <b>imidazólicos tópicos</b> (miconazol, ketoconazol).</li>
+      <li><b>Querion de Celso</b>: placa inflamatoria con pústulas, nódulos y absceso + adenopatía y fiebre → <b>griseofulvina + antibiótico + corticoide</b>.</li>
+      <li>Pregunta trampa "¿cuál NO se trata con imidazoles?" → <b>micosis fungoide</b>.</li>
+      <li>Efecto adverso de la griseofulvina: <b>pseudotumor cerebral</b> (igual que los retinoides).</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t2" style="--k:var(--hot)">
+    <div class="hd"><span class="rk">02</span><h3>Ampollares: pénfigo, penfigoide, dermatitis herpetiforme</h3><span class="n">12 apariciones</span></div>
+    <p class="foto">Ampollas en tronco. La única pregunta real es <b>si son flácidas o tensas</b>.</p>
+    <ul class="qa">
+      <li><b>Pénfigo vulgar</b>: ampollas <b>flácidas</b> que se rompen fácil, compromiso de <b>mucosas</b>, <b>Nikolsky +</b>. Tratamiento: corticoides sistémicos.</li>
+      <li><b>Penfigoide ampollar</b>: ampollas <b>tensas y firmes</b>, anciano, <b>Nikolsky −</b>. Puede ser <b>paraneoplásico</b>.</li>
+      <li><b>Dermatitis herpetiforme</b>: vesículas agrupadas muy pruriginosas en extensoras + <b>intolerancia al gluten</b> (celiaquía). Dapsona y dieta sin TACC.</li>
+      <li>Pénfigo <b>paraneoplásico</b>: la lesión aparece en <b>paladar y mucosa oral</b>.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t3" style="--k:var(--hot)">
+    <div class="hd"><span class="rk">03</span><h3>Carcinoma basocelular</h3><span class="n">11 apariciones</span></div>
+    <p class="foto">Nódulo <b>perlado con telangiectasias</b> en cara, crecimiento lento, <b>sin lesión previa</b>, a veces ulcerado en el centro o pigmentado.</p>
+    <ul class="qa">
+      <li>La opción correcta siempre es: <b>no da metástasis</b> y <b>puede contener pigmento</b>. No aparece en mucosas.</li>
+      <li>Histología: <b>nidos de células basaloides con empalizada periférica</b> y retracción del estroma.</li>
+      <li>Tratamiento: <b>cirugía con margen</b> — en las claves de estos finales figura <b>2–3 mm</b> (nodular chico); en lesiones de alto riesgo, 5 mm.</li>
+      <li>Variedades: nodular, superficial, pigmentado, <b>ulcus rodens</b>, terebrante, esclerodermiforme, <b>fibroepitelioma de Pinkus</b>. Múltiples y en joven → <b>síndrome de Gorlin</b>.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t4" style="--k:var(--hot)">
+    <div class="hd"><span class="rk">04</span><h3>Melanoma</h3><span class="n">10 apariciones</span></div>
+    <p class="foto">Lesión pigmentada asimétrica, de bordes irregulares, que cambió en 3 meses, sangra o pica. Casi siempre te piden el <b>nivel pronóstico sin darte los milímetros</b>.</p>
+    <ul class="qa">
+      <li><b>Breslow</b> = espesor en mm desde la capa granulosa hasta la célula más profunda; es el <b>factor pronóstico</b>. Clark = niveles anatómicos.</li>
+      <li>Si la foto muestra una lesión <b>elevada o papular</b> y no te dan mm → la respuesta que marcan es <b>Breslow 2</b> (Clark 1 sería solo epidermis, imposible si está sobreelevada).</li>
+      <li>Breslow <b>&gt; 0,8–1 mm</b> → <b>ganglio centinela</b>.</li>
+      <li><b>Lentigo maligno</b>: crecimiento radial más lento. <b>Nodular</b>: el más agresivo.</li>
+      <li>Histología: melanocitos con <b>núcleos atípicos y nucléolos evidentes</b>.</li>
+      <li>Metástasis: <b>SNC y pulmón</b>. Primario oculto: espalda en el hombre, piernas en la mujer.</li>
+    </ul>
+    <p class="warn"><b>Ojo con los márgenes.</b> La clave de estos finales pone "extirpación con <b>5 cm</b> de margen" para un melanoma &gt;1,5 mm. Hoy la conducta es 2 cm. Si la ves entre las opciones, marcá la de la cátedra.</p>
+  </article>
+
+  <article class="it" id="t5" style="--k:var(--hot)">
+    <div class="hd"><span class="rk">05</span><h3>Acné e isotretinoína</h3><span class="n">9 apariciones</span></div>
+    <p class="foto">Cara de adolescente con comedones, pápulas, pústulas y nódulos. Preguntan <b>tratamiento según gravedad</b>.</p>
+    <ul class="qa">
+      <li><b>Leve</b> → antibiótico <b>tópico: eritromicina o clindamicina</b>, o peróxido de benzoílo. <b>NO</b> mupirocina ni ácido fusídico (esos son para impétigo).</li>
+      <li><b>Moderado</b> → tetraciclinas orales: <b>minociclina o doxiciclina</b>.</li>
+      <li><b>Severo, nodular o grado 3–4</b> → <b>isotretinoína</b>.</li>
+      <li>Antes de la isotretinoína: <b>hemograma, hepatograma, lipidograma y subunidad β-hCG</b> (no creatinina). Anticoncepción obligatoria: es teratógena.</li>
+      <li>Reacción adversa de la <b>minociclina</b>: <b>fotosensibilidad</b>.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t6" style="--k:var(--hot)">
+    <div class="hd"><span class="rk">06</span><h3>Hemangioma vs. malformación vascular</h3><span class="n">9 apariciones</span></div>
+    <p class="foto">Bebé con lesión vascular en la cara. Toda la pregunta es <b>desde cuándo la tiene</b>.</p>
+    <ul class="qa">
+      <li><b>Hemangioma infantil</b>: <b>aparece después de nacer</b>, hace <b>crecimiento → reposo → regresión</b>. Tratamiento si complica: <b>propranolol</b>. Factores de riesgo de ulceración: <b>nena, prematura, embarazo múltiple, bajo peso</b>.</li>
+      <li><b>Malformación vascular</b> (mancha en vino de Oporto): <b>está desde el nacimiento</b>, crece con el chico, <b>no involuciona</b>.</li>
+      <li>Si toma <b>media cara o el territorio de V1</b> → <b>RMN de cerebro</b> para descartar <b>Sturge-Weber</b>. Nunca "tranquilizar a los padres porque es estético".</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t7" style="--k:var(--hot)">
+    <div class="hd"><span class="rk">07</span><h3>Sífilis secundaria</h3><span class="n">8 apariciones</span></div>
+    <p class="foto">Combo clásico: <b>placas blancas en la lengua</b> + <b>alopecia difusa</b> + lesiones maculopapulares diseminadas, muchas veces <b>palmoplantares</b>.</p>
+    <ul class="qa">
+      <li>Estudio que piden: <b>VDRL</b>.</li>
+      <li>Tratamiento: <b>penicilina G benzatínica 2.400.000 UI IM</b>. Alergia: doxiciclina. Embarazo o neurosífilis: <b>penicilina G sódica</b>.</li>
+      <li>Otros signos: roséola sifilítica, <b>condiloma plano</b>, adenopatías generalizadas, disfonía.</li>
+      <li>Complicación del tratamiento: reacción de <b>Jarisch-Herxheimer</b>.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t8" style="--k:var(--mid)">
+    <div class="hd"><span class="rk">08</span><h3>Carcinoma espinocelular</h3><span class="n">7 apariciones</span></div>
+    <p class="foto">Hombre grande, <b>fumador</b>, lesión ulcerada o queratósica en el <b>labio inferior</b>, de crecimiento rápido, con <b>adenopatía cervical</b>.</p>
+    <ul class="qa">
+      <li>Aparece sobre lesión previa: <b>queratosis actínica</b>, leucoplasia, cicatriz, radiodermitis, úlcera crónica.</li>
+      <li>Histología: células espinosas que <b>rompen la membrana basal</b> e invaden dermis, <b>perlas córneas</b>, disqueratosis.</li>
+      <li><b>Sí da metástasis</b> (ganglionares). Tratamiento: cirugía con margen amplio + evaluación ganglionar.</li>
+      <li>Si la lesión creció en pocas semanas y tiene cráter central: pensá <b>queratoacantoma</b> como diferencial.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t9" style="--k:var(--mid)">
+    <div class="hd"><span class="rk">09</span><h3>Herpes y eritema multiforme</h3><span class="n">7 apariciones</span></div>
+    <p class="foto">Vesículas en el borde del labio precedidas de <b>ardor</b>. Y unos días después, lesiones <b>en escarapela</b> en palmas.</p>
+    <ul class="qa">
+      <li>Herpes simple → <b>aciclovir</b>, y hay que empezarlo dentro de las <b>primeras 48–72 h</b> de los síntomas. Vía oral, no tópico.</li>
+      <li>Lesiones en diana días después de un herpes → <b>eritema multiforme</b>. Causa más frecuente: <b>HSV</b>.</li>
+      <li>DD: <b>Stevens-Johnson / NET</b> — por fármacos, con compromiso de mucosas y despegamiento.</li>
+      <li><b>Herpes zóster</b>: metamérico, unilateral. En joven, diseminado o hemorrágico → buscar <b>HIV o neoplasia</b>. Aciclovir 800 mg, 5 veces por día, 7 días.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t10" style="--k:var(--mid)">
+    <div class="hd"><span class="rk">10</span><h3>Escabiosis y pediculosis</h3><span class="n">6 apariciones</span></div>
+    <p class="foto">Pápulas y vesículas en pliegues, mamas o genitales, que <b>pican de noche</b>, y <b>la pareja también las tiene</b>.</p>
+    <ul class="qa">
+      <li>Escabiosis → <b>permetrina 5 %</b>. Tratar a todos los convivientes y lavar la ropa.</li>
+      <li>Pediculosis → <b>permetrina 1 %</b>.</li>
+      <li>El <i>Sarcoptes</i> hace <b>surcos</b>; en el lactante afecta palmas, plantas y cara.</li>
+    </ul>
+  </article>
+
+</div>
+
+<h2 class="sec">Bloque medio — sale casi siempre alguna</h2>
+<div class="items">
+
+  <article class="it" id="t11" style="--k:var(--mid)">
+    <div class="hd"><span class="rk">11</span><h3>Queratosis actínica y seborreica</h3><span class="n">5 apariciones</span></div>
+    <ul class="qa">
+      <li><b>Actínica</b>: <b>placas eritematoescamosas ásperas</b> en frente y calva de un anciano fotoexpuesto. Es <b>precursora de espinocelular</b>. Crioterapia, 5-fluorouracilo, imiquimod.</li>
+      <li><b>Seborreica</b>: la correcta es siempre que es <b>benigna</b>, de aspecto pegoteado. Brote súbito y masivo → signo de <b>Leser-Trélat</b> (paraneoplásico).</li>
+      <li>Distractor típico: "placa eritematoviolácea con estrías de Wickham" es <b>liquen plano</b>, no queratosis actínica.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t12" style="--k:var(--mid)">
+    <div class="hd"><span class="rk">12</span><h3>Rosácea</h3><span class="n">5 apariciones</span></div>
+    <ul class="qa">
+      <li>Eritema centrofacial + telangiectasias + pápulas y pústulas <b>sin comedones</b> (eso la separa del acné).</li>
+      <li>Empeora con <b>calor, sol, alcohol, picantes</b>. En el examen aparece como "en verano" o "con el calor".</li>
+      <li>Tratamiento: <b>fotoprotección + agua blanca de Codex + metronidazol tópico</b>; si es severa, <b>tetraciclinas o metronidazol oral</b>.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t13" style="--k:var(--mid)">
+    <div class="hd"><span class="rk">13</span><h3>Sarcoma de Kaposi</h3><span class="n">5 apariciones</span></div>
+    <ul class="qa">
+      <li>Foto: <b>placas y nódulos rojo-violáceos</b> en pies y piernas de un <b>trasplantado renal</b> o un paciente con HIV.</li>
+      <li>Etiología: <b>HHV-8</b>. El dato que resuelve la pregunta es siempre la <b>inmunosupresión</b>.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t14" style="--k:var(--cool)">
+    <div class="hd"><span class="rk">14</span><h3>Psoriasis</h3><span class="n">4 apariciones</span></div>
+    <ul class="qa">
+      <li>Confirmación diagnóstica: <b>raspado metódico de Brocq</b> (no biopsia, no cultivo).</li>
+      <li>Tratamiento en la foto de placa extensa o sacra: <b>corticoides tópicos + metotrexato oral</b>.</li>
+      <li><b>Nunca corticoides sistémicos</b>: rebote y psoriasis pustulosa.</li>
+      <li>Histología: hiperqueratosis con paraqueratosis, acantosis, papilomatosis, <b>microabscesos de Munro</b>, vasodilatación.</li>
+      <li><b>Guttata</b>: post-estreptocócica, la de <b>mejor pronóstico</b>.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t15" style="--k:var(--cool)">
+    <div class="hd"><span class="rk">15</span><h3>Impétigo</h3><span class="n">4 apariciones</span></div>
+    <ul class="qa">
+      <li>Chico con <b>costra melicérica</b> perioral → <b>mupirocina 2 % o ácido fusídico</b> tópico + higiene. Si no responde en 10 días o es extenso → cefalosporina oral.</li>
+      <li>Impétigo <b>ampollar</b>: si no se trata puede evolucionar a <b>síndrome de piel escaldada estafilocócica (SSSS)</b>. Esta pregunta apareció en los tres finales.</li>
+      <li>Complicación del estreptocócico: <b>glomerulonefritis</b> (no fiebre reumática).</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t16" style="--k:var(--cool)">
+    <div class="hd"><span class="rk">16</span><h3>Verrugas y HPV</h3><span class="n">4 apariciones</span></div>
+    <ul class="qa">
+      <li>Lesión verrugosa o cuerno cutáneo → etiología <b>HPV</b>. Tratamiento: <b>queratolítico (ácido salicílico)</b> o criocirugía.</li>
+      <li><b>Condiloma acuminado</b> (HPV 6 y 11) vs <b>condiloma plano</b> (sífilis secundaria, más chato, color piel, maloliente). Prevención: <b>vacuna</b> del calendario.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t17" style="--k:var(--cool)">
+    <div class="hd"><span class="rk">17</span><h3>Eczemas: contacto y atópico</h3><span class="n">4 apariciones</span></div>
+    <ul class="qa">
+      <li>Lesión del eczema de contacto: <b>eritema, vesícula, erosión y costra</b>, con la forma del contactante (níquel, aritos).</li>
+      <li><b>Pitiriasis alba</b> es una forma de dermatitis atópica.</li>
+      <li>Pregunta textual: "¿cuál NO es diagnóstico diferencial de eczema?" → <b>morfea</b> (sí lo son psoriasis, pitiriasis rosada y tiña corporis).</li>
+      <li>En pliegues, corticoide de <b>baja potencia</b>; en palmas y plantas, de alta.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t18" style="--k:var(--cool)">
+    <div class="hd"><span class="rk">18</span><h3>Dermatomiositis</h3><span class="n">3 apariciones</span></div>
+    <ul class="qa">
+      <li>Clínica: <b>pápulas de Gottron</b>, eritema en heliotropo, signo del chal, manos de mecánico, debilidad proximal.</li>
+      <li>Laboratorio: <b>CPK, aldolasa y LDH</b> + anticuerpos específicos <b>anti-Jo-1 y anti-Mi-2</b>.</li>
+      <li>Siempre <b>buscar neoplasia</b>: es paraneoplásica.</li>
+    </ul>
+  </article>
+
+  <article class="it" id="t19" style="--k:var(--cool)">
+    <div class="hd"><span class="rk">19</span><h3>Lupus cutáneo</h3><span class="n">3 apariciones</span></div>
+    <ul class="qa">
+      <li><b>Agudo</b>: eritema <b>en alas de mariposa</b> que respeta el surco nasogeniano.</li>
+      <li><b>Discoide crónico</b>: placas con tapones foliculares y <b>alopecia cicatrizal</b>.</li>
+      <li>DD de cara roja: rosácea (empeora con calor y sol, hay pústulas) vs lupus (fotosensible, sin pústulas, con laboratorio inmunológico).</li>
+    </ul>
+  </article>
+
+</div>
+
+<h2 class="sec">Bloque frío — una línea cada una y listo</h2>
+<div class="tw">
+  <table>
+    <thead><tr><th>Si ves…</th><th>Contestás</th></tr></thead>
+    <tbody>
+      <tr><td>Vitiligo, ¿qué antecedente busco?</td><td><b>Tiroiditis de Hashimoto / hipotiroidismo</b></td></tr>
+      <tr><td>Máculas hipo e hiperpigmentadas en tronco, signo de la uñada</td><td><b>Pitiriasis versicolor</b> (Malassezia) → imidazol tópico</td></tr>
+      <tr><td>Múltiples máculas café con leche + nódulos que aparecen con la edad</td><td><b>Neurofibromatosis</b> (manchas café con leche)</td></tr>
+      <tr><td>Roncha o habón, ¿qué patología? ¿cuánto dura?</td><td><b>Urticaria</b> · desaparece en <b>horas</b> (menos de 24)</td></tr>
+      <tr><td>Fármaco que más fotosensibiliza</td><td><b>Tetraciclinas / minociclina</b></td></tr>
+      <tr><td>Múltiples nevus displásicos y nevus con halo, ¿conducta?</td><td><b>Observación y seguimiento</b> (control cada 6 meses)</td></tr>
+      <tr><td>Pápulas umbilicadas en paciente con HIV</td><td><b>Molusco contagioso</b> (poxvirus)</td></tr>
+      <tr><td>Placas blancas y friables en la lengua que se desprenden</td><td><b>Candidiasis oral</b>; si es en el borde y no se desprende, <b>leucoplasia vellosa</b> (EBV, HIV)</td></tr>
+      <tr><td>Corticoide tópico de más baja potencia</td><td><b>Hidrocortisona</b></td></tr>
+      <tr><td>Erisipela, agente etiológico más frecuente</td><td><b>Streptococcus pyogenes</b></td></tr>
+      <tr><td>Lesión elemental del prurigo solar</td><td><b>Pápulas, nódulos, liquenificación</b> con hiper/hipopigmentación post-inflamatoria</td></tr>
+      <tr><td>Calvicie de patrón, sin inflamación</td><td><b>Alopecia androgenética</b></td></tr>
+      <tr><td>Facies de pájaro, piel esclerosada, manos</td><td><b>Esclerodermia</b></td></tr>
+      <tr><td>Pápulas poligonales violáceas con estrías blancas</td><td><b>Liquen plano</b> (estrías de Wickham)</td></tr>
+      <tr><td>Medallón heráldico y lesiones en árbol de navidad</td><td><b>Pitiriasis rosada de Gibert</b></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 class="sec">Las diez respuestas que más se repiten</h2>
+<div class="tw">
+  <table>
+    <thead><tr><th>Cuadro</th><th>Respuesta exacta</th></tr></thead>
+    <tbody>
+      <tr><td>Escabiosis</td><td><b>Permetrina 5 %</b></td></tr>
+      <tr><td>Pediculosis</td><td><b>Permetrina 1 %</b></td></tr>
+      <tr><td>Tiña capitis</td><td><b>Griseofulvina oral</b></td></tr>
+      <tr><td>Tiña corporis</td><td><b>Imidazólicos tópicos</b></td></tr>
+      <tr><td>Sífilis</td><td><b>Penicilina G benzatínica 2.400.000 UI IM</b></td></tr>
+      <tr><td>Impétigo</td><td><b>Mupirocina 2 % o ácido fusídico</b></td></tr>
+      <tr><td>Herpes</td><td><b>Aciclovir, dentro de las 48 h</b></td></tr>
+      <tr><td>Acné leve / severo</td><td><b>Eritromicina o clindamicina tópica</b> / <b>isotretinoína</b></td></tr>
+      <tr><td>Psoriasis extensa</td><td><b>Corticoide tópico + metotrexato oral</b></td></tr>
+      <tr><td>Malformación vascular en hemicara</td><td><b>RMN de cerebro</b></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="foot">
+  <p>Conteo hecho sobre los tres finales escritos del listado de arriba. Los dos PDF de "FINAL DERMATO" son el mismo examen, así que suman una sola vez; si se contaran por separado, los temas de ese examen quedarían inflados al doble.</p>
+  <p>Dosis y márgenes quirúrgicos: los puse como figuran en las claves de la cátedra. Donde eso difiere de la conducta actual, está señalado en el recuadro correspondiente.</p>
+</div>
+
+</div>
+</body>
+</html>
